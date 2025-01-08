@@ -17,6 +17,8 @@ header {
   background-color: #fff;
   padding: 10px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -30,6 +32,7 @@ header {
 }
 
 .header-message {
+  flex-basis: 60%;
   background-color: #333;
   color: #fff;
   padding: 0.5em;
@@ -50,16 +53,22 @@ header {
 
 /* Navigation Styles */
 
+header nav {
+  margin-top: 10px;
+}
+
 header nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 header nav ul li {
   margin-right: 20px;
+  margin-bottom: 10px;
 }
 
 header nav a {
@@ -78,8 +87,32 @@ header nav a {
   justify-content: center;
   align-items: center;
   color: #fff;
+  border-radius: 0 0 10px 10px;
 }
 
 #hero h1 {
   font-size: 48px;
+}
+
+/* Section Styles */
+
+section {
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+/* Footer Styles */
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+  clear: both;
+  border-radius: 10px 10px 0 0;
 }
