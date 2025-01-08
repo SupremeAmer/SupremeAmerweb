@@ -68,7 +68,7 @@ transform: translateX(100%);
 100% {
 transform: translateX(-100%);
 }
-}
+
 
 /* Section Styles */
 
@@ -81,7 +81,28 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 section h2 {
 margin-top: 0;
 }
+section P {
+  front-size: 20px;
+  front-family: arial;
+  border-radius: 12px
+}
 
+.button {
+background-color: #4CAF50;
+color: #fff;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+cursor: pointer;
+border-radius: 5px;
+border: none;
+}
+
+.button:hover {
+background-color: #3e8e41;
+}
 /* Footer Styles */
 
 footer {
