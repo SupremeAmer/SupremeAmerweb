@@ -41,7 +41,7 @@ align-items: center;
 padding: 2em;
 }
 .button {
-background-color: #4CAF50;
+background-color: #brown;
 color: #white;
 padding: 15px 32px;
 text-align: center;
@@ -49,12 +49,12 @@ text-decoration: none;
 display: inline-block;
 font-size: 16px;
 cursor: pointer;
-border-radius: 5px;
+border-radius: 9px;
 border: none;
 }
 
 .button:hover {
-background-color: #3e8e41;
+background-color: #C7C5B5;
 }
 .user-profile {
 background-color: #333;
@@ -95,11 +95,8 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 section h2 {
 margin-top: 0;
-}
-section P {
-  front-size: 20px;
-  front-family: arial;
-  border-radius: 12px
+  bord-radius: 12px;
+
 }
 
 
