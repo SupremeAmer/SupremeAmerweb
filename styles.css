@@ -13,15 +13,43 @@ color: #333;
 background: linear-gradient(to bottom, #fff, #A9A9A9);
 }
 
-/* Header Styles */
-
 header {
-background-color: #fff;
-padding: 10px;
-display: flex;
-flex-direction: column;
-align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
 }
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+}
+
+.user-profile {
+    background-color: #f7f7f7;
+    padding: 1em;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
 
 .logo {
 margin-bottom: 20px;
@@ -32,16 +60,6 @@ width: 90px;
 height: 20px;
 }
 
-.header-message {
-background-color: #333;
-color: #fff;
-padding: 0.5em;
-text-align: center;
-font-size: 18px;
-font-weight: bold;
-animation: slide 30s infinite;
-border-radius: 10px;
-}
 
 @keyframes slide {
 0% {
@@ -52,30 +70,6 @@ transform: translateX(-100%);
 }
 }
 
-/* Navigation Styles */
-
-header nav ul {
-list-style: none;
-margin: 0;
-padding: 0;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-}
-
-header nav ul li {
-margin-right: 20px;
-margin-bottom: 10px;
-background-color: #333;
-color: #fff;
-padding: 0.5em;
-border-radius: 10px;
-}
-
-header nav a {
-color: #fff;
-text-decoration: none;
-}
 
 /* Section Styles */
 
