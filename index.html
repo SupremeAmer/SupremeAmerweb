@@ -3,79 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupremeAmer - Application Development Organization</title>
+    <title>SupremeAmer application development organization</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header Section -->
     <header>
-        <div class="logo">
-            <img src="AddText_01-08-01.28.09.png" alt="SupremeAmer" width="90" height="20">
-        </div>
-        <div class="header-message">
-            <marquee behavior="scroll" direction="left">
-                Welcome to SupremeAmer - Your Trusted Partner for Innovative Application Development Solutions!
-            </marquee>
-        </div>
         <nav>
             <ul>
-               <button><li><a href="#about">About Us</a></li></button>
-                <button><li><a href="#services">Services</a></li></button>
-                <button><li><a href="#portfolio">Portfolio</a></li></button>
-                <button><li><a href="#contact">Contact Us</a></li></button>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-
-    <!-- Hero Section -->
-    <section id="hero">
-        
-<p>Innovative Application Development Solutions</p>
-        <button>Explore Our Services</button>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>SupremeAmer is a leading application development organization, dedicated to delivering cutting-edge solutions for businesses and individuals.</p><br>
-        <p>We specialize in creating innovative applications that meet the evolving needs of our clients.</p>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <h2>Our Services</h2>
-        <ul>
-            <li>Mobile App Development</li><br>
-            <li>Web Application Development</li><br>
-            <li>Custom Software Development</li><br>
-		<li>Block chain development </li><br>
-        </ul>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <h2>Our Portfolio</h2>
-	    <p>Do you know that SupremeAmer owns this project 😲😊☺️ :</p><br>
-        <ul>
-            <li>SUPREMEAMER AFFILIATE NETWORK </li>
-            <li> SUPREMEAMER WALLET </li>
-            <li>SUPREMEAMER COIN</li>
-        </ul>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Get in Touch</h2>
-        <p>Contact us to discuss your project requirements.</p>
-        <button>Contact Us</button>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 SupremeAmer. All rights reserved.</p>
-    </footer>
-
-    <script src="js/script.js"></script>
+    <main>
+        <section id="about">
+            <h1>About SupremeAmer</h1>
+            <p>SupremeAmer is an application development organization that specializes in creating innovative solutions for businesses and individuals.</p>
+        </section>
+        <section id="services">
+            <h1>Services</h1>
+            <ul>
+                <li>Website Design</li>
+                <li>Web Development</li>
+                <li>Mobile App Development</li>
+            </ul>
+        </section>
+        <section id="contact">
+            <h1>Contact Us</h1>
+            <form id="request-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <label for="project-type">Project Type:</label>
+                <select id="project-type" name="project-type">
+                    <option value="website">Website</option>
+                    <option value="web-app">Web App</option>
+                    <option value="mobile-app">Mobile App</option>
+                </select><br><br>
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" name="payment-method">
+                    <option value="naira">Naira (NGN)</option>
+                    <option value="usdt">USDT</option>
+                </select><br><br>
+                <button id="submit-btn">Submit Request</button>
+            </form>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
+
 
