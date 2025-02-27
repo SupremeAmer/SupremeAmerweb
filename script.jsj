@@ -1,15 +1,17 @@
+const form = document.getElementById('request-form');
+const submitBtn = document.getElementById('submit-btn');
 
-// Add event listener to the header navigation menu
-document.addEventListener("DOMContentLoaded", function () {
-  const navMenu = document.querySelector("header nav ul");
+submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const projectName = formData.get('project-type');
+    const paymentMethod = formData.get('payment-method');
 
-  // Add event listener to each navigation menu item
-  navMenu.addEventListener("click", function (event) {
-    if (event.target.tagName === "A") {
-      event.preventDefault();
-      const targetId = event.target.getAttribute("href").slice(1);
-      const targetElement = document.getElementById(targetId);
-      targetElement.scrollIntoView({ behavior: "smooth" });
+    if (projectName && paymentMethod) {
+        // Send data to server or perform other actions
+        console.log(`Project Type: ${projectName}`);
+        console.log(`Payment Method: ${paymentMethod}`);
+    } else {
+        console.log('Please fill in all fields');
     }
-  });
 });
