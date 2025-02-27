@@ -21,5 +21,5 @@ form.addEventListener('submit', (e) => {
 
   const emailSubject = 'New Project Request';
 
-  window.location.href = `mailto:info@supremeamerapplication@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+  window.location.href = `mailto:supremeamerapplication@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 });
