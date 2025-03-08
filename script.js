@@ -1,25 +1,11 @@
-const form = document.querySelector('form');
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const product = document.getElementById("product").value;
+  
+  const orderDetails = `Name: ${name}\nEmail: ${email}\nProduct: ${product}`;
+  alert(orderDetails);
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const projectName = document.querySelector('#project-name').value;
-  const projectDescription = document.querySelector('#project-description').value;
-  const clientName = document.querySelector('#client-name').value;
-  const clientEmail = document.querySelector('#client-email').value;
-  const paymentMethod = document.querySelector('#payment-method').value;
-  const budget = document.querySelector('#budget').value;
-
-  const emailBody = `
-    Project Name: ${projectName}
-    Project Description: ${projectDescription}
-    Client Name: ${clientName}
-    Client Email: ${clientEmail}
-    Payment Method: ${paymentMethod}
-    Budget: ${budget}
-  `;
-
-  const emailSubject = 'New Project Request';
-
-  window.location.href = `mailto:supremeamerapplication@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+  document.getElementById("orderForm").reset();
 });
