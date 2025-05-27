@@ -1,106 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>supremeAmer info</title>
-<body>
-<a href="index.html"><img src="backarrow.png" width="30px" height="30px"></a>
-    <head>
-<nav>
-    <ul>
-        <img src="suplogo.jpg" width="75px" height="75px" margin-top="90px">SupremeAmer Application development</li>
- </ul>
-   </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupremeAmer Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #242526;
+      --secondary-bg: #373940;
+      --accent: #ff6600;
+      --text-main: #fff;
+      --text-secondary: #ffae42;
+      --border-radius: 18px;
+    }
+    body {
+      background: var(--primary-bg);
+      color: var(--text-main);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    nav {
+      background: var(--secondary-bg);
+      padding: 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .nav-content {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-logo {
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+    .brand-title {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .back-arrow {
+      margin: 20px 0 0 20px;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .back-arrow:hover {
+      transform: translateX(-4px) scale(1.08);
+    }
+    .header-img {
+      width: 100%;
+      max-height: 270px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      margin: 26px 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: var(--accent);
+      margin-top: 0;
+      letter-spacing: 1px;
+    }
+    .expertise-list, .features-list, .articles-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .expertise-item, .feature-item, .article-item {
+      background: var(--secondary-bg);
+      border-radius: var(--border-radius);
+      padding: 18px 22px;
+      font-size: 1em;
+      color: var(--text-secondary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      flex: 0 1 290px;
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+    .expertise-item:hover, .feature-item:hover, .article-item:hover {
+      background: #222;
+      box-shadow: 0 4px 16px rgba(255,102,0,0.13);
+    }
+    .section {
+      margin-bottom: 38px;
+    }
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 46px;
+    }
+    .socials {
+      display: flex;
+      gap: 18px;
+    }
+    .socials img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      transition: transform 0.2s, border-color 0.2s;
+      background: #fff;
+      object-fit: cover;
+    }
+    .socials img:hover {
+      transform: scale(1.13);
+      border-color: var(--text-secondary);
+    }
+    @media (max-width: 700px) {
+      main { padding: 18px 4vw; }
+      .expertise-item, .feature-item, .article-item { flex: 1 1 94vw; }
+      nav { padding: 10px 0; }
+    }
+  </style>
 </head>
-
-
-    <style>
-        body{
-            background-color: rgb(58, 39, 16);
-            color: orangered;
-            font-style: normal;
-            font-size: 29px;
-            scrollbar-highlight-color: rgb(141, 83, 189);
-
-        }
-        img{
-            border: 2px solid orangered;
-            border-radius: 23px;
-            color:antiquewhite
-            
-            
-            
-        }
-        li{
-           
-            font-size: larger;
-            margin-top: 21px;
-            color:aquamarine;
-            font-size: 18px;
-
-        }
-        p{
-           
-         font-size: medium;
-            font-weight: bold;
-            color: aquamarine;
-            font-size: 20px;
-           
-            
-            
-        }
-        .image{
-         align-content: center;
-        }
-        
-        
-        .special{
-            border: 2px solid orangered;
-            border-radius: 12px;
-            align-items: center;
-            text-align: start;
-            margin-top: 17px;
-        }
-        h1{
-            font-size: 25px;
-            text-align: center;
-        }
-        
-            
-</style>
-<h1>Our Expertise</h1> <p>Our team has extensive experience in application development and a proven track
-record of success, Our team of experts specializes in:</p>
-<img src="IMG-20250406-WA0041.jpg" width="100%" height="13%" class="rounded-corner"><br><br>
-<div class="special">
-<li>Custom application development (web, mobile, and desktop)</li>
-<li> Full-stack development (front-end, back-end, and database)</li>
-<li> Cloud computing and migration</li>
-<li> DevOps and continuous integration/continuous deployment (CI/CD)</li>
-<li>Cybersecurity and data protection</li>
-<li> Artificial intelligence (AI) and machine learning </li>
-<li>Innovation: We stay at the forefront of technology, leveraging the latest tools and
-frameworks to deliver innovative solutions. </li>
-<li>Customer-centric approach: We prioritize our clients' needs and goals, ensuring tailored
-solutions that meet their unique requirements.</li>
- <li>Quality and reliability: We are committed to delivering high-quality, scalable, and maintainable
-applications</li>
-<li>Project Management: Agile methodologies, project planning, and team leadership</li>
- <li>Communication: Effective communication, stakeholder management, and team
- collaborationM</li>
- <li>Problem-solving: Analytical thinking, creative problem-solving, and debugging</li>
-   <li>Teamwork: Collaboration, team building, and knowledge sharing</li>
-</div>
-
- 
-<div class="contact">
-    <h2>contact us</h2>
-    <a href=""><img src="x.webp " width="45px" height="45px"></a>
-<a href=""><img src="telegram.webp" width="45px" height="45px"></a>
-<a href=""><img src="youtube.webp" width="45px" height="45px"></a>
-<a href=""><img src="instagram.webp" width="45px" height="45px"></a>
-    
-    
- </div>
+<body>
+  <a href="index.html" class="back-arrow">
+    <img src="backarrow.png" width="30" height="30" alt="Back">
+  </a>
+  <nav>
+    <div class="nav-content">
+      <img src="suplogo.jpg" class="nav-logo" alt="SupremeAmer Logo">
+      <span class="brand-title">SupremeAmer Application Development</span>
+    </div>
+  </nav>
+  <main>
+    <img src="IMG-20250406-WA0041.jpg" class="header-img" alt="Team Work">
+    <section class="section">
+      <h1>Our Expertise</h1>
+      <p style="text-align:center; font-size: 1.1em; color: #fed7b0;">
+        Our team has extensive experience in app development and a proven record of success.<br>
+        We specialize in:
+      </p>
+      <ul class="expertise-list">
+        <li class="expertise-item">Custom application development (Web, Mobile, Desktop)</li>
+        <li class="expertise-item">Full-stack development (Front-end, Back-end, Database)</li>
+        <li class="expertise-item">Cloud computing & migration</li>
+        <li class="expertise-item">DevOps & CI/CD</li>
+        <li class="expertise-item">Cybersecurity & data protection</li>
+        <li class="expertise-item">AI & Machine Learning</li>
+        <li class="expertise-item">Innovation & modern frameworks</li>
+        <li class="expertise-item">Customer-centric solutions</li>
+        <li class="expertise-item">Quality, scalability & reliability</li>
+        <li class="expertise-item">Agile project management</li>
+        <li class="expertise-item">Effective communication & teamwork</li>
+        <li class="expertise-item">Creative problem-solving & debugging</li>
+      </ul>
+    </section>
+    <section class="section">
+      <h2>Features</h2>
+      <ul class="features-list">
+        <li class="feature-item">Modern, responsive UI design</li>
+        <li class="feature-item">Cross-platform compatibility</li>
+        <li class="feature-item">Real-time collaboration tools</li>
+        <li class="feature-item">Integrated analytics dashboard</li>
+        <li class="feature-item">Robust security features</li>
+        <li class="feature-item">24/7 customer support</li>
+      </ul>
+    </section>
+    <section class="section">
+      <h2>Suggested Articles</h2>
+      <ul class="articles-list">
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Top 10 Trends in App Development 2025</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Why Cloud Migration Matters for Your Business</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">How AI Is Transforming User Experience</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Best Practices for Secure App Development</a></li>
+      </ul>
+    </section>
+    <div class="contact">
+      <h2>Contact Us</h2>
+      <div class="socials">
+        <a href="#"><img src="x.webp" alt="X"></a>
+        <a href="#"><img src="telegram.webp" alt="Telegram"></a>
+        <a href="#"><img src="youtube.webp" alt="YouTube"></a>
+        <a href="#"><img src="instagram.webp" alt="Instagram"></a>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
