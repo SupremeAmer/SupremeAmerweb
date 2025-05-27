@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SupremeAmer Info</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Add Material Icons for enhanced visuals -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     :root {
-      --primary-bg: #242526;
-      --secondary-bg: #373940;
+      --primary-bg: #222831;
+      --secondary-bg: #31363b;
       --accent: #ff6600;
-      --text-main: #fff;
-      --text-secondary: #ffae42;
-      --border-radius: 18px;
+      --accent-gradient: linear-gradient(90deg, #ff6600 0%, #ffae42 100%);
+      --text-main: #f5f5f5;
+      --text-secondary: #ffd180;
+      --card-bg: rgba(49,54,59,0.95);
+      --border-radius: 20px;
+      --shadow: 0 6px 24px rgba(0,0,0,0.25);
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
     body {
       background: var(--primary-bg);
@@ -21,6 +27,7 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      overflow-x: hidden;
     }
     nav {
       background: var(--secondary-bg);
@@ -28,52 +35,73 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: var(--shadow);
+      animation: fadeInDown 1s;
     }
     .nav-content {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 22px;
     }
     .nav-logo {
       border-radius: 50%;
-      border: 2px solid var(--accent);
-      width: 60px;
-      height: 60px;
+      border: 3px solid var(--accent);
+      width: 64px;
+      height: 64px;
       object-fit: cover;
+      box-shadow: 0 4px 16px rgba(255,102,0,0.15);
+      background: #fff;
+      animation: popIn 0.8s;
     }
     .brand-title {
-      font-size: 1.4em;
+      font-size: 1.5em;
       font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 1px;
+      color: transparent;
+      background: var(--accent-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 10px rgba(255,102,0,0.10);
     }
     .back-arrow {
-      margin: 20px 0 0 20px;
+      margin: 22px 0 0 28px;
       display: inline-block;
-      transition: transform 0.2s;
+      transition: var(--transition);
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      box-shadow: 0 2px 8px rgba(255,102,0,0.10);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .back-arrow:hover {
-      transform: translateX(-4px) scale(1.08);
+      transform: translateX(-6px) scale(1.09);
+      box-shadow: 0 6px 32px rgba(255,102,0,0.25);
+      background: var(--accent);
     }
     .header-img {
       width: 100%;
-      max-height: 270px;
+      max-height: 280px;
       object-fit: cover;
       border-radius: var(--border-radius);
-      margin: 26px 0;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      margin: 32px 0 18px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 1.2s;
     }
     main {
-      max-width: 960px;
+      max-width: 1024px;
       margin: 0 auto;
-      padding: 32px 20px 20px;
+      padding: 38px 26px 26px;
     }
     h1, h2 {
       text-align: center;
       color: var(--accent);
+      letter-spacing: 1.2px;
       margin-top: 0;
-      letter-spacing: 1px;
+      animation: fadeInUp 0.8s;
     }
     .expertise-list, .features-list, .articles-list {
       list-style: none;
@@ -81,117 +109,181 @@
       margin: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 20px;
       justify-content: center;
     }
     .expertise-item, .feature-item, .article-item {
-      background: var(--secondary-bg);
+      background: var(--card-bg);
       border-radius: var(--border-radius);
-      padding: 18px 22px;
-      font-size: 1em;
+      padding: 22px 26px;
+      font-size: 1.05em;
       color: var(--text-secondary);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.13);
       flex: 0 1 290px;
-      transition: box-shadow 0.2s, background 0.2s;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .expertise-item::before,
+    .feature-item::before,
+    .article-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--accent-gradient);
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 0.4s;
+    }
+    .expertise-item:hover::before,
+    .feature-item:hover::before,
+    .article-item:hover::before {
+      opacity: 0.10;
     }
     .expertise-item:hover, .feature-item:hover, .article-item:hover {
-      background: #222;
-      box-shadow: 0 4px 16px rgba(255,102,0,0.13);
+      box-shadow: 0 8px 32px rgba(255,102,0,0.20);
+      color: #fff;
+      background: #23272f;
+      transform: translateY(-6px) scale(1.04);
+    }
+    .expertise-item {
+      animation: slideInUp 0.5s;
+    }
+    .feature-item {
+      animation: slideInUp 0.7s;
+    }
+    .article-item {
+      animation: slideInUp 0.9s;
     }
     .section {
-      margin-bottom: 38px;
+      margin-bottom: 42px;
     }
     .contact {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      margin-top: 46px;
+      gap: 18px;
+      margin-top: 52px;
     }
     .socials {
       display: flex;
-      gap: 18px;
+      gap: 24px;
     }
     .socials img {
-      width: 45px;
-      height: 45px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      border: 2px solid var(--accent);
-      transition: transform 0.2s, border-color 0.2s;
+      border: 2.5px solid var(--accent);
       background: #fff;
       object-fit: cover;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(255,102,0,0.09);
     }
     .socials img:hover {
-      transform: scale(1.13);
+      transform: scale(1.15) rotate(-8deg);
       border-color: var(--text-secondary);
+      box-shadow: 0 6px 24px rgba(255,102,0,0.19);
+      background: var(--accent-gradient);
+    }
+    /* Animations */
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0;}
+      100% { opacity: 1;}
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.6);}
+      100% { transform: scale(1);}
+    }
+    @keyframes slideInUp {
+      0% {opacity: 0; transform: translateY(60px);}
+      100% {opacity: 1; transform: translateY(0);}
     }
     @media (max-width: 700px) {
       main { padding: 18px 4vw; }
       .expertise-item, .feature-item, .article-item { flex: 1 1 94vw; }
       nav { padding: 10px 0; }
+      .brand-title { font-size: 1.1em; }
+      .header-img { max-height: 180px; }
+      .socials img { width: 40px; height: 40px; }
+    }
+    /* Accessibility improvement: focus state */
+    a:focus-visible, .article-item:focus-visible {
+      outline: 2.5px solid var(--accent);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back-arrow">
-    <img src="backarrow.png" width="30" height="30" alt="Back">
+  <a href="index.html" class="back-arrow" title="Go Back">
+    <span class="material-icons" style="color:#fff;font-size:26px;">arrow_back</span>
   </a>
   <nav>
     <div class="nav-content">
       <img src="suplogo.jpg" class="nav-logo" alt="SupremeAmer Logo">
-      <span class="brand-title">SupremeAmer Application Development</span>
+      <span class="brand-title">SupremeAmer Application Studio</span><!-- improved branding -->
     </div>
   </nav>
   <main>
     <img src="IMG-20250406-WA0041.jpg" class="header-img" alt="Team Work">
     <section class="section">
-      <h1>Our Expertise</h1>
-      <p style="text-align:center; font-size: 1.1em; color: #fed7b0;">
-        Our team has extensive experience in app development and a proven record of success.<br>
-        We specialize in:
+      <h1>Expertise & Capabilities</h1><!-- Modernized heading -->
+      <p style="text-align:center; font-size: 1.12em; color: #fed7b0;">
+        <!-- Better wording for introduction -->
+        We are passionate innovators and skilled developers with a record of delivering impactful solutions.<br>
+        <strong>What we do best:</strong>
       </p>
       <ul class="expertise-list">
-        <li class="expertise-item">Custom application development (Web, Mobile, Desktop)</li>
-        <li class="expertise-item">Full-stack development (Front-end, Back-end, Database)</li>
-        <li class="expertise-item">Cloud computing & migration</li>
-        <li class="expertise-item">DevOps & CI/CD</li>
-        <li class="expertise-item">Cybersecurity & data protection</li>
-        <li class="expertise-item">AI & Machine Learning</li>
-        <li class="expertise-item">Innovation & modern frameworks</li>
-        <li class="expertise-item">Customer-centric solutions</li>
-        <li class="expertise-item">Quality, scalability & reliability</li>
-        <li class="expertise-item">Agile project management</li>
-        <li class="expertise-item">Effective communication & teamwork</li>
-        <li class="expertise-item">Creative problem-solving & debugging</li>
+        <li class="expertise-item">Custom Application Development (Web, Mobile, Desktop)</li>
+        <li class="expertise-item">Full-Stack Engineering (Frontend, Backend, Database)</li>
+        <li class="expertise-item">Cloud Computing & Seamless Migration</li>
+        <li class="expertise-item">DevOps, Automation & CI/CD Pipelines</li>
+        <li class="expertise-item">Cybersecurity & Data Privacy</li>
+        <li class="expertise-item">Artificial Intelligence & Machine Learning</li>
+        <li class="expertise-item">Modern Frameworks & Emerging Technologies</li>
+        <li class="expertise-item">Client-Focused Solutions</li>
+        <li class="expertise-item">Scalable, Reliable & High-Performance Systems</li>
+        <li class="expertise-item">Agile Project Management</li>
+        <li class="expertise-item">Collaborative Communication & Teamwork</li>
+        <li class="expertise-item">Creative Problem-Solving & Debugging</li>
       </ul>
     </section>
     <section class="section">
-      <h2>Features</h2>
+      <h2>Key Features</h2><!-- Wording improvement -->
       <ul class="features-list">
-        <li class="feature-item">Modern, responsive UI design</li>
-        <li class="feature-item">Cross-platform compatibility</li>
-        <li class="feature-item">Real-time collaboration tools</li>
-        <li class="feature-item">Integrated analytics dashboard</li>
-        <li class="feature-item">Robust security features</li>
-        <li class="feature-item">24/7 customer support</li>
+        <li class="feature-item">Cutting-edge, Responsive UI/UX</li>
+        <li class="feature-item">Universal Cross-Platform Support</li>
+        <li class="feature-item">Real-Time Collaboration Tools</li>
+        <li class="feature-item">Integrated Analytics & Insights Dashboard</li>
+        <li class="feature-item">Robust Security & Compliance</li>
+        <li class="feature-item">24/7 Dedicated Client Support</li>
       </ul>
     </section>
     <section class="section">
-      <h2>Suggested Articles</h2>
+      <h2>Recommended Reads</h2><!-- More engaging heading -->
       <ul class="articles-list">
-        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Top 10 Trends in App Development 2025</a></li>
-        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Why Cloud Migration Matters for Your Business</a></li>
-        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">How AI Is Transforming User Experience</a></li>
-        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Best Practices for Secure App Development</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Top 10 App Development Trends for 2025</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Why Cloud Migration Is Essential for Growth</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">How AI Is Revolutionizing User Experience</a></li>
+        <li class="article-item"><a href="#" style="color: var(--accent); text-decoration:none;">Best Practices for Secure Software Development</a></li>
       </ul>
     </section>
     <div class="contact">
-      <h2>Contact Us</h2>
+      <h2>Connect with Us</h2><!-- Wording improvement -->
       <div class="socials">
-        <a href="#"><img src="x.webp" alt="X"></a>
-        <a href="#"><img src="telegram.webp" alt="Telegram"></a>
-        <a href="#"><img src="youtube.webp" alt="YouTube"></a>
-        <a href="#"><img src="instagram.webp" alt="Instagram"></a>
+        <a href="#" title="X (Twitter)"><img src="x.webp" alt="X"></a>
+        <a href="#" title="Telegram"><img src="telegram.webp" alt="Telegram"></a>
+        <a href="#" title="YouTube"><img src="youtube.webp" alt="YouTube"></a>
+        <a href="#" title="Instagram"><img src="instagram.webp" alt="Instagram"></a>
       </div>
     </div>
   </main>
