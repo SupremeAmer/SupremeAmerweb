@@ -1,96 +1,305 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>SupremeAmer terms and conditions</title>
+  <meta charset="UTF-8" />
+  <title>SupremeAmer Terms and Conditions</title>
+  <!-- Google Fonts for Modern Look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff5722;
+      --background: #f3f4f6;
+      --surface: #fff;
+      --text: #222;
+      --accent: #4caf50;
+      --header-height: 80px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      transition: background 0.5s;
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 100;
+      height: var(--header-height);
+      animation: slideDown 0.6s;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .navbar a.brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--primary);
+      font-size: 1.3em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .navbar img {
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      margin-right: 12px;
+      width: 56px;
+      height: 56px;
+      transition: transform 0.3s;
+    }
+    .navbar img:hover {
+      transform: rotate(-10deg) scale(1.08);
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 1em;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      transition: color 0.2s, border-bottom 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+    }
+    .container {
+      max-width: 850px;
+      margin: 40px auto 0 auto;
+      background: var(--surface);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 36px 28px 24px 28px;
+      animation: fadeIn 1.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    h1, h2, h3 {
+      color: var(--primary);
+      margin-top: 36px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: color 0.5s;
+    }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.15em; }
+    p, li {
+      font-size: 1.1em;
+      margin: 10px 0;
+      line-height: 1.7;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    section {
+      margin-bottom: 34px;
+      transition: background 0.3s;
+      border-radius: 12px;
+      padding: 14px 18px;
+      background: rgba(255, 87, 34, 0.03);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+    section:hover {
+      background: rgba(255, 87, 34, 0.08);
+    }
+    .searchbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .searchbar input {
+      width: 60%;
+      padding: 10px;
+      border: 1.5px solid var(--primary);
+      border-radius: 10px;
+      font-size: 1em;
+      transition: border 0.3s;
+    }
+    .searchbar input:focus {
+      border: 1.5px solid var(--accent);
+      outline: none;
+    }
+    .suggested {
+      margin-top: 6px;
+      font-size: 0.97em;
+      color: #666;
+      display: flex;
+      gap: 10px;
+    }
+    .suggested span {
+      background: #eee;
+      padding: 4px 11px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .suggested span:hover { background: var(--accent); color: #fff;}
+    .socials {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin: 32px 0 5px 0;
+    }
+    .socials img {
+      width: 60px;
+      height: 60px;
+      border-radius: 30%;
+      box-shadow: 0 2px 6px rgba(255,87,34,0.13);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      background: #fff;
+      border: 2px solid transparent;
+    }
+    .socials img:hover {
+      transform: scale(1.13) rotate(5deg);
+      box-shadow: 0 6px 24px rgba(76,175,80,0.23);
+      border: 2px solid var(--primary);
+    }
+    @media (max-width: 599px) {
+      .container { padding: 10px 4vw; }
+      .navbar { flex-direction: column; height: auto; gap: 10px; padding: 12px;}
+      .nav-links { flex-direction: column; gap: 12px;}
+      .navbar img { width: 40px; height: 40px;}
+      .socials img { width: 45px; height: 45px;}
+    }
+  </style>
 </head>
-<section class="bar">
-   
 <body>
-    <header> <a href="bar.html"><img src="download.png" width="78px" height="78px">Terms and Conditions for SupremeAmer Application Development
-        Organization</a>
-    </header>
-    <h3> Introduction</h3>
-    <p>These Terms and Conditions ("Terms") govern the relationship between SupremeAmer
-    Application Development Organization ("SupremeAmer" or "we") and its clients, users, and
-    partners ("you" or "Client").</p>
-     <p>By engaging with SupremeAmer's services, you agree to be bound by
-    these Terms. </p>
-    <h1> Services</h1>
-    <p>SupremeAmer provides application development services including:</p>
-    <li> design </li>
-    <li>development</li>
-    <li>testing</li>
-    <li> and deployment of software applications.</li>
-    <P> We will use reasonable efforts to deliver
-    services according to project plans and timelines.</P>
-     <h1> Client Responsibilities</h1>
-   <h2> You agree to:</h2>
-    <p>- Provide clear project requirements and specifications.</p>
-    <p> - Ensure necessary infrastructure and resources for project completion. - Communicate changes or issues promptly. </p>
-    <p>- Pay fees and expenses in accordance with agreed-upon terms. </p>
-<h1>Intellectual Property</h1>
-    <p>- SupremeAmer retains ownership of intellectual property rights in its tools, methodologies, and
-    pre-existing works. </p>
-    <p>- Client retains ownership of intellectual property rights in their content, data, and materials. </p>
-    <p>- SupremeAmer grants Client a non-exclusive license to use developed applications and
-    software.</p>
-    <h1>Confidentiality</h1>
-    <p>Both parties agree to maintain confidentiality of sensitive information shared during the
-    engagement. </p>
-    <h1>Liability and Indemnification</h1>
-    <p>- SupremeAmer's liability for damages is limited to the amount paid by Client for the specific
-    service. </p>
-    <p>- Client indemnifies SupremeAmer against claims arising from Client's breach of these Terms or
-    misuse of services. </p>
-   <h1>Termination</h1>
-    <p>Either party may terminate this agreement upon written notice if the other party breaches these
-    Terms or fails to perform obligations. </p>
-    <h1> Governing Law</h1>
-    <p>These Terms are governed by and construed in accordance with the laws of [State/Country].</p>
-     <h1> Changes to Terms</h1>
-    <p>SupremeAmer reserves the right to modify these Terms. Changes will be effective upon posting.</p>
-    <h1> Contact</h1>
-   <p> For questions or concerns about these Terms, please contact [contact email or address].</p>
-    <p> By engaging with SupremeAmer's services, you acknowledge that you have read, understood, and agree to be bound by these <a href="terms.html">terms and Condition</a></p>
-   
+  <nav class="navbar">
+    <a href="bar.html" class="brand">
+      <img src="download.png" alt="SupremeAmer Logo">
+      SupremeAmer Terms
+    </a>
+    <div class="nav-links">
+      <a href="#introduction">Introduction</a>
+      <a href="#services">Services</a>
+      <a href="#client">Client</a>
+      <a href="#ip">Intellectual Property</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="searchbar">
+      <input type="text" id="searchInput" placeholder="Search terms or keywords...">
+      <div class="suggested">
+        <span onclick="suggest('Intellectual Property')">Intellectual Property</span>
+        <span onclick="suggest('Confidentiality')">Confidentiality</span>
+        <span onclick="suggest('Termination')">Termination</span>
+      </div>
+    </div>
+    <section id="introduction">
+      <h1>Introduction</h1>
+      <p>These Terms and Conditions ("Terms") govern the relationship between SupremeAmer Application Development Organization ("SupremeAmer" or "we") and its clients, users, and partners ("you" or "Client").</p>
+      <p>By engaging with SupremeAmer's services, you agree to be bound by these Terms.</p>
+    </section>
+    <section id="services">
+      <h1>Services</h1>
+      <p>SupremeAmer provides application development services including:</p>
+      <ul>
+        <li>Design</li>
+        <li>Development</li>
+        <li>Testing</li>
+        <li>Deployment of software applications</li>
+      </ul>
+      <p>We will use reasonable efforts to deliver services according to project plans and timelines.</p>
+    </section>
+    <section id="client">
+      <h1>Client Responsibilities</h1>
+      <h2>You agree to:</h2>
+      <ul>
+        <li>Provide clear project requirements and specifications.</li>
+        <li>Ensure necessary infrastructure and resources for project completion.</li>
+        <li>Communicate changes or issues promptly.</li>
+        <li>Pay fees and expenses in accordance with agreed-upon terms.</li>
+      </ul>
+    </section>
+    <section id="ip">
+      <h1>Intellectual Property</h1>
+      <ul>
+        <li>SupremeAmer retains ownership of intellectual property rights in its tools, methodologies, and pre-existing works.</li>
+        <li>Client retains ownership of intellectual property rights in their content, data, and materials.</li>
+        <li>SupremeAmer grants Client a non-exclusive license to use developed applications and software.</li>
+      </ul>
+    </section>
+    <section>
+      <h1>Confidentiality</h1>
+      <p>Both parties agree to maintain confidentiality of sensitive information shared during the engagement.</p>
+    </section>
+    <section>
+      <h1>Liability and Indemnification</h1>
+      <ul>
+        <li>SupremeAmer's liability for damages is limited to the amount paid by Client for the specific service.</li>
+        <li>Client indemnifies SupremeAmer against claims arising from Client's breach of these Terms or misuse of services.</li>
+      </ul>
+    </section>
+    <section>
+      <h1>Termination</h1>
+      <p>Either party may terminate this agreement upon written notice if the other party breaches these Terms or fails to perform obligations.</p>
+    </section>
+    <section>
+      <h1>Governing Law</h1>
+      <p>These Terms are governed by and construed in accordance with the laws of [State/Country].</p>
+    </section>
+    <section>
+      <h1>Changes to Terms</h1>
+      <p>SupremeAmer reserves the right to modify these Terms. Changes will be effective upon posting.</p>
+    </section>
+    <section id="contact">
+      <h1>Contact</h1>
+      <p>For questions or concerns about these Terms, please contact [contact email or address].</p>
+      <p>By engaging with SupremeAmer's services, you acknowledge that you have read, understood, and agree to be bound by these <a href="terms.html" style="color:var(--accent); text-decoration:underline;">Terms and Conditions</a>.</p>
+    </section>
+    <h2 style="text-align:center; margin-top:40px;">Contact Us</h2>
+    <div class="socials">
+      <a href="#"><img src="x.webp" alt="X (Twitter)"></a>
+      <a href="#"><img src="telegram.webp" alt="Telegram"></a>
+      <a href="#"><img src="youtube.webp" alt="YouTube"></a>
+      <a href="#"><img src="instagram.webp" alt="Instagram"></a>
+    </div>
+  </div>
+  <script>
+    // Suggested words click-to-fill
+    function suggest(word) {
+      document.getElementById('searchInput').value = word;
+    }
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href').slice(1);
+        document.getElementById(id).scrollIntoView({behavior: 'smooth'});
+      });
+    });
+    // (Optional) Highlight searched section or word
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const val = this.value.toLowerCase();
+      document.querySelectorAll('section').forEach(sec => {
+        if (val && sec.innerText.toLowerCase().includes(val)) {
+          sec.style.background = 'rgba(76,175,80,0.13)';
+        } else {
+          sec.style.background = 'rgba(255,87,34,0.03)';
+        }
+      });
+    });
+  </script>
 </body>
-<style>
-h1{
-    font-size: 25px;
-    font-stretch: expanded;
-    font-weight: 700;
-    
-
-}
-header{
-    font-size: 28px;
-}
-p{
-  font-size: 22px;  
-
-}
-h2{
-    font-size: 26px;
-
-}
-li{
-    font-size: 22px;
-
-}
-body{
-    background-color: rgb(131, 131, 118);
-    color: black;
-}
-img{
-    border: 2px solid orangered;
-    border-radius: 23px;
-}
-</style>
-<h1>contact us<h1>
-    <a href=""><img src="x.webp " width="95px" height="95px"></a>
-<a href=""><img src="telegram.webp" width="95px" height="95px"></a>
-<a href=""><img src="youtube.webp" width="95px" height="95px"></a>
-<a href=""><img src="instagram.webp" width="95px" height="95px"></a>
-    
 </html>
