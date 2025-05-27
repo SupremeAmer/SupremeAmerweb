@@ -1,120 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupremeAmer application development organization</title>
-    <body>
-        <section class="bar">
-         <a href="bar.html"><img src="download.png" width="58px" height="58px"></a>
-      </section>
- <head>
-   <nav>
-    <ul>
-        <img src="suplogo.jpg" width="55px" height="55px" class="rounded-corner">SupremeAmer Application Development Organization </li>
- </ul>
-   </nav>
-   <p>In the ever-evolving world of technology, innovation, and digital transformation, SupremeAmer
-      stands at the forefront of application development.</p>
-     <div class="about">
-    <a href="about.html"><img src="IMG-20250406-WA0040.jpg" width="130px" height="200px" class="rounded-corner"></a><br><br>
-    
-    <p>  In help organizations navigate the complexities of digital
-      transformation, ensuring seamless integration and adoption of new technologies.</p>
-  </div>
-   <div class="about">
-      <a href="our mission.html"><img src="ourmissionicon.jpg" width="130px" height="200px" class="rounded-corner"></a><br><br>
- 
-      <p>SupremeAmer's team of experts possesses extensive knowledge and experience in Blockchain, Web applications development, AI etc</p>
-   </div>
- <div class="about">
-   <a href="expertise.html"><img src="IMG-20250406-WA0041.jpg" width="130px" height="200px" class="rounded-corner"></a><br><br>
-
-  <p> Embracing creativity, experimentation, and calculated risk-taking to drive growth
-   and improvement, Fostering open communication, active listening, and mutual respect to
-       ensure successful partnerships and outcomes are our highest piority.</p> </div>
- <div class="about">
-   <a href="value.html"><img src="ourvalue.jpg" width="130px" height="200px" class="rounded-corner"></a><br><br><br>
-  </div>
- <div class="contact">
-    <h2>contact us</h2>
-    <a href=""><img src="youtube.webp " width="45px" height="45px"></a>
-<a href=""><img src="instagram.webp" width="45px" height="45px"></a>
-<a href=""><img src="telegram.webp" width="45px" height="45px"></a>
-<a href=""><img src="x.webp" width="45px" height="45px"></a>
-
-</div>
-<footer>@ 2025 supremeamerapplications reserve
-</footer>
-   <style>
-       body{
-         align-content: center;
-         background-image: url('IMG-20250406-WA0041.jpg');
-         background-size: 100%;
-         
-      }
-      
-        
-
-header nav a {
-color: #fff;
-text-decoration: none;      
-
-   
-      }
-      .bar{
-display: flex;
-position: fixed;
-left: 90%;
-shape-image-threshold: inherit;
-
-      }
-      .about img {
-         align-items: center;
-         border: 1px solid blueviolet;
-         justify-content: center;
-         margin-top: 26px;
-         margin-bottom: 12px;
-         background-color: #bba5e4 ;
-         display: flex;
-         opacity: 100%;
-         
-
-
-      }
-      p{
-         
-         width: 50%;
-         float: right;
-         color: #000;
-         
-      }
-      img {
-         border-radius: 21px;
-         align-items: center;
-         justify-content: center;
-         background-color: #f05b05ef;
-         background-size: 100px;
-         
-      }
-         
-         
-
-      
-      h2{
-         text-align: center;
-         font-weight: bolder;
-         font-style: normal;
-         font-family: 'Times New Roman', Times, serif;
-         font-size: larger;
-         
-      }
-      .contact  img{
-         
-justify-content: space-between ; 
-display:-moz-grid-line;
-   flex-direction: row;
-   </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupremeAmer Application Development Organization</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6c3fd3;
+      --accent-gradient: linear-gradient(90deg, #ff9800, #fdc500, #ff9800);
+      --bg: #f7f7fa;
+      --card-bg: #fff;
+      --text: #222;
+      --nav-bg: #fff;
+      --nav-shadow: 0 2px 12px #6c3fd326;
+      --radius: 18px;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      box-shadow: var(--nav-shadow);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      min-height: 70px;
+      justify-content: space-between;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.24em;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 1.2px;
+    }
+    .navbar-logo img {
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      box-shadow: 0 2px 8px #bbb4;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 28px;
+    }
+    .navbar-links a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 500;
+      font-size: 1em;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background .14s, color .14s;
+    }
+    .navbar-links a:hover {
+      background: var(--accent-gradient);
+      color: #222;
+    }
+    .hero {
+      padding: 56px 20px 24px 20px;
+      text-align: center;
+      background: linear-gradient(120deg, #f7f7fa 60%, #fceabb 100%);
+      margin-bottom: 30px;
+    }
+    .hero h1 {
+      font-size: 2.5em;
+      color: var(--primary);
+      margin-bottom: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .hero p {
+      font-size: 1.22em;
+      max-width: 650px;
+      margin: 0 auto;
+      color: #444;
+      line-height: 1.6;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 0 auto 36px auto;
+      max-width: 1100px;
+      width: 95%;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 24px #6c3fd326, 0 1.5px 5px #bbb3;
+      padding: 32px 22px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform .15s, box-shadow .15s;
+      min-height: 420px;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 10px 32px #6c3fd340;
+    }
+    .card img {
+      width: 120px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      border: 2px solid var(--primary);
+      background: #f7f7fa;
+      box-shadow: 0 2px 10px #6c3fd31a;
+      transition: box-shadow .13s;
+    }
+    .card p {
+      color: #333;
+      font-size: 1.08em;
+      margin: 0;
+      margin-top: 5px;
+      line-height: 1.45;
+      text-align: center;
+    }
+    .card a {
+      display: inline-block;
+      margin-bottom: 9px;
+      transition: transform .14s;
+    }
+    .card a:hover img {
+      box-shadow: 0 8px 28px #ff980099;
+      transform: scale(1.03);
+    }
+    .contact-section {
+      background: #fff;
+      padding: 38px 14px 24px 14px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 14px #6c3fd315;
+      max-width: 670px;
+      margin: 0 auto 36px auto;
+      text-align: center;
+    }
+    .contact-section h2 {
+      color: var(--primary);
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      font-size: 1.55em;
+      font-weight: 700;
+    }
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 18px 0;
+    }
+    .contact-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-gradient);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      box-shadow: 0 2px 10px #6c3fd31a;
+      transition: transform .14s, box-shadow .14s;
+    }
+    .contact-icons a:hover {
+      transform: scale(1.15) rotate(-7deg);
+      box-shadow: 0 4px 24px #ff980099;
+    }
+    .contact-icons img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+    footer {
+      text-align: center;
+      padding: 26px 0 18px 0;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.04em;
+      letter-spacing: 1px;
+      border-radius: 18px 18px 0 0;
+      margin-top: auto;
+      box-shadow: 0 -2px 24px #6c3fd315;
+    }
+    @media (max-width: 800px) {
+      .cards { grid-template-columns: 1fr; }
+      .navbar { padding: 0 10px;}
+    }
+    @media (max-width: 500px) {
+      .hero h1 { font-size: 1.42em; }
+      .hero { padding: 22px 4px 10px 4px;}
+      .contact-section { padding: 18px 4px;}
+    }
+  </style>
 </head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="suplogo.jpg" alt="SupremeAmer Logo">
+      SupremeAmer Application Development
+    </div>
+    <div class="navbar-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="our mission.html">Mission</a>
+      <a href="expertise.html">Expertise</a>
+      <a href="value.html">Value</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Innovating the Future of Application Development</h1>
+    <p>
+      In the ever-evolving world of technology, innovation, and digital transformation, <strong>SupremeAmer</strong>
+      stands at the forefront of application development. We help organizations navigate the complexities of digital
+      transformation, ensuring seamless integration and adoption of emerging technologies.
+    </p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <a href="about.html"><img src="IMG-20250406-WA0040.jpg" alt="About SupremeAmer"></a>
+      <p>
+        Navigating digital transformation with expertise and care, ensuring organizations integrate and adopt new technologies seamlessly.
+      </p>
+    </div>
+    <div class="card">
+      <a href="our mission.html"><img src="ourmissionicon.jpg" alt="Our Mission"></a>
+      <p>
+        Our team possesses deep knowledge in Blockchain, Web Development, and AI, driving innovation and value for our partners.
+      </p>
+    </div>
+    <div class="card">
+      <a href="expertise.html"><img src="IMG-20250406-WA0041.jpg" alt="Expertise"></a>
+      <p>
+        We embrace creativity, experimentation, and risk-taking to foster growth. Our highest priority: open communication and mutually successful outcomes.
+      </p>
+    </div>
+    <div class="card">
+      <a href="value.html"><img src="ourvalue.jpg" alt="Our Value"></a>
+      <p>
+        SupremeAmer is committed to honesty, partnership, and delivering transformative value through every engagement.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-icons">
+      <a href="#"><img src="youtube.webp" alt="YouTube"></a>
+      <a href="#"><img src="instagram.webp" alt="Instagram"></a>
+      <a href="#"><img src="telegram.webp" alt="Telegram"></a>
+      <a href="#"><img src="x.webp" alt="X"></a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 SupremeAmer Applications. All rights reserved.
+  </footer>
 </body>
 </html>
