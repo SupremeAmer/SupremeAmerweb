@@ -1,111 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>supremeAmer info</title>
-<body>
-<a href=" index.html "> <img src="backarrow.png" width="30px" height="30px"></a>
-    <head>
-<nav>
-    <ul>
-        <img src="suplogo.jpg" width="75px" height="75px" margin-top="90px">SupremeAmer Application development</li>
- </ul>
-   </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupremeAmer Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #ff4500;
+      --secondary: #00ffc3;
+      --bg: #16181d;
+      --glass: rgba(30, 34, 44, 0.75);
+      --white: #fff;
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.20);
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 12px;
+      transition: background 1s;
+    }
+    nav {
+      width: 100%;
+      max-width: 800px;
+      margin: 30px auto 18px;
+      display: flex;
+      align-items: center;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 15px 30px;
+      animation: navfade 1s;
+      transition: background var(--transition);
+    }
+    @keyframes navfade {
+      from { opacity: 0; transform: translateY(-30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    nav img {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      border: 2px solid var(--accent);
+      margin-right: 18px;
+      transition: transform var(--transition);
+    }
+    nav img:hover {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    nav span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+    .back-arrow {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      background: var(--glass);
+      border-radius: 50%;
+      transition: box-shadow var(--transition), background var(--transition);
+      box-shadow: 0 4px 16px 0 rgba(255, 69, 0, 0.13);
+      padding: 7px;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .back-arrow img {
+      width: 28px;
+      height: 28px;
+      transition: transform var(--transition);
+    }
+    .back-arrow:hover {
+      background: var(--accent);
+    }
+    .back-arrow:hover img {
+      transform: translateX(-5px) scale(1.1);
+    }
+    .glass-card {
+      width: 100%;
+      max-width: 800px;
+      background: var(--glass);
+      border-radius: 24px;
+      margin: 0 auto 22px;
+      box-shadow: var(--shadow);
+      padding: 36px 28px 32px;
+      animation: fadein 1.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+      transition: background var(--transition);
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(35px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .glass-card h3 {
+      font-size: 2.1rem;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: 700;
+      animation: fadein 1.5s;
+    }
+    .glass-card p {
+      color: var(--secondary);
+      font-size: 1.15rem;
+      line-height: 1.5;
+      text-align: center;
+      font-weight: 500;
+    }
+    .glass-card img.main-img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin: 16px 0;
+      box-shadow: 0 3px 16px 0 rgba(0,0,0,0.10);
+      transition: box-shadow var(--transition), filter var(--transition);
+      filter: grayscale(.2) brightness(.9);
+      animation: imagePop 1.1s;
+    }
+    @keyframes imagePop {
+      from { opacity: 0; transform: scale(.97);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    .glass-card h1 {
+      text-align: center;
+      font-size: 1.35rem;
+      margin: 18px 0 10px;
+      color: var(--secondary);
+      letter-spacing: 1.2px;
+    }
+    .glass-card ul {
+      list-style: none;
+      margin: 0 0 10px 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .glass-card li {
+      background: rgba(0,0,0,0.11);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      color: var(--white);
+      padding: 12px 16px;
+      font-size: 1.09rem;
+      box-shadow: 0 1px 4px 0 rgba(255,69,0,0.07);
+      transition: background var(--transition), transform var(--transition);
+      will-change: transform;
+      animation: fadein 1.2s;
+    }
+    .glass-card li:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translateX(6px) scale(1.03);
+    }
+    .glass-card h2 {
+      color: var(--accent);
+      font-size: 1.15rem;
+      margin: 18px 0 6px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .social-row {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .social-row a img {
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      border: 2px solid var(--accent);
+      box-shadow: 0 2px 10px 0 rgba(255, 69, 0, 0.13);
+      background: #fff;
+      padding: 7px;
+      transition: border-color var(--transition), transform var(--transition), filter var(--transition);
+      filter: grayscale(0.2) brightness(.97);
+    }
+    .social-row a img:hover {
+      border-color: var(--secondary);
+      transform: scale(1.14) rotate(4deg);
+      filter: brightness(1.09);
+    }
+    .suggested-words-section {
+      margin-top: 25px;
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+      animation: fadein 1s;
+    }
+    .suggested-words-title {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.13rem;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .suggested-words-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .suggested-word {
+      padding: 8px 17px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      box-shadow: 0 1px 8px 0 rgba(255, 69, 0, 0.08);
+      letter-spacing: .7px;
+    }
+    .suggested-word:hover {
+      background: var(--secondary);
+      color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    @media (max-width: 600px) {
+      nav, .glass-card, .suggested-words-section {
+        padding: 8px;
+        border-radius: 12px;
+      }
+      .glass-card {
+        padding: 16px 6px;
+      }
+      nav img { width: 46px; height: 46px;}
+      .glass-card img.main-img { max-height: 120px; }
+    }
+  </style>
 </head>
-
-
-    <style>
-        body{
-            background-color: black;
-            color: orangered;
-            font-style: normal;
-            font-size: 29px;
-            scrollbar-highlight-color: rgb(236, 231, 240);
-            
-
-        }
-        img{
-            border: 2px solid orangered;
-            border-radius: 23px;
-            color:antiquewhite
-            
-            
-            
-        }
-        li{
-           
-            font-size: larger;
-            margin-top: 21px;
-            color:aquamarine;
-            font-size: 18px;
-
-        }
-        p{
-           
-         font-size: medium;
-            font-weight: bold;
-            color: aquamarine;
-            font-size: 20px;
-           
-            
-            
-        }
-        .image{
-         align-content: center;
-        }
-        .tools{
-            border: 2px solid orangered;
-            border-radius: 12px;
-            align-items: center;
-            text-align: start;
-            margin-top: 17px;
-        }
-        .service{
-            border: 2px solid orangered;
-            border-radius: 12px;
-            align-items: center;
-            text-align: start;
-            margin-top: 17px;
-        }
-        .industries{
-            border: 2px solid orangered;
-            border-radius: 12px;
-            align-items: center;
-            text-align: start;
-            margin-top: 17px;
-        }
-        h1{
-            font-size: 25px;
-            text-align: center;
-        }
-        
-
-        
-    </style>
+<body>
+  <a href="index.html" class="back-arrow" title="Go Back">
+    <img src="backarrow.png" alt="Back">
+  </a>
+  <nav>
+    <img src="suplogo.jpg" alt="SupremeAmer Logo">
+    <span>SupremeAmer Application Development</span>
+  </nav>
+  <section class="glass-card">
     <h3>OUR MISSION</h3>
-     <p>At SupremeAmer, our mission is to empower businesses and individuals through innovative,
-     user-centric, and scalable application development solutions. We strive to deliver exceptional
-     quality, reliability, and performance, fostering long-term partnerships and driving success.</p>
-
-     <img src="ourmissionicon.jpg" width="100%" height="13%" class="rounded-corner"><br><br>
- 
-
-     <h1>Key Elements</h1>
-     <li>Empower: We aim to enable our clients to achieve their goals and reach their full potential.</li>
-     <li>Innovative: We stay at the forefront of technology, leveraging the latest tools and
-     frameworks to deliver cutting-edge solutions.</li>
-     <li>User-centric: We prioritize our clients' needs and goals, ensuring tailored solutions that meet
-     their unique requirements</li>
-     <li>Scalable: We design and develop applications that can grow and adapt to our clients'
-     evolving needs.</li>
-     <li>Exceptional quality: We are committed to delivering high-quality, reliable, and performant
-     applications.</li>
-     
-     <h2>contact us</h2>
-    <a href=""><img src="x.webp " width="45px" height="45px"></a>
-<a href=""><img src="telegram.webp" width="45px" height="45px"></a>
-<a href=""><img src="youtube.webp" width="45px" height="45px"></a>
-<a href=""><img src="instagram.webp" width="45px" height="45px"></a>
-    
-</div>
+    <p>
+      At SupremeAmer, our mission is to empower businesses and individuals through innovative,
+      user-centric, and scalable application development solutions. We strive to deliver exceptional
+      quality, reliability, and performance, fostering long-term partnerships and driving success.
+    </p>
+    <img src="ourmissionicon.jpg" alt="Our Mission" class="main-img">
+    <h1>Key Elements</h1>
+    <ul>
+      <li>Empower: We aim to enable our clients to achieve their goals and reach their full potential.</li>
+      <li>Innovative: We stay at the forefront of technology, leveraging the latest tools and frameworks to deliver cutting-edge solutions.</li>
+      <li>User-centric: We prioritize our clients' needs and goals, ensuring tailored solutions that meet their unique requirements.</li>
+      <li>Scalable: We design and develop applications that can grow and adapt to our clients' evolving needs.</li>
+      <li>Exceptional quality: We are committed to delivering high-quality, reliable, and performant applications.</li>
+    </ul>
+    <h2>Contact Us</h2>
+    <div class="social-row">
+      <a href="#" title="X"><img src="x.webp" alt="X"></a>
+      <a href="#" title="Telegram"><img src="telegram.webp" alt="Telegram"></a>
+      <a href="#" title="YouTube"><img src="youtube.webp" alt="YouTube"></a>
+      <a href="#" title="Instagram"><img src="instagram.webp" alt="Instagram"></a>
+    </div>
+  </section>
+  <section class="suggested-words-section">
+    <div class="suggested-words-title">Suggested Words</div>
+    <div class="suggested-words-list" id="suggestedWords">
+      <!-- Suggested words will be injected here -->
+    </div>
+  </section>
+  <script>
+    // Example suggested words
+    const words = ['Innovation', 'Empowerment', 'Scalable', 'Reliability', 'Quality', 'Performance', 'Support', 'Partnership', 'Growth', 'Success'];
+    const container = document.getElementById('suggestedWords');
+    words.forEach(word => {
+      const btn = document.createElement('button');
+      btn.className = 'suggested-word';
+      btn.innerText = word;
+      btn.onclick = () => alert(`You selected "${word}"!`);
+      container.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
