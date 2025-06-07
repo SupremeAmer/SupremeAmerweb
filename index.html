@@ -1,266 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SupremeAmer Application Development Organization</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SupremeAmer Application Development</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --primary: #6c3fd3;
       --accent-gradient: linear-gradient(90deg, #ff9800, #fdc500, #ff9800);
-      --bg: #f7f7fa;
-      --card-bg: #fff;
-      --text: #222;
-      --nav-bg: #fff;
-      --nav-shadow: 0 2px 12px #6c3fd326;
+      --bg-light: #f7f7fa;
+      --bg-dark: #121212;
+      --card-bg-light: #fff;
+      --card-bg-dark: #1e1e1e;
+      --text-light: #222;
+      --text-dark: #e0e0e0;
+      --nav-bg-light: #fff;
+      --nav-bg-dark: #1e1e1e;
       --radius: 18px;
+      --transition-speed: 0.3s;
     }
+
     body {
       margin: 0;
-      background: var(--bg);
       font-family: 'Montserrat', Arial, sans-serif;
-      color: var(--text);
-      min-height: 100vh;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background var(--transition-speed), color var(--transition-speed);
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
+
     .navbar {
-      width: 100%;
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: var(--nav-bg);
-      box-shadow: var(--nav-shadow);
+      background: var(--nav-bg-light);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
       display: flex;
+      justify-content: space-between;
       align-items: center;
       padding: 0 32px;
-      min-height: 70px;
-      justify-content: space-between;
+      height: 70px;
+      z-index: 1000;
     }
+
     .navbar-logo {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 1.24em;
-      font-weight: 600;
       color: var(--primary);
-      letter-spacing: 1.2px;
+      font-weight: 600;
+      font-size: 1.2em;
     }
+
     .navbar-logo img {
-      border-radius: 50%;
       width: 48px;
       height: 48px;
-      object-fit: cover;
+      border-radius: 50%;
       border: 2px solid var(--primary);
-      box-shadow: 0 2px 8px #bbb4;
     }
+
     .navbar-links {
       display: flex;
-      gap: 28px;
+      gap: 20px;
     }
+
     .navbar-links a {
       text-decoration: none;
       color: var(--primary);
       font-weight: 500;
-      font-size: 1em;
-      padding: 8px 18px;
-      border-radius: 8px;
-      transition: background .14s, color .14s;
+      transition: 0.2s;
     }
+
     .navbar-links a:hover {
       background: var(--accent-gradient);
+      padding: 6px 12px;
+      border-radius: 8px;
       color: #222;
     }
+
+    .theme-toggle {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 999;
+    }
+
+    #theme-toggle-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
     .hero {
-      padding: 56px 20px 24px 20px;
       text-align: center;
+      padding: 56px 20px 24px 20px;
       background: linear-gradient(120deg, #f7f7fa 60%, #fceabb 100%);
-      margin-bottom: 30px;
     }
+
     .hero h1 {
-      font-size: 2.5em;
+      font-size: 2.2em;
       color: var(--primary);
-      margin-bottom: 18px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.2px;
     }
+
     .hero p {
-      font-size: 1.22em;
+      font-size: 1.1em;
+      color: #444;
       max-width: 650px;
       margin: 0 auto;
-      color: #444;
       line-height: 1.6;
     }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin: 0 auto 36px auto;
+      gap: 24px;
+      padding: 20px;
       max-width: 1100px;
-      width: 95%;
+      margin: auto;
     }
+
     .card {
-      background: var(--card-bg);
+      background: var(--card-bg-light);
       border-radius: var(--radius);
-      box-shadow: 0 4px 24px #6c3fd326, 0 1.5px 5px #bbb3;
-      padding: 32px 22px 24px 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform .15s, box-shadow .15s;
-      min-height: 420px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: 0.3s;
     }
+
     .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 10px 32px #6c3fd340;
+      transform: translateY(-6px);
     }
+
     .card img {
-      width: 120px;
-      height: 140px;
-      object-fit: cover;
+      width: 100px;
+      height: 120px;
       border-radius: 14px;
-      margin-bottom: 18px;
-      border: 2px solid var(--primary);
-      background: #f7f7fa;
-      box-shadow: 0 2px 10px #6c3fd31a;
-      transition: box-shadow .13s;
+      margin-bottom: 14px;
+      object-fit: cover;
     }
+
     .card p {
+      font-size: 1em;
       color: #333;
-      font-size: 1.08em;
-      margin: 0;
-      margin-top: 5px;
-      line-height: 1.45;
-      text-align: center;
     }
-    .card a {
-      display: inline-block;
-      margin-bottom: 9px;
-      transition: transform .14s;
-    }
-    .card a:hover img {
-      box-shadow: 0 8px 28px #ff980099;
-      transform: scale(1.03);
-    }
+
     .contact-section {
-      background: #fff;
-      padding: 38px 14px 24px 14px;
-      border-radius: var(--radius);
-      box-shadow: 0 2px 14px #6c3fd315;
-      max-width: 670px;
-      margin: 0 auto 36px auto;
+      background: var(--card-bg-light);
+      padding: 30px 20px;
+      margin: 20px auto;
       text-align: center;
+      border-radius: var(--radius);
+      max-width: 700px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     }
+
     .contact-section h2 {
       color: var(--primary);
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-      font-size: 1.55em;
-      font-weight: 700;
+      margin-bottom: 16px;
     }
+
     .contact-icons {
       display: flex;
       justify-content: center;
-      gap: 32px;
-      margin: 18px 0;
+      gap: 24px;
     }
-    .contact-icons a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent-gradient);
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      box-shadow: 0 2px 10px #6c3fd31a;
-      transition: transform .14s, box-shadow .14s;
-    }
-    .contact-icons a:hover {
-      transform: scale(1.15) rotate(-7deg);
-      box-shadow: 0 4px 24px #ff980099;
-    }
+
     .contact-icons img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
     }
+
     footer {
-      text-align: center;
-      padding: 26px 0 18px 0;
       background: var(--primary);
       color: #fff;
-      font-size: 1.04em;
-      letter-spacing: 1px;
+      padding: 18px;
+      text-align: center;
       border-radius: 18px 18px 0 0;
       margin-top: auto;
-      box-shadow: 0 -2px 24px #6c3fd315;
     }
-    @media (max-width: 800px) {
-      .cards { grid-template-columns: 1fr; }
-      .navbar { padding: 0 10px;}
+
+    /* Chat Widget */
+    .chat-widget-wrapper {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    @media (max-width: 500px) {
-      .hero h1 { font-size: 1.42em; }
-      .hero { padding: 22px 4px 10px 4px;}
-      .contact-section { padding: 18px 4px;}
+
+    .chat-widget-wrapper img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .navbar-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 1.6em;
+      }
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark .navbar, 
+    body.dark .card, 
+    body.dark .contact-section {
+      background: var(--card-bg-dark);
+    }
+
+    body.dark .hero {
+      background: linear-gradient(120deg, #1e1e1e 60%, #2e2e2e 100%);
+    }
+
+    body.dark footer {
+      background: #222;
     }
   </style>
 </head>
 <body>
+  <div class="theme-toggle">
+    <button id="theme-toggle-btn">🌙</button>
+  </div>
+
   <nav class="navbar">
     <div class="navbar-logo">
-      <img src="suplogo.jpg" alt="SupremeAmer Logo">
-      SupremeAmer Application Development
+      <img src="suplogo.jpg" alt="Logo" />
+      SupremeAmer
     </div>
     <div class="navbar-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="our mission.html">Mission</a>
-      <a href="expertise.html">Expertise</a>
-      <a href="ourvalue.html">Value</a>
-      <a href="bar.html">more</a>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Mission</a>
+      <a href="#">Expertise</a>
+      <a href="#">Value</a>
+      <a href="#">More</a>
     </div>
   </nav>
 
   <section class="hero">
     <h1>Innovating the Future of Application Development</h1>
-    <p>
-      In the ever-evolving world of technology, innovation, and digital transformation, <strong>SupremeAmer</strong>
-      stands at the forefront of application development. We help organizations navigate the complexities of digital
-      transformation, ensuring seamless integration and adoption of emerging technologies.
-    </p>
+    <p>SupremeAmer stands at the forefront of application development, enabling digital transformation and innovation.</p>
   </section>
 
   <section class="cards">
     <div class="card">
-      <a href="about.html"><img src="IMG-20250406-WA0040.jpg" alt="About SupremeAmer"></a>
-      <p>
-        Navigating digital transformation with expertise and care, ensuring organizations integrate and adopt new technologies seamlessly.
-      </p>
+      <img src="IMG-20250406-WA0040.jpg" alt="About">
+      <p>We help organizations seamlessly adopt new technologies.</p>
     </div>
     <div class="card">
-      <a href="our mission.html"><img src="ourmissionicon.jpg" alt="Our Mission"></a>
-      <p>
-        Our team possesses deep knowledge in Blockchain, Web Development, and AI, driving innovation and value for our partners.
-      </p>
+      <img src="ourmissionicon.jpg" alt="Mission">
+      <p>Our team is expert in Blockchain, Web Dev, and AI.</p>
     </div>
     <div class="card">
-      <a href="expertise.html"><img src="IMG-20250406-WA0041.jpg" alt="Expertise"></a>
-      <p>
-        We embrace creativity, experimentation, and risk-taking to foster growth. Our highest priority: open communication and mutually successful outcomes.
-      </p>
+      <img src="IMG-20250406-WA0041.jpg" alt="Expertise">
+      <p>We prioritize innovation, creativity, and growth.</p>
     </div>
     <div class="card">
-      <a href="ourvalue.html"><img src="ourvalue.jpg" alt="Our Value"></a>
-      <p>
-        SupremeAmer is committed to honesty, partnership, and delivering transformative value through every engagement.
-      </p>
+      <img src="ourvalue.jpg" alt="Value">
+      <p>Committed to honesty, impact, and long-term partnerships.</p>
     </div>
   </section>
 
-  <section class="contact-section" id="contact">
+  <section class="contact-section">
     <h2>Contact Us</h2>
     <div class="contact-icons">
       <a href="#"><img src="youtube.webp" alt="YouTube"></a>
@@ -273,5 +299,25 @@
   <footer>
     © 2025 SupremeAmer Applications. All rights reserved.
   </footer>
+
+  <!-- Live Chat Widget (Simulated) -->
+  <div class="chat-widget-wrapper" onclick="startChat()">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384023.png" alt="Chat">
+    <span>Chat with us</span>
+  </div>
+
+  <script>
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+
+    // Live Chat Simulation
+    function startChat() {
+      alert('💬 Connecting you to a support agent...');
+    }
+  </script>
 </body>
 </html>
