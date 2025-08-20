@@ -1177,6 +1177,191 @@
       font-weight: bold;
     }
 
+    /* NEW: Client Logos Section */
+    .clients-section {
+      padding: 80px 20px;
+      background: var(--bg-light);
+      text-align: center;
+    }
+
+    .clients-section h2 {
+      margin-bottom: 50px;
+      color: var(--primary);
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 40px;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .client-logo {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .client-logo:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .client-logo img {
+      max-width: 100%;
+      max-height: 60px;
+    }
+
+    /* NEW: Process Section */
+    .process-section {
+      padding: var(--section-padding);
+      background: linear-gradient(135deg, rgba(108,63,211,0.03) 0%, rgba(255,152,0,0.02) 100%);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      counter-reset: process-counter;
+    }
+
+    .process-step {
+      background: var(--card-bg-light);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      counter-increment: process-counter;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .process-step:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .process-step:before {
+      content: counter(process-counter);
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: var(--accent-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #222;
+      font-size: 1.2rem;
+    }
+
+    .process-step h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .process-step p {
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* NEW: CTA Section */
+    .cta-section {
+      padding: 100px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* NEW: Animated elements */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* NEW: Loading animation */
+    .loader {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background: var(--bg-light);
+      border-radius: 50%;
+      padding: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .loader:after {
+      content: " ";
+      display: block;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 6px solid var(--primary);
+      border-color: var(--primary) transparent var(--primary) transparent;
+      animation: loader 1.2s linear infinite;
+    }
+
+    @keyframes loader {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
       .section-title {
@@ -1283,6 +1468,15 @@
       .cookie-buttons .btn {
         flex: 1;
       }
+      
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .clients-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
     }
 
     @media (max-width: 576px) {
@@ -1321,6 +1515,10 @@
         width: 50px;
         height: 50px;
       }
+      
+      .cta-content h2 {
+        font-size: 2rem;
+      }
     }
 
     /* Dark Mode */
@@ -1337,7 +1535,8 @@
     body.dark .project-card,
     body.dark .coffee-container,
     body.dark .modal-content,
-    body.dark .cookie-consent {
+    body.dark .cookie-consent,
+    body.dark .process-step {
       background: var(--card-bg-dark);
       border-color: rgba(255,255,255,0.05);
     }
@@ -1345,7 +1544,8 @@
     body.dark .hero:before,
     body.dark .services,
     body.dark .contact,
-    body.dark .projects {
+    body.dark .projects,
+    body.dark .process-section {
       background: linear-gradient(135deg, rgba(108,63,211,0.05) 0%, rgba(30,30,30,0.9) 100%);
     }
 
@@ -1355,7 +1555,8 @@
     body.dark .contact-form h3,
     body.dark .footer-column h3,
     body.dark .coffee-container h3,
-    body.dark .modal-content h2 {
+    body.dark .modal-content h2,
+    body.dark .process-step h3 {
       color: var(--text-dark);
     }
 
@@ -1398,9 +1599,21 @@
       border-color: #444;
       color: var(--text-dark);
     }
+    
+    body.dark .client-logo {
+      filter: grayscale(100%) invert(1);
+      opacity: 0.7;
+    }
+    
+    body.dark .client-logo:hover {
+      filter: grayscale(0%) invert(0);
+    }
   </style>
 </head>
 <body>
+  <!-- Loading Animation -->
+  <div class="loader" id="loader"></div>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
@@ -1447,26 +1660,53 @@
     </div>
   </section>
 
+  <!-- Client Logos Section -->
+  <section class="clients-section">
+    <div class="container">
+      <h2 class="section-title">Trusted By Industry Leaders</h2>
+      <div class="clients-grid">
+        <div class="client-logo">
+          <i class="fab fa-microsoft fa-3x"></i>
+        </div>
+        <div class="client-logo">
+          <i class="fab fa-google fa-3x"></i>
+        </div>
+        <div class="client-logo">
+          <i class="fab fa-amazon fa-3x"></i>
+        </div>
+        <div class="client-logo">
+          <i class="fab fa-apple fa-3x"></i>
+        </div>
+        <div class="client-logo">
+          <i class="fab fa-slack fa-3x"></i>
+        </div>
+        <div class="client-logo">
+          <i class="fab fa-spotify fa-3x"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
       <h2 class="section-title">Why Choose SupremeAmer</h2>
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card animate-on-scroll">
           <div class="feature-icon">
             <i class="fas fa-lightbulb"></i>
           </div>
           <h3>Innovative Solutions</h3>
           <p>We create cutting-edge applications that leverage the latest technologies to solve real business challenges with forward-thinking approaches.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card animate-on-scroll">
           <div class="feature-icon">
             <i class="fas fa-shield-alt"></i>
           </div>
           <h3>Secure Architecture</h3>
           <p>Security-first approach in all our development processes to protect your data and applications from modern threats.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card animate-on-scroll">
           <div class="feature-icon">
             <i class="fas fa-rocket"></i>
           </div>
@@ -1482,7 +1722,7 @@
     <div class="container">
       <h2 class="section-title">Our Expertise</h2>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card animate-on-scroll">
           <div class="service-image">
             <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Blockchain Development">
           </div>
@@ -1492,7 +1732,7 @@
             <a href="#" class="btn btn-outline">Learn More</a>
           </div>
         </div>
-        <div class="service-card">
+        <div class="service-card animate-on-scroll">
           <div class="service-image">
             <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1565&q=80" alt="AI & Machine Learning">
           </div>
@@ -1502,7 +1742,7 @@
             <a href="#" class="btn btn-outline">Learn More</a>
           </div>
         </div>
-        <div class="service-card">
+        <div class="service-card animate-on-scroll">
           <div class="service-image">
             <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80" alt="Web Development">
           </div>
@@ -1511,6 +1751,31 @@
             <p>Responsive, high-performance web applications with modern frameworks, optimized architecture, and seamless UX.</p>
             <a href="#" class="btn btn-outline">Learn More</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process-section">
+    <div class="container">
+      <h2 class="section-title">Our Development Process</h2>
+      <div class="process-steps">
+        <div class="process-step animate-on-scroll">
+          <h3>Discovery & Planning</h3>
+          <p>We begin by understanding your business goals, target audience, and technical requirements to create a comprehensive project plan.</p>
+        </div>
+        <div class="process-step animate-on-scroll">
+          <h3>Design & Prototyping</h3>
+          <p>Our designers create intuitive user interfaces and experiences, followed by interactive prototypes for your feedback.</p>
+        </div>
+        <div class="process-step animate-on-scroll">
+          <h3>Development</h3>
+          <p>Our developers use agile methodologies to build your solution with regular updates and opportunities for feedback.</p>
+        </div>
+        <div class="process-step animate-on-scroll">
+          <h3>Testing & Deployment</h3>
+          <p>We rigorously test your application across devices and platforms before deploying to production environments.</p>
         </div>
       </div>
     </div>
@@ -1528,7 +1793,7 @@
       </div>
       
       <div class="projects-grid">
-        <div class="project-card" data-status="completed">
+        <div class="project-card animate-on-scroll" data-status="completed">
           <div class="project-image">
             <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Blockchain Platform">
             <span class="project-status completed">Completed</span>
@@ -1545,7 +1810,7 @@
           </div>
         </div>
         
-        <div class="project-card" data-status="completed">
+        <div class="project-card animate-on-scroll" data-status="completed">
           <div class="project-image">
             <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="AI Analytics Dashboard">
             <span class="project-status completed">Completed</span>
@@ -1562,7 +1827,7 @@
           </div>
         </div>
         
-        <div class="project-card" data-status="in-progress">
+        <div class="project-card animate-on-scroll" data-status="in-progress">
           <div class="project-image">
             <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80" alt="Web3 Marketplace">
             <span class="project-status in-progress">In Progress</span>
@@ -1606,7 +1871,7 @@
             </div>
           </div>
         </div>
-        <div class="about-image">
+        <div class="about-image animate-on-scroll">
           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Our Team">
         </div>
       </div>
@@ -1618,7 +1883,7 @@
     <div class="container">
       <h2 class="section-title">What Our Clients Say</h2>
       <div class="testimonials-container">
-        <div class="testimonial-card">
+        <div class="testimonial-card animate-on-scroll">
           <div class="testimonial-content">
             <p>SupremeAmer transformed our outdated systems into a modern, efficient platform. Their blockchain expertise helped us secure our transactions and reduce costs by 40%. The team was professional, responsive, and delivered beyond our expectations.</p>
           </div>
@@ -1631,7 +1896,7 @@
           </div>
         </div>
         
-        <div class="testimonial-card">
+        <div class="testimonial-card animate-on-scroll">
           <div class="testimonial-content">
             <p>The AI solution developed by SupremeAmer has revolutionized our customer service operations. Their team understood our needs perfectly and delivered a system that has improved our response times by 60% while maintaining 98% accuracy.</p>
           </div>
@@ -1642,6 +1907,20 @@
               <p>COO, Retail Chain</p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Let's discuss how our cutting-edge solutions can help you achieve your goals and stay ahead of the competition.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-accent">Start a Project</a>
+          <a href="#contact" class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;">Schedule a Call</a>
         </div>
       </div>
     </div>
@@ -1860,6 +2139,11 @@
   </div>
 
   <script>
+    // Loading animation
+    window.addEventListener('load', function() {
+      document.getElementById('loader').style.display = 'none';
+    });
+
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const navbarLinks = document.querySelector('.navbar-links');
@@ -2122,6 +2406,20 @@
         }
       });
     });
+
+    // Scroll animation
+    function checkScroll() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        const position = element.getBoundingClientRect();
+        if (position.top < window.innerHeight - 100) {
+          element.classList.add('animated');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
   </script>
 </body>
 </html>
