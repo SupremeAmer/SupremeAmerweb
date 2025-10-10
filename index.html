@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupremeAmer | Application Development</title>
+    <meta name="description" content="SupremeAmer delivers cutting-edge mobile and web applications that transform businesses and enhance user experiences.">
+    <meta name="theme-color" content="#1a3a8f">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -53,6 +58,82 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+        
+        /* PWA Install Prompt */
+        .pwa-install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            padding: 20px;
+            z-index: 1001;
+            display: none;
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        
+        .pwa-install-prompt.show {
+            display: block;
+        }
+        
+        .pwa-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .pwa-logo {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .pwa-text {
+            flex: 1;
+        }
+        
+        .pwa-text h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .pwa-text p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .pwa-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .pwa-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--gray);
         }
         
         /* Header & Navigation */
@@ -189,10 +270,15 @@
             display: none;
             min-height: 100vh;
             padding: 120px 0 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .page.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
             animation: fadeIn 0.5s ease;
         }
         
@@ -222,17 +308,25 @@
             margin-bottom: 20px;
             line-height: 1.2;
             font-weight: 900;
+            animation: slideInLeft 1s ease;
         }
         
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 30px;
             opacity: 0.9;
+            animation: slideInLeft 1s ease 0.2s both;
         }
         
         .hero-buttons {
             display: flex;
             gap: 15px;
+            animation: slideInLeft 1s ease 0.4s both;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .secondary-button {
@@ -344,10 +438,25 @@
             border-radius: 12px;
             background: white;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .stat-card.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
         
         .stat-card:before {
             content: '';
@@ -404,7 +513,20 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .service-card.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
         
         .service-card:before {
             content: '';
@@ -501,7 +623,17 @@
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .portfolio-item.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
+        .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
+        .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
         
         .portfolio-item:hover {
             transform: translateY(-10px);
@@ -588,7 +720,18 @@
             position: relative;
             z-index: 2;
             flex: 1;
+            opacity: 0;
+            transform: translateY(30px);
         }
+        
+        .process-step.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .process-step:nth-child(1) { animation-delay: 0.1s; }
+        .process-step:nth-child(2) { animation-delay: 0.2s; }
+        .process-step:nth-child(3) { animation-delay: 0.3s; }
+        .process-step:nth-child(4) { animation-delay: 0.4s; }
         
         .step-number {
             width: 80px;
@@ -733,7 +876,21 @@
         .contact-item {
             display: flex;
             margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(-20px);
         }
+        
+        .contact-item.animate {
+            animation: slideInRight 0.6s ease forwards;
+        }
+        
+        @keyframes slideInRight {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .contact-item:nth-child(1) { animation-delay: 0.1s; }
+        .contact-item:nth-child(2) { animation-delay: 0.2s; }
+        .contact-item:nth-child(3) { animation-delay: 0.3s; }
         
         .contact-icon {
             width: 50px;
@@ -936,10 +1093,37 @@
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .pwa-install-prompt {
+                width: 95%;
+            }
+            
+            .pwa-content {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- PWA Install Prompt -->
+    <div class="pwa-install-prompt" id="pwaInstallPrompt">
+        <button class="pwa-close" id="pwaClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="pwa-content">
+            <div class="pwa-logo">SA</div>
+            <div class="pwa-text">
+                <h4>Install SupremeAmer App</h4>
+                <p>Get the best experience by installing our app on your device.</p>
+            </div>
+        </div>
+        <div class="pwa-buttons">
+            <button class="cta-button" id="pwaInstall">Install</button>
+            <button class="secondary-button" id="pwaCancel">Not Now</button>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -1341,6 +1525,62 @@
         </div>
     </footer>
 
+    <!-- Service Worker Registration -->
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('Service Worker registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const pwaInstallPrompt = document.getElementById('pwaInstallPrompt');
+        const pwaInstallButton = document.getElementById('pwaInstall');
+        const pwaCancelButton = document.getElementById('pwaCancel');
+        const pwaCloseButton = document.getElementById('pwaClose');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install prompt
+            setTimeout(() => {
+                pwaInstallPrompt.classList.add('show');
+            }, 3000);
+        });
+
+        pwaInstallButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // We've used the prompt, and can't use it again, discard it
+                deferredPrompt = null;
+                // Hide the install prompt
+                pwaInstallPrompt.classList.remove('show');
+            }
+        });
+
+        pwaCancelButton.addEventListener('click', () => {
+            pwaInstallPrompt.classList.remove('show');
+        });
+
+        pwaCloseButton.addEventListener('click', () => {
+            pwaInstallPrompt.classList.remove('show');
+        });
+    </script>
+
+    <!-- Main JavaScript -->
     <script>
         // Page Navigation
         document.addEventListener('DOMContentLoaded', function() {
@@ -1378,6 +1618,11 @@
                         
                         // Scroll to top
                         window.scrollTo(0, 0);
+                        
+                        // Trigger animations for elements in the active page
+                        setTimeout(() => {
+                            animatePageElements(pageId);
+                        }, 300);
                     }
                 });
             });
@@ -1460,36 +1705,57 @@
                 });
             }
             
-            // Start counter animation when services page is active
-            const servicesPage = document.getElementById('services');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounter();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
-            
-            observer.observe(servicesPage);
-            
             // Process steps animation
             const processSteps = document.querySelectorAll('.process-step');
             
-            window.addEventListener('scroll', function() {
-                const processSection = document.getElementById('process');
-                const sectionTop = processSection.offsetTop;
-                const sectionHeight = processSection.offsetHeight;
-                const scrollPosition = window.pageYOffset;
+            // Function to animate elements on page load
+            function animatePageElements(pageId) {
+                const page = document.getElementById(pageId);
                 
-                if (scrollPosition > sectionTop - 400 && scrollPosition < sectionTop + sectionHeight - 400) {
-                    processSteps.forEach((step, index) => {
-                        setTimeout(() => {
-                            step.classList.add('active');
-                        }, index * 300);
+                // Animate stats
+                if (pageId === 'services') {
+                    const statCards = page.querySelectorAll('.stat-card');
+                    statCards.forEach(card => {
+                        card.classList.add('animate');
+                    });
+                    animateCounter();
+                }
+                
+                // Animate service cards
+                if (pageId === 'services') {
+                    const serviceCards = page.querySelectorAll('.service-card');
+                    serviceCards.forEach(card => {
+                        card.classList.add('animate');
                     });
                 }
-            });
+                
+                // Animate portfolio items
+                if (pageId === 'portfolio') {
+                    const portfolioItems = page.querySelectorAll('.portfolio-item');
+                    portfolioItems.forEach(item => {
+                        item.classList.add('animate');
+                    });
+                }
+                
+                // Animate process steps
+                if (pageId === 'process') {
+                    const processSteps = page.querySelectorAll('.process-step');
+                    processSteps.forEach(step => {
+                        step.classList.add('animate');
+                    });
+                }
+                
+                // Animate contact items
+                if (pageId === 'contact') {
+                    const contactItems = page.querySelectorAll('.contact-item');
+                    contactItems.forEach(item => {
+                        item.classList.add('animate');
+                    });
+                }
+            }
+            
+            // Initial animation for home page
+            animatePageElements('home');
         });
     </script>
 </body>
