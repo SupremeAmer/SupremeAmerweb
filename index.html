@@ -203,11 +203,60 @@
             color: var(--dark);
         }
         
+        /* Panel Navigation */
+        .panel-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .panel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .panel-dot.active {
+            background: var(--secondary);
+            transform: scale(1.3);
+        }
+        
+        .panel-dot:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+        
+        /* Panel Sections */
+        .panel {
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
         /* Hero Section */
         .hero {
             background: var(--gradient-primary);
             color: white;
-            padding: 180px 0 120px;
             position: relative;
             overflow: hidden;
         }
@@ -314,7 +363,6 @@
         /* Stats Section */
         .stats {
             background-color: white;
-            padding: 80px 0;
             box-shadow: var(--shadow);
         }
         
@@ -375,8 +423,8 @@
         }
         
         /* Services Section */
-        .section {
-            padding: 100px 0;
+        .services {
+            background-color: #f8fafc;
         }
         
         .section-title {
@@ -474,7 +522,7 @@
         
         /* Portfolio Section */
         .portfolio {
-            background-color: #f0f2f5;
+            background-color: white;
         }
         
         .portfolio-filters {
@@ -577,6 +625,10 @@
         }
         
         /* Process Section */
+        .process {
+            background-color: #f8fafc;
+        }
+        
         .process-steps {
             display: flex;
             justify-content: space-between;
@@ -636,101 +688,7 @@
             font-size: 0.9rem;
         }
         
-        /* Pricing Section */
-        .pricing {
-            background: var(--gradient-dark);
-            color: white;
-        }
-        
-        .pricing .section-title h2 {
-            color: white;
-        }
-        
-        .pricing .section-title p {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pricing-card.featured {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-        
-        .pricing-badge {
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--secondary);
-            color: white;
-            padding: 5px 30px;
-            transform: rotate(45deg);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .pricing-header {
-            margin-bottom: 30px;
-        }
-        
-        .pricing-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .pricing-price {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-        
-        .pricing-period {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-        
-        .pricing-features li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .pricing-features i {
-            margin-right: 10px;
-            color: var(--accent);
-        }
-        
-        /* Testimonials */
+        /* Testimonials Section */
         .testimonials {
             background: var(--gradient-primary);
             color: white;
@@ -826,97 +784,11 @@
             transform: scale(1.2);
         }
         
-        /* Blog Section */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .blog-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .blog-img {
-            height: 200px;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-        }
-        
-        .blog-content {
-            padding: 25px;
-        }
-        
-        .blog-meta {
-            display: flex;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .blog-date {
-            margin-right: 15px;
-        }
-        
-        .blog-content h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .blog-link {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .blog-link i {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-        
-        .blog-link:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: var(--gradient-dark);
-            color: white;
-            text-align: center;
-            padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-        
-        .cta-section p {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-        
         /* Contact Section */
+        .contact {
+            background-color: white;
+        }
+        
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1070,37 +942,6 @@
             font-size: 0.9rem;
         }
         
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
-            transition: all 0.3s ease;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 999;
-        }
-        
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            background: var(--secondary-light);
-        }
-        
         /* Responsive Design */
         @media (max-width: 992px) {
             .process-steps {
@@ -1116,12 +957,8 @@
                 font-size: 2.8rem;
             }
             
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-            
-            .pricing-card.featured:hover {
-                transform: translateY(-10px);
+            .panel-nav {
+                display: none;
             }
         }
         
@@ -1161,10 +998,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .blog-grid {
                 grid-template-columns: 1fr;
             }
@@ -1190,8 +1023,7 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#process">Process</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact" class="cta-button">Get Started</a></li>
                 </ul>
                 <div class="mobile-menu">
@@ -1201,8 +1033,18 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <!-- Panel Navigation -->
+    <div class="panel-nav">
+        <div class="panel-dot active" data-title="Home" data-panel="home"></div>
+        <div class="panel-dot" data-title="Services" data-panel="services"></div>
+        <div class="panel-dot" data-title="Portfolio" data-panel="portfolio"></div>
+        <div class="panel-dot" data-title="Process" data-panel="process"></div>
+        <div class="panel-dot" data-title="Testimonials" data-panel="testimonials"></div>
+        <div class="panel-dot" data-title="Contact" data-panel="contact"></div>
+    </div>
+
+    <!-- Home Panel -->
+    <section class="panel hero" id="home">
         <div class="container">
             <div class="hero-content">
                 <h1>Transform Your Business With Innovative Digital Solutions</h1>
@@ -1222,7 +1064,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats">
+    <section class="panel stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-card">
@@ -1257,8 +1099,8 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="section" id="services">
+    <!-- Services Panel -->
+    <section class="panel services" id="services">
         <div class="container">
             <div class="section-title">
                 <h2>Our Services</h2>
@@ -1317,8 +1159,8 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section class="section portfolio" id="portfolio">
+    <!-- Portfolio Panel -->
+    <section class="panel portfolio" id="portfolio">
         <div class="container">
             <div class="section-title">
                 <h2>Our Portfolio</h2>
@@ -1386,8 +1228,8 @@
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="section" id="process">
+    <!-- Process Panel -->
+    <section class="panel process" id="process">
         <div class="container">
             <div class="section-title">
                 <h2>Our Development Process</h2>
@@ -1418,66 +1260,8 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="section pricing" id="pricing">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Pricing Plans</h2>
-                <p>Flexible pricing options to suit businesses of all sizes and requirements.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Starter</h3>
-                        <div class="pricing-price">$4,999</div>
-                        <div class="pricing-period">One-time payment</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Basic Mobile App</li>
-                        <li><i class="fas fa-check"></i> 5 Screens</li>
-                        <li><i class="fas fa-check"></i> Basic Backend</li>
-                        <li><i class="fas fa-times"></i> No Admin Panel</li>
-                        <li><i class="fas fa-times"></i> Limited Support</li>
-                    </ul>
-                    <a href="#" class="cta-button">Get Started</a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Professional</h3>
-                        <div class="pricing-price">$9,999</div>
-                        <div class="pricing-period">One-time payment</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Advanced Mobile App</li>
-                        <li><i class="fas fa-check"></i> 15+ Screens</li>
-                        <li><i class="fas fa-check"></i> Custom Backend</li>
-                        <li><i class="fas fa-check"></i> Admin Panel</li>
-                        <li><i class="fas fa-check"></i> 6 Months Support</li>
-                    </ul>
-                    <a href="#" class="cta-button">Get Started</a>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Enterprise</h3>
-                        <div class="pricing-price">Custom</div>
-                        <div class="pricing-period">Based on requirements</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Multi-platform App</li>
-                        <li><i class="fas fa-check"></i> Unlimited Screens</li>
-                        <li><i class="fas fa-check"></i> Advanced Backend</li>
-                        <li><i class="fas fa-check"></i> Custom Admin Panel</li>
-                        <li><i class="fas fa-check"></i> Priority Support</li>
-                    </ul>
-                    <a href="#" class="cta-button">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section testimonials" id="testimonials">
+    <!-- Testimonials Panel -->
+    <section class="panel testimonials" id="testimonials">
         <div class="container">
             <div class="section-title">
                 <h2>What Our Clients Say</h2>
@@ -1535,71 +1319,8 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section class="section" id="blog">
-        <div class="container">
-            <div class="section-title">
-                <h2>Latest From Our Blog</h2>
-                <p>Stay updated with the latest trends, insights, and news in application development.</p>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">June 15, 2023</span>
-                            <span class="blog-category">Mobile Development</span>
-                        </div>
-                        <h3>The Future of Cross-Platform Mobile Development</h3>
-                        <p>Exploring the latest frameworks and technologies that are shaping the future of mobile app development.</p>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">May 28, 2023</span>
-                            <span class="blog-category">Security</span>
-                        </div>
-                        <h3>Best Practices for Application Security in 2023</h3>
-                        <p>Essential security measures every developer should implement to protect user data and prevent breaches.</p>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">April 12, 2023</span>
-                            <span class="blog-category">Business</span>
-                        </div>
-                        <h3>How Mobile Apps Can Transform Your Business</h3>
-                        <p>Case studies and examples of businesses that achieved significant growth through mobile applications.</p>
-                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="container">
-            <h2>Ready to Start Your Project?</h2>
-            <p>Contact us today for a free consultation and let's discuss how we can bring your ideas to life with cutting-edge technology solutions.</p>
-            <a href="#contact" class="cta-button">Get Free Consultation</a>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section">
+    <!-- Contact Panel -->
+    <section class="panel contact" id="contact">
         <div class="container">
             <div class="section-title">
                 <h2>Contact Us</h2>
@@ -1706,11 +1427,6 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <a href="#" class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </a>
-
     <script>
         // Preloader
         window.addEventListener('load', function() {
@@ -1729,11 +1445,15 @@
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // Update panel navigation
+            updatePanelNavigation();
         });
 
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         });
 
         // Smooth scrolling for anchor links
@@ -1754,15 +1474,43 @@
             });
         });
 
-        // Back to top button
-        const backToTopButton = document.querySelector('.back-to-top');
+        // Panel Navigation
+        const panelDots = document.querySelectorAll('.panel-dot');
+        const panels = document.querySelectorAll('.panel');
         
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
+        function updatePanelNavigation() {
+            let currentPanel = '';
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            panels.forEach(panel => {
+                const panelTop = panel.offsetTop;
+                const panelBottom = panelTop + panel.offsetHeight;
+                
+                if (scrollPosition >= panelTop && scrollPosition < panelBottom) {
+                    currentPanel = panel.id;
+                }
+            });
+            
+            panelDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-panel') === currentPanel) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        panelDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const panelId = this.getAttribute('data-panel');
+                const targetPanel = document.getElementById(panelId);
+                
+                if (targetPanel) {
+                    window.scrollTo({
+                        top: targetPanel.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
 
         // Portfolio filtering
