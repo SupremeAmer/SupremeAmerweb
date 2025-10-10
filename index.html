@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SupremeAmer | Premium Application Development</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a3a8f;
             --primary-light: #2a4fb8;
+            --primary-dark: #0f2a6d;
             --secondary: #ff6b00;
             --secondary-light: #ff8c3a;
+            --secondary-dark: #e55e00;
+            --accent: #00d4ff;
             --dark: #0f172a;
             --dark-light: #1e293b;
             --light: #f8fafc;
@@ -20,6 +23,11 @@
             --success: #10b981;
             --warning: #f59e0b;
             --error: #ef4444;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-light));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            --gradient-dark: linear-gradient(135deg, var(--dark), var(--dark-light));
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
         
         * {
@@ -45,6 +53,34 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
         
         /* Header & Navigation */
@@ -87,7 +123,7 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -142,7 +178,7 @@
         }
         
         .cta-button {
-            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            background: var(--gradient-secondary);
             color: white;
             padding: 12px 28px;
             border-radius: 8px;
@@ -151,6 +187,8 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
             display: inline-block;
+            border: none;
+            cursor: pointer;
         }
         
         .cta-button:hover {
@@ -167,9 +205,9 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             color: white;
-            padding: 160px 0 100px;
+            padding: 180px 0 120px;
             position: relative;
             overflow: hidden;
         }
@@ -181,14 +219,14 @@
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
             line-height: 1.2;
-            font-weight: 800;
+            font-weight: 900;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 30px;
             opacity: 0.9;
         }
@@ -226,11 +264,58 @@
             background-position: center;
         }
         
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
         /* Stats Section */
         .stats {
             background-color: white;
             padding: 80px 0;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
         }
         
         .stats-grid {
@@ -244,8 +329,20 @@
             padding: 30px 20px;
             border-radius: 12px;
             background: white;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
         }
         
         .stat-card:hover {
@@ -256,7 +353,7 @@
             width: 70px;
             height: 70px;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -311,7 +408,7 @@
             background: white;
             border-radius: 12px;
             padding: 40px 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -325,18 +422,18 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--gradient-primary);
         }
         
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
         
         .service-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -414,23 +511,44 @@
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .portfolio-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
         
         .portfolio-img {
             height: 220px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
         }
         
         .portfolio-content {
@@ -518,9 +636,103 @@
             font-size: 0.9rem;
         }
         
+        /* Pricing Section */
+        .pricing {
+            background: var(--gradient-dark);
+            color: white;
+        }
+        
+        .pricing .section-title h2 {
+            color: white;
+        }
+        
+        .pricing .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-header {
+            margin-bottom: 30px;
+        }
+        
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-period {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pricing-features i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
         /* Testimonials */
         .testimonials {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: var(--gradient-primary);
             color: white;
             position: relative;
             overflow: hidden;
@@ -614,9 +826,76 @@
             transform: scale(1.2);
         }
         
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .blog-img {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .blog-date {
+            margin-right: 15px;
+        }
+        
+        .blog-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .blog-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .blog-link i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-link:hover i {
+            transform: translateX(5px);
+        }
+        
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, var(--dark), var(--dark-light));
+            background: var(--gradient-dark);
             color: white;
             text-align: center;
             padding: 100px 0;
@@ -635,6 +914,71 @@
             margin: 0 auto 30px;
             opacity: 0.9;
             font-size: 1.1rem;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p {
+            color: var(--gray);
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.1);
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
         }
         
         /* Footer */
@@ -771,6 +1115,14 @@
             .hero h1 {
                 font-size: 2.8rem;
             }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
         }
         
         @media (max-width: 768px) {
@@ -808,10 +1160,23 @@
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -825,7 +1190,8 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#process">Process</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#blog">Blog</a></li>
                     <li><a href="#contact" class="cta-button">Get Started</a></li>
                 </ul>
                 <div class="mobile-menu">
@@ -847,6 +1213,11 @@
                 </div>
             </div>
             <div class="hero-shape"></div>
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
         </div>
     </section>
 
@@ -963,6 +1334,9 @@
                 <div class="portfolio-item" data-category="mobile">
                     <div class="portfolio-img">
                         <i class="fas fa-shopping-cart"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="cta-button">View Project</a>
+                        </div>
                     </div>
                     <div class="portfolio-content">
                         <h3>E-Commerce Mobile App</h3>
@@ -977,6 +1351,9 @@
                 <div class="portfolio-item" data-category="web">
                     <div class="portfolio-img">
                         <i class="fas fa-heartbeat"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="cta-button">View Project</a>
+                        </div>
                     </div>
                     <div class="portfolio-content">
                         <h3>Healthcare Management System</h3>
@@ -991,6 +1368,9 @@
                 <div class="portfolio-item" data-category="web">
                     <div class="portfolio-img">
                         <i class="fas fa-chart-bar"></i>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="cta-button">View Project</a>
+                        </div>
                     </div>
                     <div class="portfolio-content">
                         <h3>Financial Analytics Dashboard</h3>
@@ -1033,6 +1413,64 @@
                     <div class="step-number">4</div>
                     <h3 class="step-title">Testing & Deployment</h3>
                     <p class="step-desc">We thoroughly test and deploy your application.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Pricing Plans</h2>
+                <p>Flexible pricing options to suit businesses of all sizes and requirements.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Starter</h3>
+                        <div class="pricing-price">$4,999</div>
+                        <div class="pricing-period">One-time payment</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Basic Mobile App</li>
+                        <li><i class="fas fa-check"></i> 5 Screens</li>
+                        <li><i class="fas fa-check"></i> Basic Backend</li>
+                        <li><i class="fas fa-times"></i> No Admin Panel</li>
+                        <li><i class="fas fa-times"></i> Limited Support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Professional</h3>
+                        <div class="pricing-price">$9,999</div>
+                        <div class="pricing-period">One-time payment</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Advanced Mobile App</li>
+                        <li><i class="fas fa-check"></i> 15+ Screens</li>
+                        <li><i class="fas fa-check"></i> Custom Backend</li>
+                        <li><i class="fas fa-check"></i> Admin Panel</li>
+                        <li><i class="fas fa-check"></i> 6 Months Support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-name">Enterprise</h3>
+                        <div class="pricing-price">Custom</div>
+                        <div class="pricing-period">Based on requirements</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Multi-platform App</li>
+                        <li><i class="fas fa-check"></i> Unlimited Screens</li>
+                        <li><i class="fas fa-check"></i> Advanced Backend</li>
+                        <li><i class="fas fa-check"></i> Custom Admin Panel</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <a href="#" class="cta-button">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -1097,12 +1535,125 @@
         </div>
     </section>
 
+    <!-- Blog Section -->
+    <section class="section" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest From Our Blog</h2>
+                <p>Stay updated with the latest trends, insights, and news in application development.</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">June 15, 2023</span>
+                            <span class="blog-category">Mobile Development</span>
+                        </div>
+                        <h3>The Future of Cross-Platform Mobile Development</h3>
+                        <p>Exploring the latest frameworks and technologies that are shaping the future of mobile app development.</p>
+                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">May 28, 2023</span>
+                            <span class="blog-category">Security</span>
+                        </div>
+                        <h3>Best Practices for Application Security in 2023</h3>
+                        <p>Essential security measures every developer should implement to protect user data and prevent breaches.</p>
+                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">April 12, 2023</span>
+                            <span class="blog-category">Business</span>
+                        </div>
+                        <h3>How Mobile Apps Can Transform Your Business</h3>
+                        <p>Case studies and examples of businesses that achieved significant growth through mobile applications.</p>
+                        <a href="#" class="blog-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <div class="container">
             <h2>Ready to Start Your Project?</h2>
             <p>Contact us today for a free consultation and let's discuss how we can bring your ideas to life with cutting-edge technology solutions.</p>
             <a href="#contact" class="cta-button">Get Free Consultation</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team to discuss your project requirements.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Our Office</h4>
+                                <p>123 Tech Avenue, Silicon Valley, CA 94025</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@supremeamer.dev</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject" required>
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1161,6 +1712,15 @@
     </a>
 
     <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
