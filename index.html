@@ -55,85 +55,6 @@
             padding: 0 15px;
         }
         
-        /* Floating Navigation */
-        .floating-nav {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            background: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
-            padding: 15px 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--dark);
-        }
-        
-        .nav-item:hover {
-            background: rgba(26, 58, 143, 0.1);
-            transform: translateX(-5px);
-        }
-        
-        .nav-item.active {
-            background: var(--gradient-primary);
-            color: white;
-        }
-        
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            font-size: 1.1rem;
-        }
-        
-        .nav-text {
-            font-weight: 500;
-            white-space: nowrap;
-            display: none;
-        }
-        
-        .floating-nav:hover .nav-text {
-            display: block;
-        }
-        
-        .floating-nav:hover {
-            padding: 15px 20px;
-        }
-        
-        /* Page Sections */
-        .page {
-            display: none;
-            min-height: 100vh;
-            padding: 100px 0;
-        }
-        
-        .page.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
         /* Header */
         header {
             background-color: rgba(255, 255, 255, 0.95);
@@ -208,6 +129,76 @@
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+        }
+        
+        /* Floating Navigation */
+        .floating-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--dark);
+        }
+        
+        .nav-item:hover {
+            background: rgba(26, 58, 143, 0.1);
+            transform: translateX(-5px);
+        }
+        
+        .nav-item.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .nav-text {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        /* Page Sections */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 0;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         /* Home Page */
