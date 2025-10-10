@@ -1,2425 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="SupremeAmer - Leading application development company specializing in blockchain, AI, and web solutions">
-  <title>SupremeAmer | Innovative Application Development</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #6c3fd3;
-      --primary-light: #8a63dd;
-      --primary-dark: #4d2b96;
-      --accent: #ff9800;
-      --accent-gradient: linear-gradient(135deg, #ff9800, #fdc500);
-      --bg-light: #f8f9fa;
-      --bg-dark: #121212;
-      --card-bg-light: #fff;
-      --card-bg-dark: #1e1e1e;
-      --text-light: #333;
-      --text-muted: #666;
-      --text-dark: #e0e0e0;
-      --text-dark-muted: #aaa;
-      --nav-bg-light: rgba(255,255,255,0.98);
-      --nav-bg-dark: rgba(30,30,30,0.98);
-      --radius: 12px;
-      --radius-lg: 20px;
-      --transition-speed: 0.3s;
-      --shadow: 0 4px 20px rgba(0,0,0,0.08);
-      --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
-      --section-padding: 100px 20px;
-      --chat-bg: #f1f3ff;
-      --chat-bg-dark: #252525;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-light);
-      transition: background var(--transition-speed), color var(--transition-speed);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-
-    .btn:hover {
-      background: var(--primary-light);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .btn-accent {
-      background: var(--accent-gradient);
-      color: #222;
-    }
-
-    .btn-accent:hover {
-      background: linear-gradient(135deg, #ffa726, #ffca28);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-      position: relative;
-      font-size: 2.2rem;
-    }
-
-    .section-title:after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 5px;
-      background: var(--accent-gradient);
-      margin: 20px auto 0;
-      border-radius: 3px;
-    }
-
-    /* Navigation */
-    .navbar {
-      position: sticky;
-      top: 0;
-      background: var(--nav-bg-light);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 32px;
-      height: 90px;
-      z-index: 1000;
-      transition: all var(--transition-speed);
-    }
-
-    .navbar.scrolled {
-      height: 80px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    }
-
-    .navbar-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--primary);
-      font-weight: 700;
-      font-size: 1.5rem;
-      text-decoration: none;
-    }
-
-    .navbar-logo img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: 2px solid var(--primary);
-      transition: transform 0.3s ease;
-    }
-
-    .navbar-logo:hover img {
-      transform: rotate(15deg);
-    }
-
-    .navbar-links {
-      display: flex;
-      gap: 30px;
-    }
-
-    .navbar-links a {
-      text-decoration: none;
-      color: var(--text-light);
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 8px 0;
-      font-size: 1.05rem;
-    }
-
-    .navbar-links a:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: var(--primary);
-      transition: width 0.3s ease;
-    }
-
-    .navbar-links a:hover {
-      color: var(--primary);
-    }
-
-    .navbar-links a:hover:after {
-      width: 100%;
-    }
-
-    .navbar-links a.active {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .navbar-links a.active:after {
-      width: 100%;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--primary);
-      font-size: 1.8rem;
-      cursor: pointer;
-      z-index: 999;
-    }
-
-    .theme-toggle {
-      margin-left: 20px;
-    }
-
-    #theme-toggle-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.1rem;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #theme-toggle-btn:hover {
-      transform: scale(1.1);
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 140px 20px 100px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(108,63,211,0.1) 0%, rgba(255,152,0,0.05) 100%);
-      z-index: -1;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .hero h1 {
-      font-size: 3.2rem;
-      color: var(--primary);
-      margin-bottom: 25px;
-      line-height: 1.2;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto 40px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .hero-image {
-      margin-top: 60px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-hover);
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-      border: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Features Section */
-    .features {
-      padding: var(--section-padding);
-      background: var(--bg-light);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .feature-card {
-      background: var(--card-bg-light);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 40px 30px;
-      transition: all 0.3s ease;
-      text-align: center;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .feature-icon {
-      width: 90px;
-      height: 90px;
-      background: var(--accent-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 25px;
-      color: #222;
-      font-size: 2rem;
-    }
-
-    .feature-card h3 {
-      margin-bottom: 20px;
-      color: var(--primary);
-      font-size: 1.4rem;
-    }
-
-    .feature-card p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    /* Services Section */
-    .services {
-      padding: var(--section-padding);
-      background: linear-gradient(135deg, rgba(108,63,211,0.03) 0%, rgba(255,152,0,0.02) 100%);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px;
-    }
-
-    .service-card {
-      background: var(--card-bg-light);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .service-image {
-      height: 200px;
-      overflow: hidden;
-    }
-
-    .service-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .service-card:hover .service-image img {
-      transform: scale(1.05);
-    }
-
-    .service-content {
-      padding: 30px;
-    }
-
-    .service-content h3 {
-      margin-bottom: 20px;
-      color: var(--primary);
-      font-size: 1.4rem;
-    }
-
-    .service-content p {
-      color: var(--text-muted);
-      margin-bottom: 25px;
-      font-size: 1.05rem;
-    }
-
-    /* About Section */
-    .about {
-      padding: var(--section-padding);
-      background: var(--bg-light);
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-image {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-hover);
-      border: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .about-text h2 {
-      margin-bottom: 25px;
-      color: var(--primary);
-    }
-
-    .about-text p {
-      margin-bottom: 25px;
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 5px;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .stat-label {
-      font-size: 1rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* Projects Section */
-    .projects {
-      padding: var(--section-padding);
-      background: linear-gradient(135deg, rgba(108,63,211,0.05) 0%, rgba(255,152,0,0.03) 100%);
-    }
-
-    .projects-tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .tab-btn {
-      padding: 12px 24px;
-      background: transparent;
-      color: var(--text-light);
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-
-    .tab-btn.active {
-      background: var(--primary);
-      color: white;
-    }
-
-    .tab-btn:not(.active):hover {
-      background: rgba(108,63,211,0.1);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .project-card {
-      background: var(--card-bg-light);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .project-image {
-      height: 180px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-image img {
-      transform: scale(1.05);
-    }
-
-    .project-status {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      background: var(--accent);
-      color: #222;
-    }
-
-    .project-status.completed {
-      background: #4CAF50;
-      color: white;
-    }
-
-    .project-status.in-progress {
-      background: #2196F3;
-      color: white;
-    }
-
-    .project-content {
-      padding: 20px;
-    }
-
-    .project-content h3 {
-      margin-bottom: 10px;
-      color: var(--primary);
-    }
-
-    .project-content p {
-      color: var(--text-muted);
-      margin-bottom: 15px;
-      font-size: 0.95rem;
-    }
-
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    .tech-tag {
-      padding: 4px 12px;
-      background: rgba(108,63,211,0.1);
-      border-radius: 20px;
-      font-size: 0.8rem;
-      color: var(--primary);
-    }
-
-    /* Testimonials */
-    .testimonials {
-      padding: var(--section-padding);
-      background: var(--bg-light);
-    }
-
-    .testimonials-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .testimonial-card {
-      background: var(--card-bg-light);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 40px;
-      margin: 20px;
-      position: relative;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .testimonial-card:before {
-      content: '"';
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 5rem;
-      color: rgba(108,63,211,0.1);
-      font-family: serif;
-      line-height: 1;
-    }
-
-    .testimonial-content {
-      position: relative;
-      z-index: 1;
-      margin-bottom: 25px;
-      font-style: italic;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-    }
-
-    .testimonial-author img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-right: 20px;
-      object-fit: cover;
-      border: 3px solid var(--primary);
-    }
-
-    .author-info h4 {
-      margin-bottom: 5px;
-      color: var(--primary);
-    }
-
-    .author-info p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    /* Contact Section */
-    .contact {
-      padding: var(--section-padding);
-      background: linear-gradient(135deg, rgba(108,63,211,0.03) 0%, rgba(255,152,0,0.02) 100%);
-    }
-
-    .contact-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 60px;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .contact-method {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-    }
-
-    .contact-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--accent-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #222;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .contact-details h3 {
-      margin-bottom: 10px;
-      color: var(--primary);
-    }
-
-    .contact-details p, 
-    .contact-details a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-size: 1.05rem;
-    }
-
-    .contact-details a:hover {
-      color: var(--primary);
-    }
-
-    .contact-form {
-      background: var(--card-bg-light);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 40px;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .contact-form h3 {
-      margin-bottom: 25px;
-      color: var(--primary);
-      font-size: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 25px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: 500;
-      color: var(--text-light);
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 14px 18px;
-      border: 1px solid #ddd;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(108,63,211,0.1);
-    }
-
-    textarea.form-control {
-      min-height: 150px;
-      resize: vertical;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .social-link {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      transition: all 0.3s ease;
-    }
-
-    .social-link:hover {
-      background: var(--primary-light);
-      transform: translateY(-3px);
-    }
-
-    /* Coffee Support Section */
-    .coffee-support {
-      padding: 60px 20px;
-      background: var(--bg-light);
-      text-align: center;
-    }
-
-    .coffee-container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--card-bg-light);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .coffee-container h3 {
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    .coffee-container p {
-      color: var(--text-muted);
-      margin-bottom: 30px;
-    }
-
-    .usdt-address {
-      background: rgba(0,0,0,0.05);
-      padding: 15px;
-      border-radius: var(--radius);
-      font-family: monospace;
-      word-break: break-all;
-      margin-bottom: 25px;
-      position: relative;
-    }
-
-    .copy-btn {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      background: rgba(0,0,0,0.1);
-      border: none;
-      border-radius: 4px;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: all 0.2s ease;
-    }
-
-    .copy-btn:hover {
-      background: rgba(0,0,0,0.2);
-    }
-
-    .coffee-image {
-      width: 120px;
-      margin: 0 auto 20px;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--primary);
-      color: white;
-      padding: 70px 0 30px;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 50px;
-      margin-bottom: 50px;
-    }
-
-    .footer-column h3 {
-      margin-bottom: 25px;
-      position: relative;
-      padding-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .footer-column h3:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background: var(--accent);
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 15px;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-size: 1.05rem;
-    }
-
-    .footer-links a:hover {
-      color: white;
-      text-decoration: underline;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .footer-bottom p {
-      color: rgba(255,255,255,0.8);
-    }
-
-    /* Privacy/Terms Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      z-index: 1001;
-      overflow-y: auto;
-    }
-
-    .modal-content {
-      background: var(--card-bg-light);
-      margin: 50px auto;
-      padding: 40px;
-      border-radius: var(--radius-lg);
-      max-width: 800px;
-      width: 90%;
-      box-shadow: 0 5px 30px rgba(0,0,0,0.3);
-      position: relative;
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-muted);
-      background: none;
-      border: none;
-    }
-
-    .modal-content h2 {
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    .modal-content p {
-      margin-bottom: 15px;
-      color: var(--text-muted);
-    }
-
-    /* Cookie Consent */
-    .cookie-consent {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--card-bg-light);
-      padding: 20px;
-      box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-      z-index: 999;
-      display: none;
-    }
-
-    .cookie-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .cookie-text {
-      flex: 1;
-      min-width: 300px;
-    }
-
-    .cookie-text p {
-      color: var(--text-muted);
-    }
-
-    .cookie-buttons {
-      display: flex;
-      gap: 15px;
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 999;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
-    .back-to-top.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .back-to-top:hover {
-      background: var(--primary-light);
-      transform: translateY(-3px);
-    }
-
-    /* Chat Widget */
-    .chat-widget {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 380px;
-      max-width: 90%;
-      background: var(--chat-bg);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 5px 30px rgba(0,0,0,0.2);
-      z-index: 1000;
-      overflow: hidden;
-      display: none;
-      flex-direction: column;
-      max-height: 80vh;
-      border: 1px solid rgba(0,0,0,0.1);
-    }
-
-    body.dark .chat-widget {
-      background: var(--chat-bg-dark);
-    }
-
-    .chat-header {
-      background: var(--primary);
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .chat-header h3 {
-      margin: 0;
-      font-size: 1.2rem;
-    }
-
-    .close-chat {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    .chat-messages {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .message {
-      max-width: 80%;
-      padding: 12px 16px;
-      border-radius: 18px;
-      font-size: 0.95rem;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      background: var(--primary);
-      color: white;
-      border-bottom-right-radius: 5px;
-    }
-
-    .message.bot {
-      align-self: flex-start;
-      background: rgba(0,0,0,0.1);
-      color: var(--text-light);
-      border-bottom-left-radius: 5px;
-    }
-
-    body.dark .message.bot {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-dark);
-    }
-
-    .chat-input {
-      display: flex;
-      padding: 15px;
-      border-top: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 25px;
-      outline: none;
-      font-family: inherit;
-    }
-
-    .send-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      margin-left: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .send-btn:hover {
-      background: var(--primary-light);
-    }
-
-    .chat-toggle {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--primary);
-      color: white;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      z-index: 998;
-      transition: all 0.3s ease;
-    }
-
-    .chat-toggle:hover {
-      background: var(--primary-light);
-      transform: translateY(-3px);
-    }
-
-    .chat-toggle i {
-      font-size: 1.5rem;
-    }
-
-    .chat-toggle .badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: var(--accent);
-      color: #222;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: bold;
-    }
-
-    /* NEW: Client Logos Section */
-    .clients-section {
-      padding: 80px 20px;
-      background: var(--bg-light);
-      text-align: center;
-    }
-
-    .clients-section h2 {
-      margin-bottom: 50px;
-      color: var(--primary);
-    }
-
-    .clients-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 40px;
-      align-items: center;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .client-logo {
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      filter: grayscale(100%);
-      opacity: 0.6;
-      transition: all 0.3s ease;
-    }
-
-    .client-logo:hover {
-      filter: grayscale(0%);
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .client-logo img {
-      max-width: 100%;
-      max-height: 60px;
-    }
-
-    /* NEW: Process Section */
-    .process-section {
-      padding: var(--section-padding);
-      background: linear-gradient(135deg, rgba(108,63,211,0.03) 0%, rgba(255,152,0,0.02) 100%);
-    }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      counter-reset: process-counter;
-    }
-
-    .process-step {
-      background: var(--card-bg-light);
-      border-radius: var(--radius-lg);
-      padding: 40px 30px 30px;
-      box-shadow: var(--shadow);
-      position: relative;
-      counter-increment: process-counter;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .process-step:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .process-step:before {
-      content: counter(process-counter);
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
-      background: var(--accent-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #222;
-      font-size: 1.2rem;
-    }
-
-    .process-step h3 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    .process-step p {
-      text-align: center;
-      color: var(--text-muted);
-    }
-
-    /* NEW: CTA Section */
-    .cta-section {
-      padding: 100px 20px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      text-align: center;
-    }
-
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cta-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .cta-content p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* NEW: Animated elements */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .animate-on-scroll.animated {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* NEW: Loading animation */
-    .loader {
-      display: inline-block;
-      width: 80px;
-      height: 80px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      background: var(--bg-light);
-      border-radius: 50%;
-      padding: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-    .loader:after {
-      content: " ";
-      display: block;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 6px solid var(--primary);
-      border-color: var(--primary) transparent var(--primary) transparent;
-      animation: loader 1.2s linear infinite;
-    }
-
-    @keyframes loader {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .section-title {
-        font-size: 2rem;
-      }
-      
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-    }
-
-    @media (max-width: 992px) {
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
-      .about-image {
-        order: -1;
-      }
-      
-      .section-title {
-        font-size: 1.8rem;
-      }
-      
-      .hero h1 {
-        font-size: 2.4rem;
-      }
-      
-      .hero p {
-        font-size: 1.2rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 0 20px;
-        height: 80px;
-      }
-      
-      .navbar.scrolled {
-        height: 70px;
-      }
-      
-      .section-title {
-        font-size: 1.6rem;
-        margin-bottom: 40px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1.1rem;
-      }
-
-      .navbar-links {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 85%;
-        max-width: 350px;
-        height: 100vh;
-        background: var(--nav-bg-light);
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 100px 30px 30px;
-        box-shadow: 2px 0 20px rgba(0,0,0,0.1);
-        transition: left 0.3s ease;
-        z-index: 998;
-      }
-
-      .navbar-links.active {
-        left: 0;
-      }
-
-      .navbar-links a {
-        padding: 12px 0;
-        font-size: 1.2rem;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .hero-buttons .btn {
-        width: 100%;
-        max-width: 280px;
-      }
-      
-      .contact-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .cookie-buttons {
-        width: 100%;
-      }
-      
-      .cookie-buttons .btn {
-        flex: 1;
-      }
-      
-      .process-steps {
-        grid-template-columns: 1fr;
-      }
-      
-      .clients-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      :root {
-        --section-padding: 80px 20px;
-      }
-
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      
-      .hero {
-        padding: 120px 20px 80px;
-      }
-      
-      .stat-number {
-        font-size: 2.2rem;
-      }
-      
-      .project-card {
-        max-width: 350px;
-        margin: 0 auto;
-      }
-      
-      .chat-widget {
-        width: 100%;
-        max-width: 100%;
-        bottom: 0;
-        right: 0;
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-      }
-      
-      .chat-toggle {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-      }
-      
-      .cta-content h2 {
-        font-size: 2rem;
-      }
-    }
-
-    /* Dark Mode */
-    body.dark {
-      background: var(--bg-dark);
-      color: var(--text-dark);
-    }
-
-    body.dark .navbar,
-    body.dark .feature-card,
-    body.dark .service-card,
-    body.dark .contact-form,
-    body.dark .testimonial-card,
-    body.dark .project-card,
-    body.dark .coffee-container,
-    body.dark .modal-content,
-    body.dark .cookie-consent,
-    body.dark .process-step {
-      background: var(--card-bg-dark);
-      border-color: rgba(255,255,255,0.05);
-    }
-
-    body.dark .hero:before,
-    body.dark .services,
-    body.dark .contact,
-    body.dark .projects,
-    body.dark .process-section {
-      background: linear-gradient(135deg, rgba(108,63,211,0.05) 0%, rgba(30,30,30,0.9) 100%);
-    }
-
-    body.dark .navbar-links a,
-    body.dark .form-group label,
-    body.dark .contact-details h3,
-    body.dark .contact-form h3,
-    body.dark .footer-column h3,
-    body.dark .coffee-container h3,
-    body.dark .modal-content h2,
-    body.dark .process-step h3 {
-      color: var(--text-dark);
-    }
-
-    body.dark .navbar-links a:hover,
-    body.dark .contact-details a:hover,
-    body.dark .footer-links a:hover {
-      color: var(--primary-light);
-    }
-
-    body.dark .form-control {
-      background: #2a2a2a;
-      border-color: #444;
-      color: var(--text-dark);
-    }
-
-    body.dark .form-control:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(108,63,211,0.2);
-    }
-    
-    body.dark .usdt-address {
-      background: rgba(255,255,255,0.1);
-    }
-    
-    body.dark .copy-btn {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-dark);
-    }
-    
-    body.dark .message.bot {
-      background: rgba(255,255,255,0.1);
-    }
-    
-    body.dark .chat-input {
-      border-color: rgba(255,255,255,0.1);
-    }
-    
-    body.dark .chat-input input {
-      background: #2a2a2a;
-      border-color: #444;
-      color: var(--text-dark);
-    }
-    
-    body.dark .client-logo {
-      filter: grayscale(100%) invert(1);
-      opacity: 0.7;
-    }
-    
-    body.dark .client-logo:hover {
-      filter: grayscale(0%) invert(0);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupremeAmer | Application Development Organization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a3a8f;
+            --secondary: #ff6b00;
+            --dark: #1e2a4a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .cta-button {
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e55e00;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #2a4fb8);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Services Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background-color: #f0f2f5;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .portfolio-img {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .portfolio-content {
+            padding: 20px;
+        }
+        
+        .portfolio-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            height: 400px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .testimonials .section-title h2 {
+            color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #b0b7c3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0b7c3;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Loading Animation -->
-  <div class="loader" id="loader"></div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <div class="logo-text">SupremeAmer</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="cta-button">Get Started</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container">
-      <a href="#" class="navbar-logo">
-        <img src="suplogo.jpg" alt="SupremeAmer Logo" />
-        SupremeAmer
-      </a>
-      
-      <div class="navbar-links">
-        <a href="#" class="active">Home</a>
-        <a href="#features">Features</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
-      </div>
-      
-      <div style="display: flex; align-items: center;">
-        <div class="theme-toggle">
-          <button id="theme-toggle-btn">🌙</button>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Innovative Application Development Solutions</h1>
+            <p>SupremeAmer delivers cutting-edge mobile and web applications that transform businesses and enhance user experiences.</p>
+            <a href="#contact" class="cta-button">Start Your Project</a>
         </div>
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
+    </section>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Innovating the Future of Application Development</h1>
-        <p>SupremeAmer stands at the forefront of digital transformation, delivering cutting-edge blockchain, AI, and web solutions that drive business growth and innovation.</p>
-        <div class="hero-buttons">
-          <a href="#contact" class="btn btn-accent">Get Started</a>
-          <a href="#services" class="btn btn-outline">Our Services</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="App Development">
-      </div>
-    </div>
-  </section>
-
-  <!-- Client Logos Section -->
-  <section class="clients-section">
-    <div class="container">
-      <h2 class="section-title">Trusted By Industry Leaders</h2>
-      <div class="clients-grid">
-        <div class="client-logo">
-          <i class="fab fa-microsoft fa-3x"></i>
-        </div>
-        <div class="client-logo">
-          <i class="fab fa-google fa-3x"></i>
-        </div>
-        <div class="client-logo">
-          <i class="fab fa-amazon fa-3x"></i>
-        </div>
-        <div class="client-logo">
-          <i class="fab fa-apple fa-3x"></i>
-        </div>
-        <div class="client-logo">
-          <i class="fab fa-slack fa-3x"></i>
-        </div>
-        <div class="client-logo">
-          <i class="fab fa-spotify fa-3x"></i>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2 class="section-title">Why Choose SupremeAmer</h2>
-      <div class="features-grid">
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">
-            <i class="fas fa-lightbulb"></i>
-          </div>
-          <h3>Innovative Solutions</h3>
-          <p>We create cutting-edge applications that leverage the latest technologies to solve real business challenges with forward-thinking approaches.</p>
-        </div>
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3>Secure Architecture</h3>
-          <p>Security-first approach in all our development processes to protect your data and applications from modern threats.</p>
-        </div>
-        <div class="feature-card animate-on-scroll">
-          <div class="feature-icon">
-            <i class="fas fa-rocket"></i>
-          </div>
-          <h3>Scalable Systems</h3>
-          <p>Build applications that grow with your business, handling increased loads without performance issues or downtime.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section class="services" id="services">
-    <div class="container">
-      <h2 class="section-title">Our Expertise</h2>
-      <div class="services-grid">
-        <div class="service-card animate-on-scroll">
-          <div class="service-image">
-            <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Blockchain Development">
-          </div>
-          <div class="service-content">
-            <h3>Blockchain Development</h3>
-            <p>Secure, decentralized solutions including smart contracts, DApps, custom blockchain implementations, and cryptocurrency integrations.</p>
-            <a href="#" class="btn btn-outline">Learn More</a>
-          </div>
-        </div>
-        <div class="service-card animate-on-scroll">
-          <div class="service-image">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1565&q=80" alt="AI & Machine Learning">
-          </div>
-          <div class="service-content">
-            <h3>AI & Machine Learning</h3>
-            <p>Intelligent systems that learn, adapt, and automate processes to drive efficiency and insights with predictive analytics.</p>
-            <a href="#" class="btn btn-outline">Learn More</a>
-          </div>
-        </div>
-        <div class="service-card animate-on-scroll">
-          <div class="service-image">
-            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80" alt="Web Development">
-          </div>
-          <div class="service-content">
-            <h3>Web Development</h3>
-            <p>Responsive, high-performance web applications with modern frameworks, optimized architecture, and seamless UX.</p>
-            <a href="#" class="btn btn-outline">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process Section -->
-  <section class="process-section">
-    <div class="container">
-      <h2 class="section-title">Our Development Process</h2>
-      <div class="process-steps">
-        <div class="process-step animate-on-scroll">
-          <h3>Discovery & Planning</h3>
-          <p>We begin by understanding your business goals, target audience, and technical requirements to create a comprehensive project plan.</p>
-        </div>
-        <div class="process-step animate-on-scroll">
-          <h3>Design & Prototyping</h3>
-          <p>Our designers create intuitive user interfaces and experiences, followed by interactive prototypes for your feedback.</p>
-        </div>
-        <div class="process-step animate-on-scroll">
-          <h3>Development</h3>
-          <p>Our developers use agile methodologies to build your solution with regular updates and opportunities for feedback.</p>
-        </div>
-        <div class="process-step animate-on-scroll">
-          <h3>Testing & Deployment</h3>
-          <p>We rigorously test your application across devices and platforms before deploying to production environments.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="projects" id="projects">
-    <div class="container">
-      <h2 class="section-title">Our Projects</h2>
-      
-      <div class="projects-tabs">
-        <button class="tab-btn active" data-tab="all">All Projects</button>
-        <button class="tab-btn" data-tab="completed">Completed</button>
-        <button class="tab-btn" data-tab="in-progress">In Progress</button>
-      </div>
-      
-      <div class="projects-grid">
-        <div class="project-card animate-on-scroll" data-status="completed">
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Blockchain Platform">
-            <span class="project-status completed">Completed</span>
-          </div>
-          <div class="project-content">
-            <h3>SecureChain Platform</h3>
-            <p>A decentralized blockchain platform for secure financial transactions with smart contract capabilities.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Ethereum</span>
-              <span class="tech-tag">Solidity</span>
-              <span class="tech-tag">Web3.js</span>
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive application development services tailored to your business needs.</p>
             </div>
-            <a href="#" class="btn btn-outline">View Details</a>
-          </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile App Development</h3>
+                    <p>Custom iOS and Android applications built with the latest technologies and frameworks.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Application Development</h3>
+                    <p>Responsive and scalable web applications that deliver exceptional user experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Secure and reliable cloud infrastructure to power your applications and services.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design approach that creates intuitive and engaging interfaces.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>API Development</h3>
+                    <p>Robust and scalable APIs to connect your applications and services seamlessly.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>App Maintenance & Support</h3>
+                    <p>Ongoing maintenance and support to keep your applications running smoothly.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="project-card animate-on-scroll" data-status="completed">
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="AI Analytics Dashboard">
-            <span class="project-status completed">Completed</span>
-          </div>
-          <div class="project-content">
-            <h3>AI Business Analytics</h3>
-            <p>Machine learning platform that provides predictive insights and data visualization for business intelligence.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">TensorFlow</span>
-              <span class="tech-tag">React</span>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Portfolio</h2>
+                <p>Explore some of our successful projects that have helped businesses grow and thrive.</p>
             </div>
-            <a href="#" class="btn btn-outline">View Details</a>
-          </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        [Project Image]
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>E-Commerce Mobile App</h3>
+                        <p>A feature-rich shopping application with seamless payment integration.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        [Project Image]
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Healthcare Management System</h3>
+                        <p>A comprehensive platform for patient records and appointment scheduling.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        [Project Image]
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Financial Analytics Dashboard</h3>
+                        <p>Real-time data visualization and reporting for financial institutions.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="project-card animate-on-scroll" data-status="in-progress">
-          <div class="project-image">
-            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80" alt="Web3 Marketplace">
-            <span class="project-status in-progress">In Progress</span>
-          </div>
-          <div class="project-content">
-            <h3>NFT Marketplace</h3>
-            <p>A Web3 platform for creators to mint and sell digital assets as NFTs with multi-chain support.</p>
-            <div class="project-tech">
-              <span class="tech-tag">Polygon</span>
-              <span class="tech-tag">IPFS</span>
-              <span class="tech-tag">Next.js</span>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About SupremeAmer</h2>
+                    <p>SupremeAmer is a premier application development organization with a mission to deliver innovative digital solutions that drive business growth and transformation.</p>
+                    <p>Founded in 2015, we have successfully completed over 200 projects for clients across various industries, from startups to Fortune 500 companies.</p>
+                    <p>Our team of experienced developers, designers, and project managers work collaboratively to create applications that not only meet but exceed our clients' expectations.</p>
+                    <a href="#contact" class="cta-button">Learn More</a>
+                </div>
+                <div class="about-image">
+                    [Company Image]
+                </div>
             </div>
-            <a href="#" class="btn btn-outline">View Details</a>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About Section -->
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <h2 class="section-title">About SupremeAmer</h2>
-          <p>Founded in 2020, SupremeAmer has rapidly established itself as a leader in innovative application development. Our team of expert developers, designers, and strategists work together to deliver exceptional digital solutions.</p>
-          <p>We believe in the power of technology to transform businesses and create meaningful impact. Our approach combines technical excellence with creative problem-solving to deliver solutions that exceed expectations.</p>
-          
-          <div class="about-stats">
-            <div class="stat-item">
-              <div class="stat-number">50+</div>
-              <div class="stat-label">Projects</div>
+    <!-- Testimonials Section -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Hear from businesses that have transformed their operations with our applications.</p>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">15+</div>
-              <div class="stat-label">Developers</div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "SupremeAmer delivered an exceptional mobile app that has significantly improved our customer engagement. Their attention to detail and technical expertise is impressive."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechSolutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Working with SupremeAmer was a game-changer for our business. Their web application streamlined our operations and increased our efficiency by 40%."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Michael Chen</h4>
+                            <p>Operations Director, GlobalRetail</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The team at SupremeAmer understood our vision and brought it to life with a stunning UI/UX design. Our users love the intuitive interface of our new application."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4>Emily Rodriguez</h4>
+                            <p>Product Manager, HealthPlus</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">100%</div>
-              <div class="stat-label">Satisfaction</div>
-            </div>
-          </div>
         </div>
-        <div class="about-image animate-on-scroll">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Our Team">
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us to discuss your project and how we can help bring your ideas to life.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Our Office</h4>
+                                <p>123 Tech Avenue, Silicon Valley, CA 94025</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@supremeamer.dev</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject" required>
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials Section -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <h2 class="section-title">What Our Clients Say</h2>
-      <div class="testimonials-container">
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-content">
-            <p>SupremeAmer transformed our outdated systems into a modern, efficient platform. Their blockchain expertise helped us secure our transactions and reduce costs by 40%. The team was professional, responsive, and delivered beyond our expectations.</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
-            <div class="author-info">
-              <h4>Michael Johnson</h4>
-              <p>CEO, FinTech Solutions</p>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SupremeAmer</h3>
+                    <p>Delivering innovative application development solutions that drive business success and digital transformation.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Mobile App Development</a></li>
+                        <li><a href="#">Web Application Development</a></li>
+                        <li><a href="#">Cloud Solutions</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">API Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Subscribe</h3>
+                    <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" class="cta-button" style="margin-top: 10px; width: 100%;">Subscribe</button>
+                    </form>
+                </div>
             </div>
-          </div>
+            <div class="copyright">
+                <p>&copy; 2023 SupremeAmer Application Development Organization. All Rights Reserved.</p>
+            </div>
         </div>
-        
-        <div class="testimonial-card animate-on-scroll">
-          <div class="testimonial-content">
-            <p>The AI solution developed by SupremeAmer has revolutionized our customer service operations. Their team understood our needs perfectly and delivered a system that has improved our response times by 60% while maintaining 98% accuracy.</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
-            <div class="author-info">
-              <h4>Sarah Williams</h4>
-              <p>COO, Retail Chain</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to Transform Your Business?</h2>
-        <p>Let's discuss how our cutting-edge solutions can help you achieve your goals and stay ahead of the competition.</p>
-        <div class="cta-buttons">
-          <a href="#contact" class="btn btn-accent">Start a Project</a>
-          <a href="#contact" class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;">Schedule a Call</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Coffee Support Section -->
-  <section class="coffee-support">
-    <div class="container">
-      <div class="coffee-container">
-        <div class="coffee-image">
-          <i class="fas fa-coffee" style="font-size: 5rem; color: var(--accent);"></i>
-        </div>
-        <h3>Support Our Work</h3>
-        <p>If you appreciate our open-source projects or find our resources helpful, consider buying us a coffee to support our development efforts. Every contribution helps us create more amazing tools and content.</p>
-        
-        <div class="usdt-address">
-          <p>USDT (TRC20) Address:</p>
-          <p id="usdt-address">TNPv5LSLdK1XqJ6R4f5r7S8t9U0v1W2x3Y4z5A6B7C8D9E0F1G2H</p>
-          <button class="copy-btn" onclick="copyUSDTAddress()">Copy</button>
-        </div>
-        
-        <p>Thank you for your support! ❤️</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2 class="section-title">Get In Touch</h2>
-      <div class="contact-container">
-        <div class="contact-info">
-          <div class="contact-method">
-            <div class="contact-icon">
-              <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <div class="contact-details">
-              <h3>Location</h3>
-              <p>123 Tech Park, Silicon Valley, CA 94025</p>
-            </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <div class="contact-details">
-              <h3>Email</h3>
-              <a href="mailto:info@supremeamer.com">info@supremeamer.com</a>
-            </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-icon">
-              <i class="fas fa-phone-alt"></i>
-            </div>
-            <div class="contact-details">
-              <h3>Phone</h3>
-              <a href="tel:+18005551234">+1 (800) 555-1234</a>
-            </div>
-          </div>
-          
-          <div class="social-links">
-            <a href="#" class="social-link" aria-label="YouTube">
-              <i class="fab fa-youtube"></i>
-            </a>
-            <a href="#" class="social-link" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="social-link" aria-label="Telegram">
-              <i class="fab fa-telegram"></i>
-            </a>
-            <a href="#" class="social-link" aria-label="Twitter">
-              <i class="fab fa-twitter"></i>
-            </a>
-          </div>
-        </div>
-        
-        <div class="contact-form">
-          <h3>Send Us a Message</h3>
-          <form id="contactForm">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" class="form-control" required></textarea>
-            </div>
-            <div class="form-group">
-              <div class="checkbox">
-                <input type="checkbox" id="privacy-terms" required>
-                <label for="privacy-terms">I agree to the <a href="#" onclick="showPrivacyModal()">Privacy Policy</a> and <a href="#" onclick="showTermsModal()">Terms of Service</a></label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-accent">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>SupremeAmer</h3>
-          <p>Innovating the future of application development with cutting-edge blockchain, AI, and web solutions.</p>
-        </div>
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Services</h3>
-          <ul class="footer-links">
-            <li><a href="#">Blockchain Development</a></li>
-            <li><a href="#">AI Solutions</a></li>
-            <li><a href="#">Web Applications</a></li>
-            <li><a href="#">Consulting</a></li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Legal</h3>
-          <ul class="footer-links">
-            <li><a href="#" onclick="showPrivacyModal()">Privacy Policy</a></li>
-            <li><a href="#" onclick="showTermsModal()">Terms of Service</a></li>
-            <li><a href="#">Cookie Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 SupremeAmer Applications. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Back to Top Button -->
-  <div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </div>
-
-  <!-- Chat Widget -->
-  <div class="chat-toggle" id="chatToggle">
-    <i class="fas fa-comment-dots"></i>
-    <span class="badge" id="unreadCount" style="display: none;">1</span>
-  </div>
-  
-  <div class="chat-widget" id="chatWidget">
-    <div class="chat-header">
-      <h3>Support Chat</h3>
-      <button class="close-chat" id="closeChat">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="message bot">
-        Hello! How can we help you today?
-      </div>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="chatInput" placeholder="Type your message...">
-      <button class="send-btn" id="sendMessage">
-        <i class="fas fa-paper-plane"></i>
-      </button>
-    </div>
-  </div>
-
-  <!-- Privacy/Terms Modal -->
-  <div class="modal" id="privacyModal">
-    <div class="modal-content">
-      <button class="close-modal" id="closePrivacyModal">&times;</button>
-      <h2>Privacy Policy</h2>
-      <div id="privacyContent">
-        <!-- Content will be loaded from privacy.html -->
-        Loading privacy policy...
-      </div>
-    </div>
-  </div>
-
-  <div class="modal" id="termsModal">
-    <div class="modal-content">
-      <button class="close-modal" id="closeTermsModal">&times;</button>
-      <h2>Terms of Service</h2>
-      <div id="termsContent">
-        <!-- Content will be loaded from terms.html -->
-        Loading terms of service...
-      </div>
-    </div>
-  </div>
-
-  <!-- Cookie Consent -->
-  <div class="cookie-consent" id="cookieConsent">
-    <div class="cookie-content">
-      <div class="cookie-text">
-        <p>We use cookies to enhance your experience on our website. By continuing to browse, you agree to our use of cookies.</p>
-      </div>
-      <div class="cookie-buttons">
-        <button class="btn btn-accent" id="acceptCookies">Accept</button>
-        <button class="btn btn-outline" id="declineCookies">Decline</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Loading animation
-    window.addEventListener('load', function() {
-      document.getElementById('loader').style.display = 'none';
-    });
-
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const navbarLinks = document.querySelector('.navbar-links');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-      navbarLinks.classList.toggle('active');
-      mobileMenuBtn.innerHTML = navbarLinks.classList.contains('active') ? 
-        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.navbar-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navbarLinks.classList.remove('active');
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-      });
-    });
-
-    // Dark Mode Toggle
-    const toggleBtn = document.getElementById('theme-toggle-btn');
-    const preferredTheme = localStorage.getItem('theme');
-    
-    if (preferredTheme === 'dark') {
-      document.body.classList.add('dark');
-      toggleBtn.textContent = '☀️';
-    }
-    
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
-      localStorage.setItem('theme', theme);
-      toggleBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    });
-
-    // Back to Top Button
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('active');
-      } else {
-        backToTopBtn.classList.remove('active');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    // Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Form submission
-    const contactForm = document.getElementById('contactForm');
-    
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thank you for your message! We will get back to you soon.');
-      contactForm.reset();
-    });
-
-    // Projects Tab Filter
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Update active tab
-        tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        const filter = btn.dataset.tab;
-        
-        // Filter projects
-        projectCards.forEach(card => {
-          if (filter === 'all' || card.dataset.status === filter) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
         });
-      });
-    });
-
-    // Chat Widget
-    const chatToggle = document.getElementById('chatToggle');
-    const chatWidget = document.getElementById('chatWidget');
-    const closeChat = document.getElementById('closeChat');
-    const chatInput = document.getElementById('chatInput');
-    const sendMessage = document.getElementById('sendMessage');
-    const chatMessages = document.getElementById('chatMessages');
-    const unreadCount = document.getElementById('unreadCount');
-    
-    let unreadMessages = 0;
-    
-    chatToggle.addEventListener('click', () => {
-      chatWidget.style.display = 'flex';
-      unreadMessages = 0;
-      unreadCount.style.display = 'none';
-    });
-    
-    closeChat.addEventListener('click', () => {
-      chatWidget.style.display = 'none';
-    });
-    
-    function addMessage(text, isUser) {
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message');
-      messageDiv.classList.add(isUser ? 'user' : 'bot');
-      messageDiv.textContent = text;
-      chatMessages.appendChild(messageDiv);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      
-      if (!isUser && chatWidget.style.display === 'none') {
-        unreadMessages++;
-        unreadCount.textContent = unreadMessages;
-        unreadCount.style.display = 'flex';
-      }
-    }
-    
-    sendMessage.addEventListener('click', () => {
-      const message = chatInput.value.trim();
-      if (message) {
-        addMessage(message, true);
-        chatInput.value = '';
         
-        // Simulate bot response after a delay
-        setTimeout(() => {
-          addMessage('Thanks for your message! Our team will respond shortly.', false);
-        }, 1000);
-      }
-    });
-    
-    chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        sendMessage.click();
-      }
-    });
-
-    // Privacy/Terms Modals
-    const privacyModal = document.getElementById('privacyModal');
-    const termsModal = document.getElementById('termsModal');
-    const closePrivacyModal = document.getElementById('closePrivacyModal');
-    const closeTermsModal = document.getElementById('closeTermsModal');
-    
-    function showPrivacyModal() {
-      // In a real implementation, you would load content from privacy.html here
-      // For example using fetch():
-      // fetch('privacy.html')
-      //   .then(response => response.text())
-      //   .then(html => {
-      //     document.getElementById('privacyContent').innerHTML = html;
-      //   });
-      
-      document.getElementById('privacyContent').innerHTML = `
-        <p>This is a placeholder for your Privacy Policy content. In a real implementation, 
-        this would be loaded from your privacy.html file.</p>
-        <p>You should include information about:</p>
-        <ul>
-          <li>What data you collect</li>
-          <li>How you use the data</li>
-          <li>How you protect the data</li>
-          <li>User rights regarding their data</li>
-        </ul>
-      `;
-      privacyModal.style.display = 'block';
-    }
-    
-    function showTermsModal() {
-      // Similarly, load content from terms.html here
-      document.getElementById('termsContent').innerHTML = `
-        <p>This is a placeholder for your Terms of Service content. In a real implementation, 
-        this would be loaded from your terms.html file.</p>
-        <p>You should include information about:</p>
-        <ul>
-          <li>User responsibilities</li>
-          <li>Limitations of liability</li>
-          <li>Governing law</li>
-          <li>Termination conditions</li>
-        </ul>
-      `;
-      termsModal.style.display = 'block';
-    }
-    
-    closePrivacyModal.addEventListener('click', () => {
-      privacyModal.style.display = 'none';
-    });
-    
-    closeTermsModal.addEventListener('click', () => {
-      termsModal.style.display = 'none';
-    });
-    
-    window.addEventListener('click', (e) => {
-      if (e.target === privacyModal) {
-        privacyModal.style.display = 'none';
-      }
-      if (e.target === termsModal) {
-        termsModal.style.display = 'none';
-      }
-    });
-
-    // Cookie Consent
-    const cookieConsent = document.getElementById('cookieConsent');
-    const acceptCookies = document.getElementById('acceptCookies');
-    const declineCookies = document.getElementById('declineCookies');
-    
-    if (!localStorage.getItem('cookiesAccepted')) {
-      setTimeout(() => {
-        cookieConsent.style.display = 'block';
-      }, 2000);
-    }
-    
-    acceptCookies.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'true');
-      cookieConsent.style.display = 'none';
-    });
-    
-    declineCookies.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'false');
-      cookieConsent.style.display = 'none';
-    });
-
-    // USDT Address Copy
-    function copyUSDTAddress() {
-      const address = document.getElementById('usdt-address').textContent;
-      navigator.clipboard.writeText(address.trim()).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = 'Copied!';
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-        }, 2000);
-      });
-    }
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 90,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Scroll animation
-    function checkScroll() {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      elements.forEach(element => {
-        const position = element.getBoundingClientRect();
-        if (position.top < window.innerHeight - 100) {
-          element.classList.add('animated');
-        }
-      });
-    }
-    
-    window.addEventListener('scroll', checkScroll);
-    window.addEventListener('load', checkScroll);
-  </script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
