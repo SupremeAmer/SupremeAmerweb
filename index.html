@@ -344,6 +344,79 @@
             font-size: 1.1rem;
         }
         
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .stat-card.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .stat-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-text {
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
         /* Services Section */
         .services-grid {
             display: grid;
@@ -936,12 +1009,20 @@
                 font-size: 2.2rem;
             }
             
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .hero-image {
                 display: none;
             }
         }
         
         @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
@@ -998,6 +1079,36 @@
             <div class="section-title">
                 <h2>Our Services</h2>
                 <p>We offer comprehensive application development services tailored to your business needs and goals.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-number" data-count="250">0</div>
+                    <div class="stat-text">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" data-count="85">0</div>
+                    <div class="stat-text">Happy Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-text">Industry Awards</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" data-count="7">0</div>
+                    <div class="stat-text">Years Experience</div>
+                </div>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -1259,7 +1370,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm">
                         <input type="text" placeholder="Your Name" required>
                         <input type="email" placeholder="Your Email" required>
                         <input type="text" placeholder="Subject" required>
@@ -1426,12 +1537,40 @@
                 showSlide(currentSlide + 1);
             }, 5000);
             
+            // Animated counter for stats
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            function animateCounter() {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-count');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(animateCounter, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                });
+            }
+            
             // Process steps animation
             const processSteps = document.querySelectorAll('.process-step');
             
             // Function to animate elements on page load
             function animatePageElements(pageId) {
                 const page = document.getElementById(pageId);
+                
+                // Animate stats
+                if (pageId === 'services') {
+                    const statCards = page.querySelectorAll('.stat-card');
+                    statCards.forEach(card => {
+                        card.classList.add('animate');
+                    });
+                    animateCounter();
+                }
                 
                 // Animate service cards
                 if (pageId === 'services') {
@@ -1464,6 +1603,17 @@
                         item.classList.add('animate');
                     });
                 }
+            }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would send the form data to a server here
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
             }
             
             // Initial animation for home page
