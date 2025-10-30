@@ -33,6 +33,7 @@
             --gradient-dark: linear-gradient(135deg, var(--dark), var(--dark-light));
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
         }
         
         * {
@@ -60,6 +61,63 @@
             padding: 0 15px;
         }
         
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loading-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
         /* PWA Install Prompt */
         .pwa-install-prompt {
             position: fixed;
@@ -67,7 +125,7 @@
             left: 50%;
             transform: translateX(-50%);
             background: white;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow-lg);
             padding: 20px;
             z-index: 1001;
@@ -134,6 +192,38 @@
             font-size: 1.2rem;
             cursor: pointer;
             color: var(--gray);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
         
         /* Header & Navigation */
@@ -435,7 +525,7 @@
         .stat-card {
             text-align: center;
             padding: 30px 20px;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             background: white;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
@@ -506,7 +596,7 @@
         
         .service-card {
             background: white;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             padding: 40px 30px;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
@@ -618,7 +708,7 @@
         
         .portfolio-item {
             background: white;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
@@ -792,7 +882,7 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             padding: 40px;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             text-align: center;
             display: none;
         }
@@ -1106,6 +1196,14 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">SA</div>
+        <div class="loading-bar">
+            <div class="loading-progress" id="loadingProgress"></div>
+        </div>
+    </div>
+
     <!-- PWA Install Prompt -->
     <div class="pwa-install-prompt" id="pwaInstallPrompt">
         <button class="pwa-close" id="pwaClose">
@@ -1123,6 +1221,11 @@
             <button class="secondary-button" id="pwaCancel">Not Now</button>
         </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <!-- Header -->
     <header>
@@ -1464,7 +1567,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm">
                         <input type="text" placeholder="Your Name" required>
                         <input type="email" placeholder="Your Email" required>
                         <input type="text" placeholder="Subject" required>
@@ -1582,11 +1685,30 @@
 
     <!-- Main JavaScript -->
     <script>
+        // Loading Screen
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingProgress = document.getElementById('loadingProgress');
+        
+        // Simulate loading progress
+        let progress = 0;
+        const loadingInterval = setInterval(() => {
+            progress += Math.random() * 10;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 500);
+            }
+            loadingProgress.style.width = `${progress}%`;
+        }, 200);
+        
         // Page Navigation
         document.addEventListener('DOMContentLoaded', function() {
             const navItems = document.querySelectorAll('.nav-links a, .footer-links a, .hero-buttons a, .logo');
             const mobileMenu = document.querySelector('.mobile-menu');
             const navLinks = document.querySelector('.nav-links');
+            const backToTop = document.getElementById('backToTop');
             
             // Mobile menu toggle
             mobileMenu.addEventListener('click', function() {
@@ -1635,6 +1757,21 @@
                 } else {
                     header.classList.remove('scrolled');
                 }
+                
+                // Show/hide back to top button
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
             
             // Portfolio filtering
@@ -1752,6 +1889,17 @@
                         item.classList.add('animate');
                     });
                 }
+            }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real application, you would send the form data to a server here
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
             }
             
             // Initial animation for home page
