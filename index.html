@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupremeAmer | Application Development</title>
-    <meta name="description" content="SupremeAmer delivers cutting-edge mobile and web applications that transform businesses and enhance user experiences.">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4006581742721770"
-     crossorigin="anonymous"></script>
+    <title>SupremeAmer | Investment & Sponsorship Platform</title>
+    <meta name="description" content="SupremeAmer connects visionary investors with groundbreaking projects. Discover, sponsor, and invest in the next generation of innovative applications.">
     <meta name="theme-color" content="#1a3a8f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -50,6 +53,7 @@
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            padding-bottom: 70px;
         }
         
         .container {
@@ -59,7 +63,70 @@
             padding: 0 15px;
         }
         
-        /* Header & Navigation - Compact */
+        /* Install Banner */
+        .install-banner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 20px;
+            z-index: 1001;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .install-banner.show {
+            display: flex;
+        }
+        
+        .install-banner span {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .install-banner button {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .install-banner .close-banner {
+            background: transparent;
+            color: white;
+            padding: 4px;
+            margin-left: 10px;
+        }
+        
+        /* Offline Indicator */
+        .offline-indicator {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--warning);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            z-index: 1000;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .offline-indicator.show {
+            display: block;
+        }
+        
+        /* Header */
         header {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -119,6 +186,7 @@
         .nav-links {
             display: flex;
             list-style: none;
+            align-items: center;
         }
         
         .nav-links li {
@@ -163,6 +231,17 @@
             width: 100%;
         }
         
+        .admin-badge {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-left: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
         .cta-button {
             background: var(--gradient-secondary);
             color: white;
@@ -183,6 +262,22 @@
             box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
         }
         
+        .cta-button.outline {
+            background: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+        
+        .cta-button.outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .cta-button.small {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+        }
+        
         .mobile-menu {
             display: none;
             font-size: 1.3rem;
@@ -190,7 +285,7 @@
             color: var(--dark);
         }
         
-        /* Page Sections - Compact */
+        /* Page Sections */
         .page {
             display: none;
             min-height: 100vh;
@@ -212,7 +307,7 @@
             to { opacity: 1; }
         }
         
-        /* Home Page - Compact */
+        /* Home Page */
         .home {
             background: var(--gradient-primary);
             color: white;
@@ -247,6 +342,7 @@
             display: flex;
             gap: 12px;
             animation: slideInLeft 1s ease 0.4s both;
+            flex-wrap: wrap;
         }
         
         @keyframes slideInLeft {
@@ -278,7 +374,7 @@
             right: 0;
             width: 50%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
             clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
         }
         
@@ -329,7 +425,7 @@
             100% { transform: translateY(0) rotate(360deg); }
         }
         
-        /* Section Styles - Compact */
+        /* Section Styles */
         .section-title {
             text-align: center;
             margin-bottom: 40px;
@@ -349,7 +445,11 @@
             font-size: 1rem;
         }
         
-        /* Stats Section - Compact */
+        .section-title.light h2, .section-title.light p {
+            color: white;
+        }
+        
+        /* Stats Section */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -423,382 +523,863 @@
             font-size: 0.9rem;
         }
         
-        /* Services Section - Compact */
-        .services-grid {
+        /* Projects Section - Investment Cards */
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
         
-        .service-card {
+        .project-card {
             background: white;
-            border-radius: 10px;
-            padding: 30px 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
+            border-radius: 16px;
             overflow: hidden;
-            z-index: 1;
-            opacity: 0;
-            transform: translateY(30px);
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
-        .service-card.animate {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .service-card:nth-child(1) { animation-delay: 0.1s; }
-        .service-card:nth-child(2) { animation-delay: 0.2s; }
-        .service-card:nth-child(3) { animation-delay: 0.3s; }
-        .service-card:nth-child(4) { animation-delay: 0.4s; }
-        .service-card:nth-child(5) { animation-delay: 0.5s; }
-        .service-card:nth-child(6) { animation-delay: 0.6s; }
-        
-        .service-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-8px);
+        .project-card:hover {
+            transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
         }
         
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-        
-        .service-card p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        
-        .service-link {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .service-link i {
-            margin-left: 6px;
-            transition: transform 0.3s ease;
-        }
-        
-        .service-link:hover i {
-            transform: translateX(5px);
-        }
-        
-        /* Portfolio Section - Compact */
-        .portfolio-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 30px;
-        }
-        
-        .filter-btn {
-            background: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            font-size: 0.9rem;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .portfolio-item {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .portfolio-item.animate {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .portfolio-item:nth-child(1) { animation-delay: 0.1s; }
-        .portfolio-item:nth-child(2) { animation-delay: 0.2s; }
-        .portfolio-item:nth-child(3) { animation-delay: 0.3s; }
-        
-        .portfolio-item:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .portfolio-img {
-            height: 200px;
+        .project-image {
+            height: 220px;
             position: relative;
             overflow: hidden;
         }
         
-        .portfolio-img img {
+        .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .portfolio-item:hover .portfolio-img img {
-            transform: scale(1.05);
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
         }
         
-        .portfolio-overlay {
+        .project-badge {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-        
-        .portfolio-content {
-            padding: 20px;
-        }
-        
-        .portfolio-content h3 {
-            margin-bottom: 8px;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-        
-        .portfolio-content p {
-            font-size: 0.9rem;
-        }
-        
-        .portfolio-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 12px;
-        }
-        
-        .portfolio-tag {
-            background: rgba(26, 58, 143, 0.1);
-            color: var(--primary);
-            padding: 4px 10px;
+            top: 15px;
+            left: 15px;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        
-        /* Process Section - Compact */
-        .process-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .process-steps:before {
-            content: '';
-            position: absolute;
-            top: 35px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gray-light);
-            z-index: 1;
-        }
-        
-        .process-step {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            flex: 1;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .process-step.animate {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .process-step:nth-child(1) { animation-delay: 0.1s; }
-        .process-step:nth-child(2) { animation-delay: 0.2s; }
-        .process-step:nth-child(3) { animation-delay: 0.3s; }
-        .process-step:nth-child(4) { animation-delay: 0.4s; }
-        
-        .step-number {
-            width: 70px;
-            height: 70px;
-            background: white;
-            border: 2px solid var(--gray-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 1.3rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            color: var(--gray);
-            transition: all 0.3s ease;
+            text-transform: uppercase;
+            z-index: 2;
         }
         
-        .process-step.active .step-number {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
+        .project-badge.closed {
+            background: var(--gray);
         }
         
-        .step-title {
+        .project-badge.funded {
+            background: var(--success);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-category {
+            color: var(--secondary);
             font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--dark);
-            font-size: 1rem;
-        }
-        
-        .step-desc {
-            color: var(--gray);
             font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
         
-        /* Testimonials - Compact */
-        .testimonials {
-            background: var(--gradient-primary);
-            color: white;
-            position: relative;
-            overflow: hidden;
+        .project-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+            line-height: 1.3;
         }
         
-        .testimonials .section-title h2 {
-            color: white;
-        }
-        
-        .testimonials .section-title p {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .testimonial-slide {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            display: none;
-        }
-        
-        .testimonial-slide.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .testimonial-text {
-            font-style: italic;
+        .project-description {
+            color: var(--gray);
             margin-bottom: 20px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
         
-        .testimonial-author {
+        .project-meta {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-top: 1px solid var(--gray-light);
+            border-bottom: 1px solid var(--gray-light);
         }
         
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            margin-right: 12px;
+        .meta-item {
+            text-align: center;
+        }
+        
+        .meta-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .project-footer {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
+            gap: 10px;
         }
         
-        .author-info h4 {
-            margin-bottom: 4px;
-            font-size: 1rem;
+        .btn-full {
+            flex: 1;
+            text-align: center;
         }
         
-        .author-info p {
-            opacity: 0.8;
-            font-size: 0.85rem;
-        }
-        
-        .testimonial-nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 25px;
-            gap: 8px;
-        }
-        
-        .testimonial-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
+        .btn-invest {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: center;
         }
         
-        .testimonial-dot.active {
+        .btn-invest:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(26, 58, 143, 0.3);
+        }
+        
+        .btn-details {
+            background: transparent;
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        
+        .btn-details:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Investment Plans */
+        .plans-section {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0;
+            margin: 40px 0;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .plan-card {
+            background: var(--dark-light);
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .plan-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .plan-card.featured {
+            border-color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        .plan-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
             background: white;
-            transform: scale(1.2);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlide 0.3s ease;
         }
         
-        /* Contact Section - Compact */
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 58, 143, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .form-error {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-error.show {
+            display: block;
+        }
+        
+        /* Admin Panel */
+        .admin-panel {
+            background: var(--dark);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            background: var(--dark-light);
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .admin-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+        
+        .admin-subtitle {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-nav-btn {
+            background: var(--dark-light);
+            color: white;
+            border: 2px solid transparent;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .admin-nav-btn:hover, .admin-nav-btn.active {
+            border-color: var(--secondary);
+            background: rgba(255, 107, 0, 0.1);
+        }
+        
+        .admin-section {
+            display: none;
+        }
+        
+        .admin-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .admin-card {
+            background: var(--dark-light);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .admin-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .data-table th {
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-table td {
+            font-size: 0.9rem;
+        }
+        
+        .data-table tr:hover td {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .btn-icon:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .btn-icon.delete:hover {
+            color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .btn-icon.edit:hover {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .status-closed {
+            background: rgba(100, 116, 139, 0.2);
+            color: var(--gray);
+        }
+        
+        /* Login Modal */
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo .logo-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            font-size: 24px;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: toastSlide 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .toast.success {
+            border-left-color: var(--success);
+        }
+        
+        .toast.error {
+            border-left-color: var(--error);
+        }
+        
+        .toast.warning {
+            border-left-color: var(--warning);
+        }
+        
+        @keyframes toastSlide {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .toast-icon {
+            font-size: 1.2rem;
+        }
+        
+        .toast.success .toast-icon {
+            color: var(--success);
+        }
+        
+        .toast.error .toast-icon {
+            color: var(--error);
+        }
+        
+        .toast.warning .toast-icon {
+            color: var(--warning);
+        }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        
+        .toast-message {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-light) 25%, #e2e8f0 50%, var(--gray-light) 75%);
+            background-size: 200% 100%;
+            animation: skeleton 1.5s infinite;
+            border-radius: 8px;
+        }
+        
+        @keyframes skeleton {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Footer Navigation */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.08);
+            z-index: 998;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            border-top: 1px solid var(--gray-light);
+        }
+        
+        .footer-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--gray);
+            padding: 4px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .footer-nav-item i {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        
+        .footer-nav-item span {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .footer-nav-item:hover, .footer-nav-item.active {
+            color: var(--primary);
+        }
+        
+        .footer-nav-item.active {
+            background: rgba(26, 58, 143, 0.1);
+        }
+        
+        /* About Page */
+        .about-hero {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 100px 0 60px;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .about-content p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .value-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .value-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 30px auto 20px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .team-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .team-role {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .team-bio {
+            color: var(--gray);
+            padding: 0 20px 25px;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -880,11 +1461,11 @@
             resize: vertical;
         }
         
-        /* Footer - Compact */
+        /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 60px 0 15px;
+            padding: 60px 0 90px;
         }
         
         .footer-content {
@@ -927,6 +1508,7 @@
             display: flex;
             align-items: center;
             font-size: 0.9rem;
+            cursor: pointer;
         }
         
         .footer-links a i {
@@ -970,15 +1552,10 @@
             font-size: 0.85rem;
         }
         
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 992px) {
-            .process-steps {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .process-steps:before {
-                display: none;
+            .about-grid {
+                grid-template-columns: 1fr;
             }
             
             .hero h1 {
@@ -987,6 +1564,14 @@
             
             .hero-image {
                 width: 40%;
+            }
+            
+            .plan-card.featured {
+                transform: none;
+            }
+            
+            .plan-card.featured:hover {
+                transform: translateY(-5px);
             }
         }
         
@@ -1036,6 +1621,20 @@
             .hero-image {
                 display: none;
             }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-nav {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1043,17 +1642,95 @@
                 grid-template-columns: 1fr;
             }
             
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .page {
                 padding: 70px 0 40px;
             }
+            
+            .modal {
+                margin: 10px;
+            }
+            
+            .footer-nav-item {
+                padding: 4px 12px;
+            }
+            
+            .footer-nav-item span {
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* Sync Status */
+        .sync-status {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            z-index: 997;
+            box-shadow: var(--shadow);
+        }
+        
+        .sync-status.show {
+            display: flex;
+        }
+        
+        .sync-status i {
+            color: var(--accent);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--gray-light);
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .empty-state p {
+            color: var(--gray);
+            max-width: 400px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
+    <!-- Install Banner -->
+    <div class="install-banner" id="installBanner">
+        <span><i class="fas fa-download"></i> Install SupremeAmer App</span>
+        <div>
+            <button onclick="installApp()">Install</button>
+            <button class="close-banner" onclick="dismissInstall()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offlineIndicator">
+        <i class="fas fa-wifi-slash"></i> You're offline. Changes will sync when connection is restored.
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- Sync Status -->
+    <div class="sync-status" id="syncStatus">
+        <i class="fas fa-sync-alt fa-spin"></i> Syncing with server...
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -1064,11 +1741,11 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="#" data-page="home" class="active">Home</a></li>
-                    <li><a href="#" data-page="services">Services</a></li>
-                    <li><a href="#" data-page="portfolio">Portfolio</a></li>
-                    <li><a href="#" data-page="process">Process</a></li>
-                    <li><a href="#" data-page="testimonials">Testimonials</a></li>
-                    <li><a href="#" data-page="contact" class="cta-button">Get Started</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="projects">Projects</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                    <li><a href="#" data-page="admin" id="adminLink" style="display:none;"><i class="fas fa-lock"></i> Admin <span class="admin-badge">PRO</span></a></li>
+                    <li><a href="#" class="cta-button" data-page="projects">Invest Now</a></li>
                 </ul>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -1081,11 +1758,11 @@
     <section id="home" class="page active home">
         <div class="container">
             <div class="hero-content">
-                <h1>Transform Your Business With Innovative Digital Solutions</h1>
-                <p>SupremeAmer delivers cutting-edge mobile and web applications that drive growth, enhance user experiences, and transform businesses.</p>
+                <h1>Invest in the Future of Innovation</h1>
+                <p>SupremeAmer connects visionary investors with groundbreaking projects. Discover, sponsor, and invest in the next generation of transformative applications and digital solutions.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="cta-button" data-page="contact">Start Your Project</a>
-                    <a href="#" class="secondary-button" data-page="portfolio">View Our Work</a>
+                    <a href="#" class="cta-button" data-page="projects">Explore Projects</a>
+                    <a href="#" class="secondary-button" data-page="about">Learn More</a>
                 </div>
             </div>
             <div class="hero-image"></div>
@@ -1097,251 +1774,185 @@
         </div>
     </section>
 
-    <!-- Services Page -->
-    <section id="services" class="page">
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="about-hero">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2>Building Tomorrow's Technology Today</h2>
+                        <p>SupremeAmer is a premier investment and sponsorship platform dedicated to connecting innovative projects with forward-thinking investors. Since 2015, we have facilitated over $50M in investments across 200+ successful projects.</p>
+                        <p>Our mission is to democratize access to high-quality investment opportunities in the technology sector, enabling both seasoned investors and newcomers to participate in the digital revolution.</p>
+                        <a href="#" class="cta-button" data-page="projects">View Investment Opportunities</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="SupremeAmer Team">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container" style="padding: 60px 0;">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+                <p>The principles that guide every investment and partnership we facilitate.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Trust & Transparency</h3>
+                    <p>Every project undergoes rigorous vetting. We provide full disclosure on risks, returns, and project milestones.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Innovation First</h3>
+                    <p>We prioritize cutting-edge projects that push boundaries and create real market disruption.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Partnership Approach</h3>
+                    <p>We don't just broker deals. We build lasting relationships between investors and project founders.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Proven Returns</h3>
+                    <p>Our track record speaks for itself with an average ROI of 34% across our project portfolio.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container" style="padding-bottom: 60px;">
+            <div class="section-title">
+                <h2>Leadership Team</h2>
+                <p>Meet the experts behind SupremeAmer's investment success.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h4>Alexandra Chen</h4>
+                    <div class="team-role">Chief Executive Officer</div>
+                    <div class="team-bio">15 years in venture capital and tech investment. Former partner at Sequoia Capital.</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h4>Marcus Johnson</h4>
+                    <div class="team-role">Chief Investment Officer</div>
+                    <div class="team-bio">Expert in portfolio management with $2B+ in managed assets across tech startups.</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h4>Sarah Williams</h4>
+                    <div class="team-role">Head of Operations</div>
+                    <div class="team-bio">Specializes in scaling operations for fintech platforms and investment marketplaces.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Page -->
+    <section id="projects" class="page">
         <div class="container">
             <div class="section-title">
-                <h2>Our Services</h2>
-                <p>We offer comprehensive application development services tailored to your business needs and goals.</p>
+                <h2>Investment Opportunities</h2>
+                <p>Discover vetted projects seeking sponsorship and investment. Each opportunity has been rigorously analyzed by our team.</p>
             </div>
-            <div class="stats-grid">
+            
+            <div class="stats-grid" style="margin-bottom: 40px;">
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-project-diagram"></i>
+                        <i class="fas fa-rocket"></i>
                     </div>
-                    <div class="stat-number" data-count="250">0</div>
-                    <div class="stat-text">Projects Completed</div>
+                    <div class="stat-number" data-count="47">0</div>
+                    <div class="stat-text">Active Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-number" data-count="12.5">0</div>
+                    <div class="stat-text">Million Raised</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-number" data-count="85">0</div>
-                    <div class="stat-text">Happy Clients</div>
+                    <div class="stat-number" data-count="320">0</div>
+                    <div class="stat-text">Investors</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-award"></i>
+                        <i class="fas fa-percentage"></i>
                     </div>
-                    <div class="stat-number" data-count="15">0</div>
-                    <div class="stat-text">Industry Awards</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-number" data-count="7">0</div>
-                    <div class="stat-text">Years Experience</div>
+                    <div class="stat-number" data-count="34">0</div>
+                    <div class="stat-text">Avg ROI %</div>
                 </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile App Development</h3>
-                    <p>Custom iOS and Android applications built with the latest technologies and frameworks for optimal performance.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Web Application Development</h3>
-                    <p>Responsive and scalable web applications that deliver exceptional user experiences across all devices.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3>Cloud Solutions</h3>
-                    <p>Secure and reliable cloud infrastructure to power your applications and services with maximum uptime.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>UI/UX Design</h3>
-                    <p>User-centered design approach that creates intuitive, engaging, and conversion-focused interfaces.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>API Development</h3>
-                    <p>Robust and scalable APIs to connect your applications and services seamlessly with third-party platforms.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>App Maintenance & Support</h3>
-                    <p>Ongoing maintenance, updates, and support to keep your applications running smoothly and securely.</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
+            
+            <div id="projectsContainer">
+                <!-- Projects loaded dynamically from Supabase -->
+                <div class="skeleton" style="height: 400px; width: 100%;"></div>
             </div>
         </div>
-    </section>
-
-    <!-- Portfolio Page -->
-    <section id="portfolio" class="page">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Portfolio</h2>
-                <p>Explore some of our successful projects that have helped businesses grow and thrive in the digital space.</p>
-            </div>
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
-                <button class="filter-btn" data-filter="web">Web Apps</button>
-                <button class="filter-btn" data-filter="design">UI/UX Design</button>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="mobile">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Mobile App Development">
-                        <div class="portfolio-overlay">
-                            <a href="#" class="cta-button">View Project</a>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>E-Commerce Mobile App</h3>
-                        <p>A feature-rich shopping application with seamless payment integration and personalized recommendations.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">iOS</span>
-                            <span class="portfolio-tag">Android</span>
-                            <span class="portfolio-tag">React Native</span>
-                        </div>
-                    </div>
+        
+        <!-- Investment Plans Section -->
+        <div class="plans-section">
+            <div class="container">
+                <div class="section-title light">
+                    <h2>Investment Tiers</h2>
+                    <p>Choose the sponsorship level that matches your investment strategy and goals.</p>
                 </div>
-                <div class="portfolio-item" data-category="web">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Web Application">
-                        <div class="portfolio-overlay">
-                            <a href="#" class="cta-button">View Project</a>
-                        </div>
+                <div class="plans-grid">
+                    <div class="plan-card">
+                        <div class="plan-name">Seed Sponsor</div>
+                        <div class="plan-price">$5,000<span>/project</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> Early access to new projects</li>
+                            <li><i class="fas fa-check"></i> Quarterly project reports</li>
+                            <li><i class="fas fa-check"></i> Investor dashboard access</li>
+                            <li><i class="fas fa-check"></i> 5% preferred return rate</li>
+                        </ul>
+                        <button class="cta-button outline" style="width: 100%;" onclick="showToast('Please select a project first', 'warning')">Get Started</button>
                     </div>
-                    <div class="portfolio-content">
-                        <h3>Healthcare Management System</h3>
-                        <p>A comprehensive platform for patient records, appointment scheduling, and telemedicine services.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Vue.js</span>
-                            <span class="portfolio-tag">Node.js</span>
-                            <span class="portfolio-tag">MongoDB</span>
-                        </div>
+                    <div class="plan-card featured">
+                        <div class="plan-badge">Most Popular</div>
+                        <div class="plan-name">Growth Partner</div>
+                        <div class="plan-price">$25,000<span>/project</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> All Seed benefits included</li>
+                            <li><i class="fas fa-check"></i> Monthly project updates</li>
+                            <li><i class="fas fa-check"></i> Direct founder access</li>
+                            <li><i class="fas fa-check"></i> 12% preferred return rate</li>
+                            <li><i class="fas fa-check"></i> Board observer rights</li>
+                        </ul>
+                        <button class="cta-button" style="width: 100%;" onclick="showToast('Please select a project first', 'warning')">Get Started</button>
                     </div>
-                </div>
-                <div class="portfolio-item" data-category="web">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Financial Dashboard">
-                        <div class="portfolio-overlay">
-                            <a href="#" class="cta-button">View Project</a>
-                        </div>
+                    <div class="plan-card">
+                        <div class="plan-name">Visionary Backer</div>
+                        <div class="plan-price">$100,000<span>/project</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> All Growth benefits included</li>
+                            <li><i class="fas fa-check"></i> Weekly strategy calls</li>
+                            <li><i class="fas fa-check"></i> Co-investment opportunities</li>
+                            <li><i class="fas fa-check"></i> 18% preferred return rate</li>
+                            <li><i class="fas fa-check"></i> Board seat eligibility</li>
+                            <li><i class="fas fa-check"></i> Exclusive deal flow</li>
+                        </ul>
+                        <button class="cta-button outline" style="width: 100%;" onclick="showToast('Please select a project first', 'warning')">Get Started</button>
                     </div>
-                    <div class="portfolio-content">
-                        <h3>Financial Analytics Dashboard</h3>
-                        <p>Real-time data visualization and reporting for financial institutions with predictive analytics.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">React</span>
-                            <span class="portfolio-tag">Python</span>
-                            <span class="portfolio-tag">D3.js</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process Page -->
-    <section id="process" class="page">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Development Process</h2>
-                <p>We follow a structured and collaborative approach to ensure successful project delivery and client satisfaction.</p>
-            </div>
-            <div class="process-steps">
-                <div class="process-step active">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Discovery & Planning</h3>
-                    <p class="step-desc">We analyze requirements and create a detailed project plan.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Design & Prototyping</h3>
-                    <p class="step-desc">We create wireframes and prototypes for client approval.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Development</h3>
-                    <p class="step-desc">We build your application using agile methodology.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Testing & Deployment</h3>
-                    <p class="step-desc">We thoroughly test and deploy your application.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Page -->
-    <section id="testimonials" class="page testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Clients Say</h2>
-                <p>Hear from businesses that have transformed their operations with our applications.</p>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-slide active">
-                    <div class="testimonial-text">
-                        "SupremeAmer delivered an exceptional mobile app that has significantly improved our customer engagement. Their attention to detail and technical expertise is impressive. The app has helped us increase our sales by 35% in just three months."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>CEO, TechSolutions Inc.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-text">
-                        "Working with SupremeAmer was a game-changer for our business. Their web application streamlined our operations and increased our efficiency by 40%. The team was professional, responsive, and delivered beyond our expectations."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Operations Director, GlobalRetail</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-text">
-                        "The team at SupremeAmer understood our vision and brought it to life with a stunning UI/UX design. Our users love the intuitive interface of our new application. We've seen a 50% increase in user retention since launching the new design."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="author-info">
-                            <h4>Emily Rodriguez</h4>
-                            <p>Product Manager, HealthPlus</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-nav">
-                    <div class="testimonial-dot active" data-slide="0"></div>
-                    <div class="testimonial-dot" data-slide="1"></div>
-                    <div class="testimonial-dot" data-slide="2"></div>
                 </div>
             </div>
         </div>
@@ -1352,7 +1963,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Contact Us</h2>
-                <p>Get in touch with our team to discuss your project requirements.</p>
+                <p>Get in touch with our investment team to discuss opportunities or partnerships.</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info">
@@ -1382,7 +1993,7 @@
                             </div>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <p>info@supremeamer.dev</p>
+                                <p>invest@supremeamer.com</p>
                             </div>
                         </div>
                     </div>
@@ -1406,13 +2017,230 @@
         </div>
     </section>
 
+    <!-- Admin Panel -->
+    <section id="admin" class="page admin-panel">
+        <div class="admin-header">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div class="admin-title"><i class="fas fa-cog"></i> Admin Dashboard</div>
+                        <div class="admin-subtitle">Manage projects, investments, and platform settings</div>
+                    </div>
+                    <button class="cta-button small" onclick="logoutAdmin()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="admin-nav">
+                <button class="admin-nav-btn active" onclick="switchAdminTab('projects')">
+                    <i class="fas fa-project-diagram"></i> Projects
+                </button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('investments')">
+                    <i class="fas fa-hand-holding-usd"></i> Investments
+                </button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('analytics')">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('settings')">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+            
+            <!-- Projects Management -->
+            <div class="admin-section active" id="admin-projects">
+                <div class="admin-card">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Project</h3>
+                    <form id="addProjectForm" onsubmit="handleAddProject(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Project Name</label>
+                                <input type="text" id="projName" required placeholder="Enter project name">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="projCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="Mobile App">Mobile App</option>
+                                    <option value="Web App">Web App</option>
+                                    <option value="AI/ML">AI/ML</option>
+                                    <option value="Blockchain">Blockchain</option>
+                                    <option value="SaaS">SaaS</option>
+                                    <option value="Fintech">Fintech</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Funding Goal ($)</label>
+                                <input type="number" id="projGoal" required placeholder="50000" min="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Investment ($)</label>
+                                <input type="number" id="projMin" required placeholder="5000" min="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="projDesc" required placeholder="Describe the project, its goals, and investment potential..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Image URL</label>
+                                <input type="url" id="projImage" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="projStatus">
+                                    <option value="active">Active</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="closed">Closed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-plus"></i> Create Project
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-list"></i> All Projects</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Project</th>
+                                    <th>Category</th>
+                                    <th>Goal</th>
+                                    <th>Raised</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminProjectsList">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Investments Management -->
+            <div class="admin-section" id="admin-investments">
+                <div class="admin-card">
+                    <h3><i class="fas fa-hand-holding-usd"></i> Recent Investments</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Investor</th>
+                                    <th>Project</th>
+                                    <th>Amount</th>
+                                    <th>Plan</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminInvestmentsList">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; padding: 40px; color: var(--gray);">
+                                        No investments recorded yet
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analytics -->
+            <div class="admin-section" id="admin-analytics">
+                <div class="stats-grid" style="margin-bottom: 30px;">
+                    <div class="stat-card" style="background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="stat-icon" style="background: var(--gradient-secondary);">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-number" style="color: white;" id="totalProjects">0</div>
+                        <div class="stat-text" style="color: var(--gray);">Total Projects</div>
+                    </div>
+                    <div class="stat-card" style="background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="stat-icon" style="background: var(--gradient-primary);">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-number" style="color: white;" id="totalRaised">$0</div>
+                        <div class="stat-text" style="color: var(--gray);">Total Raised</div>
+                    </div>
+                    <div class="stat-card" style="background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #059669);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number" style="color: white;" id="totalInvestors">0</div>
+                        <div class="stat-text" style="color: var(--gray);">Total Investors</div>
+                    </div>
+                    <div class="stat-card" style="background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--accent), #0891b2);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-number" style="color: white;" id="avgInvestment">$0</div>
+                        <div class="stat-text" style="color: var(--gray);">Avg Investment</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings -->
+            <div class="admin-section" id="admin-settings">
+                <div class="admin-card">
+                    <h3><i class="fas fa-database"></i> Supabase Configuration</h3>
+                    <div class="form-group">
+                        <label>Supabase URL</label>
+                        <input type="text" id="sbUrl" placeholder="https://your-project.supabase.co" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>Supabase Anon Key</label>
+                        <input type="password" id="sbKey" placeholder="your-anon-key" value="">
+                    </div>
+                    <button class="cta-button" onclick="saveSupabaseConfig()">
+                        <i class="fas fa-save"></i> Save Configuration
+                    </button>
+                    <p style="margin-top: 15px; color: var(--gray); font-size: 0.85rem;">
+                        <i class="fas fa-info-circle"></i> These credentials are stored in your browser's localStorage for this session. For production, use environment variables.
+                    </p>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-shield-alt"></i> Admin Access</h3>
+                    <div class="form-group">
+                        <label>Admin PIN</label>
+                        <input type="password" id="adminPin" placeholder="Enter admin PIN" maxlength="6">
+                    </div>
+                    <button class="cta-button" onclick="setAdminPin()">
+                        <i class="fas fa-lock"></i> Update PIN
+                    </button>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-sync"></i> Data Management</h3>
+                    <button class="cta-button outline" onclick="syncData()" style="margin-right: 10px;">
+                        <i class="fas fa-sync-alt"></i> Sync Now
+                    </button>
+                    <button class="cta-button" style="background: var(--error);" onclick="clearLocalData()">
+                        <i class="fas fa-trash"></i> Clear Local Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>SupremeAmer</h3>
-                    <p>Delivering innovative application development solutions that drive business success and digital transformation since 2015.</p>
+                    <p>Connecting visionary investors with groundbreaking projects since 2015. Your trusted platform for tech investments.</p>
                     <div class="social-links">
                         <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -1423,21 +2251,19 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#" data-page="home"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#" data-page="services"><i class="fas fa-chevron-right"></i> Services</a></li>
-                        <li><a href="#" data-page="portfolio"><i class="fas fa-chevron-right"></i> Portfolio</a></li>
-                        <li><a href="#" data-page="process"><i class="fas fa-chevron-right"></i> Process</a></li>
-                        <li><a href="#" data-page="testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+                        <li><a onclick="navigateTo('home')"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a onclick="navigateTo('about')"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a onclick="navigateTo('projects')"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                        <li><a onclick="navigateTo('contact')"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Services</h3>
+                    <h3>Investment</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Mobile App Development</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Web Application Development</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cloud Solutions</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> UI/UX Design</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> API Development</a></li>
+                        <li><a onclick="navigateTo('projects')"><i class="fas fa-chevron-right"></i> Active Projects</a></li>
+                        <li><a onclick="navigateTo('projects')"><i class="fas fa-chevron-right"></i> Investment Tiers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Risk Disclosure</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1445,204 +2271,899 @@
                     <ul class="footer-links">
                         <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Tech Avenue, Silicon Valley, CA 94025</a></li>
                         <li><a href="tel:+15551234567"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
-                        <li><a href="mailto:info@supremeamer.dev"><i class="fas fa-envelope"></i> info@supremeamer.dev</a></li>
+                        <li><a href="mailto:invest@supremeamer.com"><i class="fas fa-envelope"></i> invest@supremeamer.com</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 SupremeAmer Application Development Organization. All Rights Reserved.</p>
+                <p>&copy; 2026 SupremeAmer Investment Platform. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Main JavaScript -->
+    <!-- Footer Navigation -->
+    <nav class="footer-nav">
+        <button class="footer-nav-item active" onclick="navigateTo('home')" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </button>
+        <button class="footer-nav-item" onclick="navigateTo('about')" data-page="about">
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+        </button>
+        <button class="footer-nav-item" onclick="navigateTo('projects')" data-page="projects">
+            <i class="fas fa-rocket"></i>
+            <span>Projects</span>
+        </button>
+    </nav>
+
+    <!-- Invest Modal -->
+    <div class="modal-overlay" id="investModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-hand-holding-usd"></i> Invest in Project</h2>
+                <button class="modal-close" onclick="closeModal('investModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="investProjectDetails"></div>
+                <form id="investForm" onsubmit="handleInvest(event)">
+                    <div class="form-group">
+                        <label>Investment Plan</label>
+                        <select id="investPlan" required onchange="updateInvestAmount()">
+                            <option value="">Select plan</option>
+                            <option value="seed" data-amount="5000">Seed Sponsor - $5,000</option>
+                            <option value="growth" data-amount="25000">Growth Partner - $25,000</option>
+                            <option value="visionary" data-amount="100000">Visionary Backer - $100,000</option>
+                            <option value="custom">Custom Amount</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="customAmountGroup" style="display: none;">
+                        <label>Custom Amount ($)</label>
+                        <input type="number" id="customAmount" min="1000" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="investorName" required placeholder="Full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="investorEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="investorPhone" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <input type="hidden" id="investProjectId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-button" onclick="closeModal('investModal')" style="color: var(--dark); border-color: var(--gray-light);">Cancel</button>
+                <button class="cta-button" onclick="document.getElementById('investForm').dispatchEvent(new Event('submit'))">Confirm Investment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="modalProjectTitle">Project Details</h2>
+                <button class="modal-close" onclick="closeModal('projectModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalProjectContent">
+                <!-- Populated dynamically -->
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-button" onclick="closeModal('projectModal')" style="color: var(--dark);">Close</button>
+                <button class="cta-button" id="modalInvestBtn" onclick="openInvestModal()">Invest Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal-overlay" id="adminLoginModal">
+        <div class="modal" style="max-width: 450px;">
+            <div class="modal-body">
+                <div class="login-logo">
+                    <div class="logo-icon">SA</div>
+                    <h2 style="color: var(--primary); margin-bottom: 5px;">Admin Access</h2>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Enter your credentials to access the admin panel</p>
+                </div>
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                        <label>Admin PIN</label>
+                        <input type="password" id="loginPin" required placeholder="Enter 6-digit PIN" maxlength="6" pattern="\d{6}">
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%;">
+                        <i class="fas fa-lock"></i> Access Dashboard
+                    </button>
+                </form>
+                <p style="text-align: center; margin-top: 20px; color: var(--gray); font-size: 0.85rem;">
+                    Default PIN: <code style="background: var(--gray-light); padding: 2px 6px; border-radius: 4px;">123456</code>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Worker Registration and Main JavaScript -->
     <script>
-        // Page Navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.nav-links a, .footer-links a, .hero-buttons a, .logo');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const navLinks = document.querySelector('.nav-links');
-            
-            // Mobile menu toggle
-            mobileMenu.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-            });
-            
-            navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const pageId = this.getAttribute('data-page');
-                    
-                    if (pageId) {
-                        // Hide all pages
-                        document.querySelectorAll('.page').forEach(page => {
-                            page.classList.remove('active');
-                        });
-                        
-                        // Show selected page
-                        document.getElementById(pageId).classList.add('active');
-                        
-                        // Update active nav item
-                        document.querySelectorAll('.nav-links a').forEach(nav => {
-                            nav.classList.remove('active');
-                        });
-                        this.classList.add('active');
-                        
-                        // Close mobile menu if open
-                        navLinks.classList.remove('active');
-                        
-                        // Scroll to top
-                        window.scrollTo(0, 0);
-                        
-                        // Trigger animations for elements in the active page
-                        setTimeout(() => {
-                            animatePageElements(pageId);
-                        }, 300);
+        // Environment Configuration
+        const ENV = {
+            SUPABASE_URL: localStorage.getItem('sb_url') || '',
+            SUPABASE_KEY: localStorage.getItem('sb_key') || '',
+            ADMIN_PIN: localStorage.getItem('admin_pin') || '123456'
+        };
+
+        // Initialize Supabase if credentials exist
+        let supabase = null;
+        if (ENV.SUPABASE_URL && ENV.SUPABASE_KEY) {
+            supabase = window.supabase.createClient(ENV.SUPABASE_URL, ENV.SUPABASE_KEY);
+        }
+
+        // State Management
+        const state = {
+            projects: JSON.parse(localStorage.getItem('sa_projects') || '[]'),
+            investments: JSON.parse(localStorage.getItem('sa_investments') || '[]'),
+            currentUser: null,
+            isAdmin: false,
+            deferredPrompt: null,
+            isOnline: navigator.onLine
+        };
+
+        // Demo Projects Data
+        const demoProjects = [
+            {
+                id: '1',
+                name: 'AI-Powered Healthcare Assistant',
+                category: 'AI/ML',
+                description: 'Revolutionary healthcare platform using artificial intelligence to provide preliminary diagnoses and connect patients with specialists. FDA approval pending. Expected ROI: 45% within 18 months.',
+                image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+                goal: 500000,
+                raised: 325000,
+                min_investment: 10000,
+                status: 'active',
+                created_at: new Date().toISOString()
+            },
+            {
+                id: '2',
+                name: 'Decentralized Finance Protocol',
+                category: 'Blockchain',
+                description: 'Next-generation DeFi platform offering yield farming, lending, and cross-chain swaps with institutional-grade security. Smart contracts audited by CertiK.',
+                image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+                goal: 1000000,
+                raised: 750000,
+                min_investment: 25000,
+                status: 'active',
+                created_at: new Date().toISOString()
+            },
+            {
+                id: '3',
+                name: 'Sustainable Energy Marketplace',
+                category: 'SaaS',
+                description: 'Peer-to-peer marketplace for renewable energy credits and carbon offsets. Connecting producers directly with corporate buyers. Revenue model: 2% transaction fee.',
+                image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+                goal: 300000,
+                raised: 120000,
+                min_investment: 5000,
+                status: 'active',
+                created_at: new Date().toISOString()
+            },
+            {
+                id: '4',
+                name: 'EdTech Learning Platform',
+                category: 'Web App',
+                description: 'Adaptive learning platform using ML to personalize education for K-12 students. Partnerships with 200+ schools. Monthly recurring revenue growing at 15% MoM.',
+                image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+                goal: 400000,
+                raised: 400000,
+                min_investment: 10000,
+                status: 'funded',
+                created_at: new Date().toISOString()
+            }
+        ];
+
+        // Initialize demo data if empty
+        if (state.projects.length === 0) {
+            state.projects = demoProjects;
+            saveLocalData();
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'supremeamer-v1';
+                const urlsToCache = [
+                    '/',
+                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+                    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap'
+                ];
+
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => cache.addAll(urlsToCache))
+                    );
+                    self.skipWaiting();
+                });
+
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                if (response) return response;
+                                return fetch(event.request).catch(() => {
+                                    return new Response('Offline mode - data synced locally');
+                                });
+                            })
+                    );
+                });
+
+                self.addEventListener('sync', event => {
+                    if (event.tag === 'sync-projects') {
+                        event.waitUntil(syncProjects());
                     }
                 });
-            });
-            
-            // Header scroll effect
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
+
+                async function syncProjects() {
+                    const clients = await self.clients.matchAll();
+                    clients.forEach(client => client.postMessage({type: 'sync-complete'}));
                 }
-            });
+            `;
             
-            // Portfolio filtering
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            const blob = new Blob([swCode], {type: 'application/javascript'});
+            const swUrl = URL.createObjectURL(blob);
             
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    const filterValue = this.getAttribute('data-filter');
-                    
-                    portfolioItems.forEach(item => {
-                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
+            navigator.serviceWorker.register(swUrl)
+                .then(registration => {
+                    console.log('SW registered:', registration);
+                })
+                .catch(error => {
+                    console.log('SW registration failed:', error);
                 });
-            });
-            
-            // Testimonial slider
-            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-            const testimonialDots = document.querySelectorAll('.testimonial-dot');
-            let currentSlide = 0;
-            
-            function showSlide(n) {
-                testimonialSlides.forEach(slide => slide.classList.remove('active'));
-                testimonialDots.forEach(dot => dot.classList.remove('active'));
-                
-                currentSlide = (n + testimonialSlides.length) % testimonialSlides.length;
-                
-                testimonialSlides[currentSlide].classList.add('active');
-                testimonialDots[currentSlide].classList.add('active');
-            }
-            
-            testimonialDots.forEach((dot, index) => {
-                dot.addEventListener('click', function() {
-                    showSlide(index);
-                });
-            });
-            
-            // Auto-advance testimonials
-            setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, 5000);
-            
-            // Animated counter for stats
-            const counters = document.querySelectorAll('.stat-number');
-            const speed = 200;
-            
-            function animateCounter() {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute('data-count');
-                    const count = +counter.innerText;
-                    const increment = target / speed;
-                    
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + increment);
-                        setTimeout(animateCounter, 1);
-                    } else {
-                        counter.innerText = target;
-                    }
-                });
-            }
-            
-            // Process steps animation
-            const processSteps = document.querySelectorAll('.process-step');
-            
-            // Function to animate elements on page load
-            function animatePageElements(pageId) {
-                const page = document.getElementById(pageId);
-                
-                // Animate stats
-                if (pageId === 'services') {
-                    const statCards = page.querySelectorAll('.stat-card');
-                    statCards.forEach(card => {
-                        card.classList.add('animate');
-                    });
-                    animateCounter();
-                }
-                
-                // Animate service cards
-                if (pageId === 'services') {
-                    const serviceCards = page.querySelectorAll('.service-card');
-                    serviceCards.forEach(card => {
-                        card.classList.add('animate');
-                    });
-                }
-                
-                // Animate portfolio items
-                if (pageId === 'portfolio') {
-                    const portfolioItems = page.querySelectorAll('.portfolio-item');
-                    portfolioItems.forEach(item => {
-                        item.classList.add('animate');
-                    });
-                }
-                
-                // Animate process steps
-                if (pageId === 'process') {
-                    const processSteps = page.querySelectorAll('.process-step');
-                    processSteps.forEach(step => {
-                        step.classList.add('animate');
-                    });
-                }
-                
-                // Animate contact items
-                if (pageId === 'contact') {
-                    const contactItems = page.querySelectorAll('.contact-item');
-                    contactItems.forEach(item => {
-                        item.classList.add('animate');
-                    });
-                }
-            }
-            
-            // Contact form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // In a real application, you would send the form data to a server here
-                    alert('Thank you for your message! We will get back to you soon.');
-                    contactForm.reset();
-                });
-            }
-            
-            // Initial animation for home page
-            animatePageElements('home');
+        }
+
+        // PWA Install Prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            state.deferredPrompt = e;
+            document.getElementById('installBanner').classList.add('show');
         });
+
+        function installApp() {
+            if (state.deferredPrompt) {
+                state.deferredPrompt.prompt();
+                state.deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('App installed successfully!', 'success');
+                    }
+                    state.deferredPrompt = null;
+                    document.getElementById('installBanner').classList.remove('show');
+                });
+            }
+        }
+
+        function dismissInstall() {
+            document.getElementById('installBanner').classList.remove('show');
+        }
+
+        // Online/Offline Handling
+        window.addEventListener('online', () => {
+            state.isOnline = true;
+            document.getElementById('offlineIndicator').classList.remove('show');
+            showToast('Back online! Syncing data...', 'success');
+            syncWithSupabase();
+        });
+
+        window.addEventListener('offline', () => {
+            state.isOnline = false;
+            document.getElementById('offlineIndicator').classList.add('show');
+            showToast('You are offline. Changes saved locally.', 'warning');
+        });
+
+        // Navigation
+        function navigateTo(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Update nav active states
+            document.querySelectorAll('.nav-links a').forEach(nav => {
+                nav.classList.remove('active');
+                if (nav.getAttribute('data-page') === pageId) {
+                    nav.classList.add('active');
+                }
+            });
+            
+            document.querySelectorAll('.footer-nav-item').forEach(nav => {
+                nav.classList.remove('active');
+                if (nav.getAttribute('data-page') === pageId) {
+                    nav.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu
+            document.querySelector('.nav-links').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Page specific logic
+            if (pageId === 'projects') {
+                renderProjects();
+            } else if (pageId === 'admin') {
+                if (!state.isAdmin) {
+                    document.getElementById('adminLoginModal').classList.add('active');
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    document.getElementById('home').classList.add('active');
+                    return;
+                }
+                renderAdminProjects();
+                updateAnalytics();
+            }
+            
+            // Trigger animations
+            setTimeout(() => animatePageElements(pageId), 300);
+        }
+
+        // Event delegation for nav links
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('[data-page]');
+            if (link && !link.closest('.footer-nav')) {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                if (pageId) navigateTo(pageId);
+            }
+        });
+
+        // Mobile menu
+        document.querySelector('.mobile-menu').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Render Projects
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            
+            if (state.projects.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>No Active Projects</h3>
+                        <p>Check back soon for new investment opportunities.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '<div class="projects-grid">' + state.projects.map(project => {
+                const progress = Math.min((project.raised / project.goal) * 100, 100);
+                const statusClass = project.status === 'funded' ? 'funded' : project.status === 'closed' ? 'closed' : '';
+                const statusText = project.status === 'funded' ? 'Fully Funded' : project.status === 'closed' ? 'Closed' : 'Active';
+                
+                return `
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="${project.image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'}" alt="${project.name}">
+                            <div class="project-badge ${statusClass}">${statusText}</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-category">${project.category}</div>
+                            <h3>${project.name}</h3>
+                            <p class="project-description">${project.description.substring(0, 120)}...</p>
+                            <div class="project-meta">
+                                <div class="meta-item">
+                                    <span class="meta-value">$${formatNumber(project.goal)}</span>
+                                    <span class="meta-label">Goal</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-value">$${formatNumber(project.raised)}</span>
+                                    <span class="meta-label">Raised</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-value">${Math.round(progress)}%</span>
+                                    <span class="meta-label">Funded</span>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="project-footer">
+                                <button class="btn-details" onclick="showProjectDetails('${project.id}')">Details</button>
+                                <button class="btn-invest btn-full" onclick="openInvestModal('${project.id}')" ${project.status !== 'active' ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>
+                                    ${project.status === 'active' ? 'Invest Now' : 'Unavailable'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('') + '</div>';
+            
+            // Animate stat cards
+            setTimeout(() => {
+                document.querySelectorAll('#projects .stat-card').forEach((card, i) => {
+                    setTimeout(() => card.classList.add('animate'), i * 100);
+                });
+                animateCounters();
+            }, 100);
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(0) + 'K';
+            return num.toString();
+        }
+
+        function showProjectDetails(projectId) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (!project) return;
+            
+            const progress = Math.min((project.raised / project.goal) * 100, 100);
+            
+            document.getElementById('modalProjectTitle').textContent = project.name;
+            document.getElementById('modalProjectContent').innerHTML = `
+                <img src="${project.image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                <div class="project-category" style="margin-bottom: 10px;">${project.category}</div>
+                <p style="color: var(--gray); line-height: 1.8; margin-bottom: 20px;">${project.description}</p>
+                <div class="project-meta" style="margin: 20px 0;">
+                    <div class="meta-item">
+                        <span class="meta-value">$${formatNumber(project.goal)}</span>
+                        <span class="meta-label">Funding Goal</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-value">$${formatNumber(project.raised)}</span>
+                        <span class="meta-label">Raised So Far</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-value">$${formatNumber(project.min_investment)}</span>
+                        <span class="meta-label">Min Investment</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <p style="text-align: center; color: var(--gray); font-size: 0.9rem; margin-top: 10px;">${Math.round(progress)}% funded by ${state.investments.filter(i => i.project_id === projectId).length} investors</p>
+            `;
+            
+            const investBtn = document.getElementById('modalInvestBtn');
+            investBtn.onclick = () => {
+                closeModal('projectModal');
+                openInvestModal(projectId);
+            };
+            if (project.status !== 'active') {
+                investBtn.style.display = 'none';
+            } else {
+                investBtn.style.display = 'inline-block';
+            }
+            
+            document.getElementById('projectModal').classList.add('active');
+        }
+
+        function openInvestModal(projectId) {
+            if (!projectId && state.lastViewedProject) {
+                projectId = state.lastViewedProject;
+            }
+            if (projectId) {
+                state.lastViewedProject = projectId;
+                const project = state.projects.find(p => p.id === projectId);
+                document.getElementById('investProjectDetails').innerHTML = `
+                    <div style="background: var(--light); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <strong style="color: var(--primary);">${project.name}</strong>
+                        <p style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;">Min investment: $${formatNumber(project.min_investment)}</p>
+                    </div>
+                `;
+                document.getElementById('investProjectId').value = projectId;
+            }
+            document.getElementById('investModal').classList.add('active');
+        }
+
+        function updateInvestAmount() {
+            const select = document.getElementById('investPlan');
+            const customGroup = document.getElementById('customAmountGroup');
+            if (select.value === 'custom') {
+                customGroup.style.display = 'block';
+            } else {
+                customGroup.style.display = 'none';
+            }
+        }
+
+        function handleInvest(e) {
+            e.preventDefault();
+            const projectId = document.getElementById('investProjectId').value;
+            const plan = document.getElementById('investPlan').value;
+            const name = document.getElementById('investorName').value;
+            const email = document.getElementById('investorEmail').value;
+            const phone = document.getElementById('investorPhone').value;
+            
+            let amount = 0;
+            if (plan === 'custom') {
+                amount = parseInt(document.getElementById('customAmount').value) || 0;
+            } else {
+                const option = document.querySelector(`#investPlan option[value="${plan}"]`);
+                amount = parseInt(option?.getAttribute('data-amount')) || 0;
+            }
+            
+            if (!amount || amount < 1000) {
+                showToast('Please enter a valid investment amount', 'error');
+                return;
+            }
+            
+            const investment = {
+                id: 'inv_' + Date.now(),
+                project_id: projectId,
+                investor_name: name,
+                investor_email: email,
+                investor_phone: phone,
+                amount: amount,
+                plan: plan,
+                status: 'pending',
+                created_at: new Date().toISOString()
+            };
+            
+            state.investments.push(investment);
+            
+            // Update project raised amount
+            const project = state.projects.find(p => p.id === projectId);
+            if (project) {
+                project.raised += amount;
+                if (project.raised >= project.goal) {
+                    project.status = 'funded';
+                }
+            }
+            
+            saveLocalData();
+            syncWithSupabase();
+            
+            closeModal('investModal');
+            showToast(`Investment of $${formatNumber(amount)} submitted successfully!`, 'success');
+            document.getElementById('investForm').reset();
+            
+            if (document.getElementById('projects').classList.contains('active')) {
+                renderProjects();
+            }
+        }
+
+        // Admin Functions
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pin = document.getElementById('loginPin').value;
+            if (pin === ENV.ADMIN_PIN) {
+                state.isAdmin = true;
+                closeModal('adminLoginModal');
+                document.getElementById('adminLink').style.display = 'inline';
+                navigateTo('admin');
+                showToast('Welcome to Admin Dashboard', 'success');
+            } else {
+                showToast('Invalid PIN', 'error');
+            }
+        }
+
+        function logoutAdmin() {
+            state.isAdmin = false;
+            document.getElementById('adminLink').style.display = 'none';
+            navigateTo('home');
+            showToast('Logged out successfully', 'success');
+        }
+
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('admin-' + tab).classList.add('active');
+            event.target.closest('.admin-nav-btn').classList.add('active');
+            
+            if (tab === 'analytics') updateAnalytics();
+            if (tab === 'investments') renderAdminInvestments();
+        }
+
+        function handleAddProject(e) {
+            e.preventDefault();
+            const project = {
+                id: 'proj_' + Date.now(),
+                name: document.getElementById('projName').value,
+                category: document.getElementById('projCategory').value,
+                description: document.getElementById('projDesc').value,
+                goal: parseInt(document.getElementById('projGoal').value),
+                min_investment: parseInt(document.getElementById('projMin').value),
+                image: document.getElementById('projImage').value || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+                status: document.getElementById('projStatus').value,
+                raised: 0,
+                created_at: new Date().toISOString()
+            };
+            
+            state.projects.push(project);
+            saveLocalData();
+            syncWithSupabase();
+            
+            document.getElementById('addProjectForm').reset();
+            renderAdminProjects();
+            showToast('Project created successfully!', 'success');
+        }
+
+        function renderAdminProjects() {
+            const tbody = document.getElementById('adminProjectsList');
+            tbody.innerHTML = state.projects.map(p => {
+                const statusClass = p.status === 'active' ? 'status-active' : p.status === 'pending' ? 'status-pending' : 'status-closed';
+                return `
+                    <tr>
+                        <td><strong>${p.name}</strong></td>
+                        <td>${p.category}</td>
+                        <td>$${formatNumber(p.goal)}</td>
+                        <td>$${formatNumber(p.raised)}</td>
+                        <td><span class="status-badge ${statusClass}">${p.status}</span></td>
+                        <td>
+                            <button class="btn-icon edit" onclick="editProject('${p.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button class="btn-icon delete" onclick="deleteProject('${p.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderAdminInvestments() {
+            const tbody = document.getElementById('adminInvestmentsList');
+            if (state.investments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px; color: var(--gray);">No investments recorded yet</td></tr>';
+                return;
+            }
+            tbody.innerHTML = state.investments.map(i => {
+                const project = state.projects.find(p => p.id === i.project_id);
+                return `
+                    <tr>
+                        <td>${i.investor_name}</td>
+                        <td>${project?.name || 'Unknown'}</td>
+                        <td>$${formatNumber(i.amount)}</td>
+                        <td>${i.plan}</td>
+                        <td>${new Date(i.created_at).toLocaleDateString()}</td>
+                        <td><span class="status-badge status-pending">${i.status}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateAnalytics() {
+            document.getElementById('totalProjects').textContent = state.projects.length;
+            const totalRaised = state.projects.reduce((sum, p) => sum + (p.raised || 0), 0);
+            document.getElementById('totalRaised').textContent = '$' + formatNumber(totalRaised);
+            document.getElementById('totalInvestors').textContent = state.investments.length;
+            const avg = state.investments.length > 0 ? state.investments.reduce((s, i) => s + i.amount, 0) / state.investments.length : 0;
+            document.getElementById('avgInvestment').textContent = '$' + formatNumber(avg);
+        }
+
+        function deleteProject(id) {
+            if (!confirm('Are you sure you want to delete this project?')) return;
+            state.projects = state.projects.filter(p => p.id !== id);
+            saveLocalData();
+            syncWithSupabase();
+            renderAdminProjects();
+            showToast('Project deleted', 'success');
+        }
+
+        function editProject(id) {
+            showToast('Edit functionality coming soon', 'warning');
+        }
+
+        // Supabase Integration
+        async function syncWithSupabase() {
+            if (!supabase || !state.isOnline) return;
+            
+            document.getElementById('syncStatus').classList.add('show');
+            
+            try {
+                // Sync projects
+                const { data: projects, error: projError } = await supabase
+                    .from('projects')
+                    .upsert(state.projects, { onConflict: 'id' });
+                
+                if (projError) throw projError;
+                
+                // Fetch latest projects
+                const { data: freshProjects, error: fetchError } = await supabase
+                    .from('projects')
+                    .select('*');
+                
+                if (!fetchError && freshProjects) {
+                    state.projects = freshProjects;
+                    saveLocalData();
+                }
+                
+                showToast('Data synced with Supabase', 'success');
+            } catch (error) {
+                console.error('Sync error:', error);
+                showToast('Sync failed: ' + error.message, 'error');
+            } finally {
+                setTimeout(() => document.getElementById('syncStatus').classList.remove('show'), 2000);
+            }
+        }
+
+        function saveSupabaseConfig() {
+            const url = document.getElementById('sbUrl').value;
+            const key = document.getElementById('sbKey').value;
+            
+            if (url && key) {
+                localStorage.setItem('sb_url', url);
+                localStorage.setItem('sb_key', key);
+                ENV.SUPABASE_URL = url;
+                ENV.SUPABASE_KEY = key;
+                supabase = window.supabase.createClient(url, key);
+                showToast('Supabase configuration saved', 'success');
+            }
+        }
+
+        function setAdminPin() {
+            const pin = document.getElementById('adminPin').value;
+            if (pin.length === 6) {
+                localStorage.setItem('admin_pin', pin);
+                ENV.ADMIN_PIN = pin;
+                showToast('Admin PIN updated', 'success');
+            } else {
+                showToast('PIN must be 6 digits', 'error');
+            }
+        }
+
+        function syncData() {
+            syncWithSupabase();
+        }
+
+        function clearLocalData() {
+            if (!confirm('This will clear all local data. Are you sure?')) return;
+            localStorage.removeItem('sa_projects');
+            localStorage.removeItem('sa_investments');
+            state.projects = [...demoProjects];
+            state.investments = [];
+            saveLocalData();
+            renderAdminProjects();
+            showToast('Local data cleared', 'success');
+        }
+
+        // Local Data Management
+        function saveLocalData() {
+            localStorage.setItem('sa_projects', JSON.stringify(state.projects));
+            localStorage.setItem('sa_investments', JSON.stringify(state.investments));
+        }
+
+        // Toast Notifications
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                info: 'fa-info-circle'
+            };
+            
+            toast.innerHTML = `
+                <i class="fas ${icons[type]} toast-icon"></i>
+                <div class="toast-content">
+                    <div class="toast-title">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+            `;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 5000);
+        }
+
+        // Modal Functions
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.classList.remove('active');
+            });
+        });
+
+        // Animations
+        function animatePageElements(pageId) {
+            const page = document.getElementById(pageId);
+            if (!page) return;
+            
+            // Stat cards
+            page.querySelectorAll('.stat-card').forEach((card, i) => {
+                setTimeout(() => card.classList.add('animate'), i * 100);
+            });
+            
+            // Contact items
+            page.querySelectorAll('.contact-item').forEach((item, i) => {
+                setTimeout(() => item.classList.add('animate'), i * 100);
+            });
+            
+            if (pageId === 'projects' || pageId === 'home') {
+                animateCounters();
+            }
+        }
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number[data-count]');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = current % 1 === 0 ? Math.floor(current) : current.toFixed(1);
+                }, 16);
+            });
+        }
+
+        // Contact Form
+        document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast('Message sent! We will respond within 24 hours.', 'success');
+            e.target.reset();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for admin PIN in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('admin') === 'true') {
+                document.getElementById('adminLoginModal').classList.add('active');
+            }
+            
+            // Load saved config into inputs
+            if (document.getElementById('sbUrl')) {
+                document.getElementById('sbUrl').value = ENV.SUPABASE_URL;
+                document.getElementById('sbKey').value = ENV.SUPABASE_KEY;
+            }
+            
+            // Initial render
+            renderProjects();
+            
+            // Check online status
+            if (!navigator.onLine) {
+                document.getElementById('offlineIndicator').classList.add('show');
+            }
+        });
+
+        // Expose functions globally for onclick handlers
+        window.navigateTo = navigateTo;
+        window.showProjectDetails = showProjectDetails;
+        window.openInvestModal = openInvestModal;
+        window.closeModal = closeModal;
+        window.handleInvest = handleInvest;
+        window.updateInvestAmount = updateInvestAmount;
+        window.handleAdminLogin = handleAdminLogin;
+        window.logoutAdmin = logoutAdmin;
+        window.switchAdminTab = switchAdminTab;
+        window.handleAddProject = handleAddProject;
+        window.deleteProject = deleteProject;
+        window.editProject = editProject;
+        window.saveSupabaseConfig = saveSupabaseConfig;
+        window.setAdminPin = setAdminPin;
+        window.syncData = syncData;
+        window.clearLocalData = clearLocalData;
+        window.installApp = installApp;
+        window.dismissInstall = dismissInstall;
+        window.showToast = showToast;
     </script>
 </body>
 </html>
