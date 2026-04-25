@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | SupremeAmer Investment Platform</title>
-    <meta name="description" content="Get in touch with SupremeAmer's investment team. We're here to answer your questions about projects, investments, and partnerships.">
+    <title>About Us | SupremeAmer Investment Platform</title>
+    <meta name="description" content="Learn about SupremeAmer's mission to connect visionary investors with groundbreaking technology projects.">
     <meta name="theme-color" content="#1a3a8f">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,6 +13,7 @@
         :root {
             --primary: #1a3a8f;
             --primary-light: #2a4fb8;
+            --primary-dark: #0f2a6d;
             --secondary: #ff6b00;
             --secondary-light: #ff8c3a;
             --dark: #0f172a;
@@ -21,7 +22,6 @@
             --gray: #64748b;
             --gray-light: #cbd5e1;
             --success: #10b981;
-            --error: #ef4444;
             --accent: #00d4ff;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
@@ -32,37 +32,6 @@
         body { background-color: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; padding-bottom: 70px; }
         .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
-        /* Toast */
-        .toast-container {
-            position: fixed;
-            top: 80px; right: 20px;
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .toast {
-            background: white;
-            border-radius: 12px;
-            padding: 16px 20px;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            min-width: 300px;
-            animation: toastSlide 0.3s ease;
-            border-left: 4px solid var(--primary);
-        }
-        .toast.success { border-left-color: var(--success); }
-        @keyframes toastSlide {
-            from { opacity: 0; transform: translateX(100%); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .toast-icon { font-size: 1.2rem; color: var(--success); }
-        .toast-content { flex: 1; }
-        .toast-title { font-weight: 700; font-size: 0.95rem; }
-        .toast-message { font-size: 0.85rem; color: var(--gray); }
-
         /* Header */
         header {
             background-color: rgba(255, 255, 255, 0.95);
@@ -71,18 +40,22 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 999;
+            transition: all 0.3s ease;
         }
+        
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
         }
+        
         .logo {
             display: flex;
             align-items: center;
             text-decoration: none;
         }
+        
         .logo-icon {
             width: 36px; height: 36px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -95,17 +68,21 @@
             font-weight: 700;
             font-size: 16px;
         }
+        
         .logo-text {
             font-size: 1.3rem;
             font-weight: 800;
             color: var(--primary);
         }
+        
         .nav-links {
             display: flex;
             list-style: none;
             align-items: center;
         }
-        .nav-links li { margin-left: 25px; }
+        
+        .nav-links li { margin-left: 25px; position: relative; }
+        
         .nav-links a {
             text-decoration: none;
             color: var(--dark);
@@ -115,6 +92,7 @@
             cursor: pointer;
             font-size: 0.95rem;
         }
+        
         .nav-links a:after {
             content: '';
             position: absolute;
@@ -123,10 +101,12 @@
             background-color: var(--secondary);
             transition: width 0.3s ease;
         }
+        
         .nav-links a:hover:after { width: 100%; }
         .nav-links a:hover { color: var(--primary); }
         .nav-links a.active { color: var(--primary); }
         .nav-links a.active:after { width: 100%; }
+        
         .cta-button {
             background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
             color: white;
@@ -141,297 +121,510 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
+        
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
         }
+        
         .mobile-menu {
             display: none;
             font-size: 1.3rem;
             cursor: pointer;
             color: var(--dark);
         }
-
-        /* Hero */
-        .contact-hero {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(135deg, var(--dark), var(--dark-light));
             color: white;
             padding: 120px 0 80px;
-            text-align: center;
             position: relative;
-        }
-        .contact-hero h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-        .contact-hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 80px 0;
-        }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        /* Info Cards */
-        .info-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-        .info-card {
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        .info-card:hover {
-            border-color: var(--primary);
-            transform: translateX(10px);
-        }
-        .info-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        .info-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        .info-card p {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-        .info-card a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .info-card a:hover {
-            color: var(--secondary);
-        }
-
-        /* Social */
-        .social-section {
-            margin-top: 30px;
-        }
-        .social-section h3 {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-        .social-grid {
-            display: flex;
-            gap: 15px;
-        }
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-        .social-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-        .social-btn.linkedin { background: #0077b5; }
-        .social-btn.twitter { background: #1da1f2; }
-        .social-btn.facebook { background: #4267B2; }
-        .social-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-
-        /* Form */
-        .form-container {
-            background: white;
-            padding: 50px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-        }
-        .form-container h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        .form-container > p {
-            color: var(--gray);
-            margin-bottom: 35px;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-            color: var(--dark);
-            font-size: 0.9rem;
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--gray-light);
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(26, 58, 143, 0.1);
-        }
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-
-        /* Map Section */
-        .map-section {
-            padding: 0 0 80px;
-        }
-        .map-container {
-            border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            height: 400px;
-            background: var(--gray-light);
-            position: relative;
         }
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .map-overlay {
+        
+        .about-hero:before {
+            content: '';
             position: absolute;
-            bottom: 30px;
-            left: 30px;
-            background: white;
-            padding: 25px 30px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-            max-width: 300px;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.15;
         }
-        .map-overlay h3 {
+        
+        .about-hero .container { position: relative; z-index: 1; }
+        
+        .about-hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .about-hero p {
             font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
+            opacity: 0.85;
+            max-width: 600px;
+            line-height: 1.8;
         }
-        .map-overlay p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* FAQ */
-        .faq-section {
-            padding: 60px 0 80px;
+        
+        /* Mission Section */
+        .mission-section {
+            padding: 80px 0;
             background: white;
         }
+        
         .section-title {
             text-align: center;
             margin-bottom: 50px;
         }
+        
         .section-title h2 {
             font-size: 2.4rem;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-weight: 800;
         }
+        
         .section-title p {
             color: var(--gray);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            font-size: 1.05rem;
         }
-        .faq-grid {
+        
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            max-width: 900px;
-            margin: 0 auto;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
         }
-        .faq-item {
+        
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+        
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .about-stat {
+            text-align: center;
+            padding: 25px;
             background: var(--light);
-            padding: 30px;
             border-radius: 16px;
             border: 2px solid transparent;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
-        .faq-item:hover {
+        
+        .about-stat:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .about-stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .about-stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        
+        /* Values Section */
+        .values-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f0f4ff, #e8eeff);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
             border-color: var(--primary);
         }
-        .faq-item h4 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: var(--dark);
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(26, 58, 143, 0.3);
         }
-        .faq-item h4 i {
-            color: var(--secondary);
+        
+        .value-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
         }
-        .faq-item p {
+        
+        .value-card p {
             color: var(--gray);
             font-size: 0.95rem;
             line-height: 1.7;
         }
-
+        
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .team-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-image:before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+            opacity: 0.2;
+        }
+        
+        .team-image i { position: relative; z-index: 1; }
+        
+        .team-info { padding: 30px 25px; }
+        
+        .team-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .team-role {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .team-bio {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .team-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark), var(--dark-light));
+            color: white;
+        }
+        
+        .timeline-section .section-title h2,
+        .timeline-section .section-title p { color: white; }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary), var(--primary));
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        
+        .timeline-content {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px 30px;
+            border-radius: 16px;
+            max-width: 350px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        .timeline-content:before {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 30px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content:before {
+            right: -60px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content:before {
+            left: -60px;
+        }
+        
+        .timeline-year {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* Partners Section */
+        .partners-section {
+            padding: 60px 0;
+            background: white;
+            text-align: center;
+        }
+        
+        .partners-section h3 {
+            color: var(--gray);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+        
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .partner-logo {
+            font-size: 2rem;
+            color: var(--gray-light);
+            font-weight: 800;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+        
+        .partner-logo:hover {
+            color: var(--primary);
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+        
+        .cta-section .container { position: relative; z-index: 1; }
+        
+        .cta-section h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 35px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button.white {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .cta-button.white:hover {
+            background: var(--light);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button.outline-white {
+            background: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+        
+        .cta-button.outline-white:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
         /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
             padding: 60px 0 90px;
         }
+        
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
+        
         .footer-column h3 {
             font-size: 1.1rem;
             margin-bottom: 25px;
@@ -439,6 +632,7 @@
             position: relative;
             padding-bottom: 12px;
         }
+        
         .footer-column h3:after {
             content: '';
             position: absolute;
@@ -447,8 +641,20 @@
             background: var(--secondary);
             border-radius: 2px;
         }
-        .footer-links { list-style: none; }
+        
+        .footer-column p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
         .footer-links li { margin-bottom: 12px; }
+        
         .footer-links a {
             color: #94a3b8;
             text-decoration: none;
@@ -457,15 +663,42 @@
             align-items: center;
             font-size: 0.95rem;
         }
+        
         .footer-links a i {
             margin-right: 10px;
             font-size: 0.8rem;
             color: var(--secondary);
         }
+        
         .footer-links a:hover {
             color: white;
             transform: translateX(5px);
         }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
         .copyright {
             text-align: center;
             padding-top: 30px;
@@ -473,8 +706,8 @@
             color: #64748b;
             font-size: 0.9rem;
         }
-
-        /* Footer Nav */
+        
+        /* Footer Navigation */
         .footer-nav {
             position: fixed;
             bottom: 0;
@@ -487,6 +720,7 @@
             padding: 10px 0;
             border-top: 1px solid var(--gray-light);
         }
+        
         .footer-nav-item {
             display: flex;
             flex-direction: column;
@@ -501,27 +735,53 @@
             background: none;
             font-family: 'Inter', sans-serif;
         }
+        
         .footer-nav-item i {
             font-size: 1.4rem;
             margin-bottom: 5px;
         }
+        
         .footer-nav-item span {
             font-size: 0.75rem;
             font-weight: 700;
         }
+        
         .footer-nav-item:hover, .footer-nav-item.active {
             color: var(--primary);
         }
+        
         .footer-nav-item.active {
             background: rgba(26, 58, 143, 0.1);
         }
 
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
-            .contact-grid { grid-template-columns: 1fr; }
-            .faq-grid { grid-template-columns: 1fr; }
-            .map-overlay { left: 20px; right: 20px; max-width: none; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-hero h1 { font-size: 2.5rem; }
+            .timeline:before { left: 20px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(odd) .timeline-content:before,
+            .timeline-item:nth-child(even) .timeline-content:before {
+                left: -50px;
+                right: auto;
+            }
         }
+        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -535,16 +795,15 @@
             .nav-links.active { display: flex; }
             .nav-links li { margin: 10px 0; }
             .mobile-menu { display: block; }
-            .contact-hero h1 { font-size: 2.2rem; }
-            .form-container { padding: 30px; }
-            .form-row { grid-template-columns: 1fr; }
+            .about-hero h1 { font-size: 2rem; }
+            .about-stats { grid-template-columns: 1fr; }
+            .cta-section h2 { font-size: 2rem; }
+            .partners-grid { gap: 30px; }
+            .timeline-content { max-width: 100%; }
         }
     </style>
 </head>
 <body>
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
     <!-- Header -->
     <header>
         <div class="container">
@@ -555,9 +814,9 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
                     <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                     <li><a href="index.html?admin=true" class="cta-button">Invest Now</a></li>
                 </ul>
                 <div class="mobile-menu">
@@ -568,139 +827,206 @@
     </header>
 
     <!-- Hero -->
-    <section class="contact-hero">
+    <section class="about-hero">
         <div class="container">
-            <h1>Get In Touch</h1>
-            <p>Have questions about an investment opportunity? Our team is here to help you make informed decisions.</p>
+            <h1>Building Tomorrow's Technology Today</h1>
+            <p>We bridge the gap between visionary founders and strategic investors, creating opportunities that shape the future of innovation.</p>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact-section">
+    <!-- Mission -->
+    <section class="mission-section">
         <div class="container">
-            <div class="contact-grid">
-                <div class="info-cards">
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3>Visit Our Office</h3>
-                        <p>123 Tech Avenue, Suite 500<br>Silicon Valley, CA 94025<br>United States</p>
-                        <a href="https://maps.google.com" target="_blank">Get Directions <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <h3>Call Us</h3>
-                        <p>Mon-Fri from 8am to 6pm PST<br>Investment hotline available 24/7 for active investors.</p>
-                        <a href="tel:+15551234567">+1 (555) 123-4567 <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <h3>Email Us</h3>
-                        <p>For general inquiries and partnership opportunities. We typically respond within 24 hours.</p>
-                        <a href="mailto:invest@supremeamer.com">invest@supremeamer.com <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="social-section">
-                        <h3>Follow Us</h3>
-                        <div class="social-grid">
-                            <a href="#" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="SupremeAmer Team">
                 </div>
-
-                <div class="form-container">
-                    <h2>Send a Message</h2>
-                    <p>Fill out the form below and our investment team will get back to you shortly.</p>
-                    <form id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>First Name</label>
-                                <input type="text" placeholder="John" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input type="text" placeholder="Doe" required>
-                            </div>
+                <div class="about-content">
+                    <h2>Our Mission</h2>
+                    <p>SupremeAmer was founded in 2015 with a singular vision: to democratize access to high-quality technology investments. We believe that groundbreaking innovations deserve more than just capital—they deserve strategic partners who understand the journey from concept to market dominance.</p>
+                    <p>Over the past decade, we've facilitated over $50 million in investments across 200+ projects, maintaining an average ROI of 34% for our investor community. Our rigorous vetting process ensures that only the most promising ventures make it to our platform.</p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <span class="about-stat-number">$50M+</span>
+                            <span class="about-stat-label">Invested</span>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" placeholder="john@example.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input type="tel" placeholder="+1 (555) 000-0000">
-                            </div>
+                        <div class="about-stat">
+                            <span class="about-stat-number">200+</span>
+                            <span class="about-stat-label">Projects</span>
                         </div>
-                        <div class="form-group">
-                            <label>Subject</label>
-                            <select required>
-                                <option value="">Select a topic</option>
-                                <option value="investment">Investment Inquiry</option>
-                                <option value="project">Project Submission</option>
-                                <option value="partnership">Partnership Opportunity</option>
-                                <option value="support">Account Support</option>
-                                <option value="other">Other</option>
-                            </select>
+                        <div class="about-stat">
+                            <span class="about-stat-number">34%</span>
+                            <span class="about-stat-label">Avg ROI</span>
                         </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea placeholder="Tell us about your inquiry..." required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button submit-btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Map -->
-    <section class="map-section">
-        <div class="container">
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.639436474726!2d-122.08374688469287!3d37.42199997982571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fba02425dad8f%3A0x6c296c66619367e1!2sGoogleplex!5e0!3m2!1sen!2sus!4v1625091234567!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
-                <div class="map-overlay">
-                    <h3><i class="fas fa-building" style="color: var(--primary);"></i> SupremeAmer HQ</h3>
-                    <p>Located in the heart of Silicon Valley, our headquarters is where investment innovation happens.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq-section">
+    <!-- Values -->
+    <section class="values-section">
         <div class="container">
             <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Quick answers to common questions about investing with SupremeAmer.</p>
+                <h2>Our Core Values</h2>
+                <p>The principles that guide every investment decision and partnership we forge.</p>
             </div>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h4><i class="fas fa-question-circle"></i> What is the minimum investment?</h4>
-                    <p>Minimum investments vary by project, typically starting at $5,000 for Seed Sponsor tier. Each project listing displays its specific minimum.</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Trust & Transparency</h3>
+                    <p>Every project undergoes rigorous due diligence. We provide full disclosure on risks, returns, and milestones—no hidden agendas, no surprises.</p>
                 </div>
-                <div class="faq-item">
-                    <h4><i class="fas fa-question-circle"></i> How are projects vetted?</h4>
-                    <p>Our investment committee conducts rigorous due diligence including financial audits, team background checks, market analysis, and technical feasibility reviews.</p>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Innovation First</h3>
+                    <p>We prioritize cutting-edge projects that push boundaries and create genuine market disruption, not incremental improvements.</p>
                 </div>
-                <div class="faq-item">
-                    <h4><i class="fas fa-question-circle"></i> When do I see returns?</h4>
-                    <p>Return timelines vary by project, typically 18-36 months. Preferred returns begin accruing immediately upon investment confirmation.</p>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>True Partnership</h3>
+                    <p>We don't broker deals—we build lasting relationships. Our success is measured by the success of our investors and founders.</p>
                 </div>
-                <div class="faq-item">
-                    <h4><i class="fas fa-question-circle"></i> Can I invest from outside the US?</h4>
-                    <p>Yes, we accept international investors subject to applicable securities regulations in your jurisdiction. Contact us for details.</p>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Data-Driven Decisions</h3>
+                    <p>Our investment committee leverages advanced analytics and market intelligence to identify opportunities with the highest probability of success.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Leadership Team</h2>
+                <p>Meet the experts who drive SupremeAmer's investment strategy and platform innovation.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h4>Alexandra Chen</h4>
+                        <div class="team-role">Chief Executive Officer</div>
+                        <p class="team-bio">Former partner at Sequoia Capital with 15 years in venture capital. Led investments in 3 unicorn startups.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h4>Marcus Johnson</h4>
+                        <div class="team-role">Chief Investment Officer</div>
+                        <p class="team-bio">Portfolio management expert with $2B+ in managed assets. Former Goldman Sachs VP specializing in tech equities.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="team-info">
+                        <h4>Sarah Williams</h4>
+                        <div class="team-role">Head of Operations</div>
+                        <p class="team-bio">Scaled operations at Stripe and Square. Expert in fintech platform architecture and regulatory compliance.</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Journey</h2>
+                <p>Key milestones that shaped SupremeAmer into the platform it is today.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <h3>Foundation</h3>
+                        <p>SupremeAmer founded in Silicon Valley with a mission to democratize tech investments.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2017</div>
+                        <h3>First $10M Raised</h3>
+                        <p>Platform facilitates its first $10 million in investments across 15 projects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2019</div>
+                        <h3>Platform 2.0 Launch</h3>
+                        <p>Complete platform rebuild with real-time analytics, mobile app, and automated compliance.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021</div>
+                        <h3>Global Expansion</h3>
+                        <p>Expanded operations to Europe and Asia, supporting cross-border investments.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2026</div>
+                        <h3>AI-Powered Matching</h3>
+                        <p>Launched proprietary AI algorithm to match investors with optimal project opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners-section">
+        <div class="container">
+            <h3>Trusted By Industry Leaders</h3>
+            <div class="partners-grid">
+                <div class="partner-logo"><i class="fab fa-google"></i></div>
+                <div class="partner-logo"><i class="fab fa-microsoft"></i></div>
+                <div class="partner-logo"><i class="fab fa-aws"></i></div>
+                <div class="partner-logo"><i class="fab fa-stripe"></i></div>
+                <div class="partner-logo"><i class="fas fa-university"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Investing?</h2>
+            <p>Join thousands of investors who are already building the future with SupremeAmer.</p>
+            <div class="cta-buttons">
+                <a href="projects.html" class="cta-button white">View Projects</a>
+                <a href="contact.html" class="cta-button outline-white">Contact Us</a>
             </div>
         </div>
     </section>
@@ -711,7 +1037,13 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>SupremeAmer</h3>
-                    <p>Connecting visionary investors with groundbreaking projects since 2015.</p>
+                    <p>Connecting visionary investors with groundbreaking projects since 2015. Your trusted platform for technology investments.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
@@ -723,11 +1055,20 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Legal</h3>
+                    <h3>Investment</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="projects.html"><i class="fas fa-chevron-right"></i> Active Projects</a></li>
+                        <li><a href="projects.html"><i class="fas fa-chevron-right"></i> Investment Tiers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> How It Works</a></li>
                         <li><a href="#"><i class="fas fa-chevron-right"></i> Risk Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Tech Avenue, Silicon Valley, CA 94025</a></li>
+                        <li><a href="tel:+15551234567"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="mailto:invest@supremeamer.com"><i class="fas fa-envelope"></i> invest@supremeamer.com</a></li>
                     </ul>
                 </div>
             </div>
@@ -737,13 +1078,13 @@
         </div>
     </footer>
 
-    <!-- Footer Nav -->
+    <!-- Footer Navigation -->
     <nav class="footer-nav">
         <a href="index.html" class="footer-nav-item">
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-        <a href="about.html" class="footer-nav-item">
+        <a href="about.html" class="footer-nav-item active">
             <i class="fas fa-info-circle"></i>
             <span>About</span>
         </a>
@@ -761,31 +1102,22 @@
 
         // Header scroll
         window.addEventListener('scroll', () => {
-            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            showToast('Message sent! We will respond within 24 hours.', 'success');
-            e.target.reset();
-        });
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
 
-        // Toast
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <i class="fas fa-check-circle toast-icon"></i>
-                <div class="toast-content">
-                    <div class="toast-title">Success</div>
-                    <div class="toast-message">${message}</div>
-                </div>
-            `;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 5000);
-        }
+        document.querySelectorAll('.value-card, .team-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
